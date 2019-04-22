@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProductSearchResult extends CI_Controller {
 
+	public function __construct(){
+  		
+  		parent::__construct();
+   		$this->load->library('session'); 
+}
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -19,7 +25,10 @@ class ProductSearchResult extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-		$searchString = 'microsoft Surface Pro 4 Tablet - Intel Core i7, 12.3 Inch, 256GB, 8GB, WiFi, Windows 10 Pro, Silver with Surface Pen';
+
+
+
+		$searchString = $this->input->post('s');
 
 		$m = new Memcached();
 		$m->addServer('localhost', 11211);
@@ -27,9 +36,19 @@ class ProductSearchResult extends CI_Controller {
 		$searchKeys = $m->get('search_key_words');
 		$productSearchResult = $m->get('product_search_result');
 
-		$output = json_encode($this->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys));
+		$output = json_encode ($this->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys));
 
-		return $this->output->set_output($output);
+		$this->load->helper('url');
+		 
+		//$this->output->set_output($output);
+		
+		$this->session->set_flashdata('output', $output);
+
+		redirect(base_url());
+
+		//$this->load->view('can-be-less-price/templates/header');
+		//$this->load->view('can-be-less-price/contents/index', ['output' => $output], TRUE);
+		//$this->load->view('can-be-less-price/templates/footer');
 			
 	}
 

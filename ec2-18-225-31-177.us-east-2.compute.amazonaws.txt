@@ -1,0 +1,10 @@
+ec2-18-225-31-177.us-east-2.compute.amazonaws.com
+
+chmod 400 tribuygo.pem
+
+ssh -i tribuygo.pem ubuntu@172.31.47.160
+
+ssh -i tribuygo.pem ubuntu@3.16.126.86
+
+
+3.16.126.86

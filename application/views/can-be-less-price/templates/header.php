@@ -7,29 +7,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
 
+
 <title>Price Can Be Lesser</title>
 
-<link href="<?php echo base_url(); ?>/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<?php echo base_url(); ?>assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<link href="<?php echo base_url(); ?>assets/css/style-pri.css" rel="stylesheet" type="text/css"/>
+
 
 <!-- jQuery -->
-<script src="<?php echo base_url(); ?>/assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!-- Bootstrap4 files-->
-<script src="<?php echo base_url(); ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-<link href="<?php echo base_url(); ?>/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
-<!-- Font awesome 5 -->
-<link href="<?php echo base_url(); ?>/assets/fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
+
+<link href="<?php echo base_url(); ?>assets/css/easy-autocomplete.min.css" rel="stylesheet" type="text/css"/>
+
 
 <!-- custom style -->
-<link href="<?php echo base_url(); ?>/assets/css/ui.css" rel="stylesheet" type="text/css"/>
-<link href="<?php echo base_url(); ?>/assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<link href="<?php echo base_url(); ?>assets/css/ui.css" rel="stylesheet" type="text/css"/>
+
+<link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/easy-autocomplete.themes.min.css"> 
 
 <!-- custom javascript -->
-<script src="<?php echo base_url(); ?>/assets/js/script.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 /// some script
@@ -42,11 +49,34 @@ $(document).ready(function() {
 // jquery end
 </script>
 
+<style>
+	
+	.easy-autocomplete{
+
+		width:95% !important;
+	}
+
+div.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: yellow;
+  padding: 50px;
+  font-size: 20px;
+}
+
+
+</style>
+
+
 </head>
 <body>
 
-<header class="section-header">
-<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+	
+
+
+<header class="section-header sticky">
+<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary  navbar-fixed-top">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -61,24 +91,26 @@ $(document).ready(function() {
 <section class="header-main shadow">
 	<div class="container">
 <div class="row align-items-center">
-	<div class="col-lg-3 col-sm-4">
+
+
+	<div class="col-md-2">
 	<div class="brand-wrap">
 		<img class="logo" src="<?php echo base_url(); ?>/assets/images/logo-dark.png">
 		
 	</div> <!-- brand-wrap.// -->
 	</div>
-	<div class="col-sm-9">
-			<form action="#" class="search-wrap">
+	<div class="col-md-10">
+			<form action="api/product_search_result" class="search-wrap" method = "post">
 				<div class="input-group w-100">
 
-				    <input type="text" class="form-control" style="width:90%;" placeholder="Search">
+				    <input name = "s" type="text" class="form-control"  placeholder="Search" id = "categories-basic">
 
 
 				    
 
 				
 				    
-				      <button class="btn btn-primary" type="submit" style = "width:10%; color: #000000;">
+				      <button class="btn btn-primary" type="submit"  color: #000000;">
 				        <i class="fa fa-search" style ></i>
 				      </button>
 
@@ -100,6 +132,9 @@ $(document).ready(function() {
 	</div> <!-- container.// -->
 </section> <!-- header-main .// -->
 </header> <!-- section-header.// -->
+
+
+
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 

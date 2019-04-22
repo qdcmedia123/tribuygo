@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CanBeLessPrice extends CI_Controller {
 
+		public function __construct(){
+  		
+  		parent::__construct();
+   		$this->load->library('session'); 
+}
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,7 +26,7 @@ class CanBeLessPrice extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('can-be-less-price/templates/header.php');
+		$this->load->view('can-be-less-price/templates/header');
 		$this->load->view('can-be-less-price/contents/index');
 		$this->load->view('can-be-less-price/templates/footer');
 	}
