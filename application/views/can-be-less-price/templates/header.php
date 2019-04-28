@@ -7,37 +7,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
 
-
 <title>Price Can Be Lesser</title>
 
-<link href="<?php echo base_url(); ?>assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
-<link href="<?php echo base_url(); ?>assets/css/style-pri.css" rel="stylesheet" type="text/css"/>
-
+<link href="<?php echo base_url(); ?>/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
 <!-- jQuery -->
-
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="<?php echo base_url(); ?>/assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
 <!-- Bootstrap4 files-->
+<script src="<?php echo base_url(); ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="<?php echo base_url(); ?>/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
-
-<link href="<?php echo base_url(); ?>assets/css/easy-autocomplete.min.css" rel="stylesheet" type="text/css"/>
-
-
-<!-- custom style -->
-<link href="<?php echo base_url(); ?>assets/css/ui.css" rel="stylesheet" type="text/css"/>
-
-<link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-
+<!-- Font awesome 5 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/easy-autocomplete.themes.min.css"> 
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+<!-- custom style -->
+<link href="<?php echo base_url(); ?>/assets/css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url(); ?>/assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+
+<!-- CSS file -->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.min.css"> 
+
+<!-- Additional CSS Themes file - not required-->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
+
 
 <!-- custom javascript -->
+<script src="<?php echo base_url(); ?>/assets/js/script.js" type="text/javascript"></script>
 
+<style>
+	
+	.easy-autocomplete{
 
+		width:90% !important;
+
+	}
+
+	.
+	}
+</style>
 <script type="text/javascript">
 /// some script
 
@@ -49,34 +60,25 @@ $(document).ready(function() {
 // jquery end
 </script>
 
-<style>
-	
-	.easy-autocomplete{
-
-		width:95% !important;
-	}
-
-div.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background-color: yellow;
-  padding: 50px;
-  font-size: 20px;
-}
-
-
-</style>
-
-
 </head>
 <body>
 
-	
+<header class="section-header">
+<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
+<div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
 
 
-<header class="section-header sticky">
-<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary  navbar-fixed-top">
+  
+  </div>
+</div> <!-- container //  -->
+</nav>
+
+<header class="section-header">
+<nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -91,53 +93,32 @@ div.sticky {
 <section class="header-main shadow">
 	<div class="container">
 <div class="row align-items-center">
-
-
 	<div class="col-md-2">
-	<div class="brand-wrap">
-		<img class="logo" src="<?php echo base_url(); ?>/assets/images/logo-dark.png">
-		
-	</div> <!-- brand-wrap.// -->
+<h1><font color="black">tri</font><font color="red">buy</font><font color="orange">go</font></h1>
+
 	</div>
+
+
 	<div class="col-md-10">
-			<form action="api/product_search_result" class="search-wrap" method = "post">
+			<form action="<?=base_url()?>search" class="search-wrap" method = "POST">
+				
 				<div class="input-group w-100">
 
-				    <input name = "s" type="text" class="form-control"  placeholder="Search" id = "categories-basic">
-
-
-				    
-
-				
-				    
-				      <button class="btn btn-primary" type="submit"  color: #000000;">
-				        <i class="fa fa-search" style ></i>
+				    <input name = "search" type="text" class="form-control"  placeholder="Search" id = "categories-basic" style = "width:100%;">
+				      
+				      <button class="btn btn-primary" type="submit" style="width:10%;" >
+				        <i class="fa fa-search" style=""></i>
 				      </button>
 
 
 			    </div>
 			</form> <!-- search-wrap .end// -->
 	</div> <!-- col.// -->
-	<div class="col-lg-3 col-sm-12">
-			<a href="#" class="widget-header float-md-right">
-				<div class="icontext">
-					
-					<div class="text-wrap">
-						
-					</div>
-				</div>
-			</a>
-	</div> <!-- col.// -->
+	
+
+	
+
 </div> <!-- row.// -->
 	</div> <!-- container.// -->
 </section> <!-- header-main .// -->
-</header> <!-- section-header.// -->
-
-
-
-
-<!-- ========================= SECTION PAGETOP ========================= -->
-
-<!-- ========================= SECTION INTRO END// ========================= -->
-
-<!-- ========================= SECTION CONTENT ========================= -->
+</header>

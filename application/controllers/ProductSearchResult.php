@@ -3,12 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProductSearchResult extends CI_Controller {
 
-	public function __construct(){
-  		
-  		parent::__construct();
-   		$this->load->library('session'); 
-}
-
 	/**
 	 * Index Page for this controller.
 	 *
@@ -24,31 +18,23 @@ class ProductSearchResult extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct() {
+        
+        parent:: __construct();
+
+        $this->load->helper('url');
+        
+    
+
+    }
+
+
 	public function index() {
 
 
 
-		$searchString = $this->input->post('s');
 
-		$m = new Memcached();
-		$m->addServer('localhost', 11211);
-		$productTitles = $m->get('product_title');
-		$searchKeys = $m->get('search_key_words');
-		$productSearchResult = $m->get('product_search_result');
-
-		$output = json_encode ($this->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys));
-
-		$this->load->helper('url');
-		 
-		//$this->output->set_output($output);
-		
-		$this->session->set_flashdata('output', $output);
-
-		redirect(base_url());
-
-		//$this->load->view('can-be-less-price/templates/header');
-		//$this->load->view('can-be-less-price/contents/index', ['output' => $output], TRUE);
-		//$this->load->view('can-be-less-price/templates/footer');
 			
 	}
 
@@ -118,6 +104,9 @@ class ProductSearchResult extends CI_Controller {
 	return $finding ? $finding : ['status' => 404, 'message' => 'Opps, We are unable to find anything right at the moment.', 'searchString' => $searchString];
 
 }
+
+
+
 }
 
 

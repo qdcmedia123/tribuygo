@@ -1,9 +1,59 @@
 <!-- ========================= FOOTER ========================= -->
-<footer class="section-footer bg-secondary" style = "position: relative; bottom: 0px; width:100%; height: auto; margin: auto;">
+<footer class="section-footer bg-secondary">
 	<div class="container">
 		<section class="footer-top padding-top">
 
-		<br> 
+<!--
+			<div class="row">
+				<aside class="col-sm-3 col-md-3 white">
+					<h5 class="title">Customer Services</h5>
+					<ul class="list-unstyled">
+						<li> <a href="#">Help center</a></li>
+						<li> <a href="#">Money refund</a></li>
+						<li> <a href="#">Terms and Policy</a></li>
+						<li> <a href="#">Open dispute</a></li>
+					</ul>
+				</aside>
+				<aside class="col-sm-3  col-md-3 white">
+					<h5 class="title">My Account</h5>
+					<ul class="list-unstyled">
+						<li> <a href="#"> User Login </a></li>
+						<li> <a href="#"> User register </a></li>
+						<li> <a href="#"> Account Setting </a></li>
+						<li> <a href="#"> My Orders </a></li>
+						<li> <a href="#"> My Wishlist </a></li>
+					</ul>
+				</aside>
+				<aside class="col-sm-3  col-md-3 white">
+					<h5 class="title">About</h5>
+					<ul class="list-unstyled">
+						<li> <a href="#"> Our history </a></li>
+						<li> <a href="#"> How to buy </a></li>
+						<li> <a href="#"> Delivery and payment </a></li>
+						<li> <a href="#"> Advertice </a></li>
+						<li> <a href="#"> Partnership </a></li>
+					</ul>
+				</aside>
+				<aside class="col-sm-3">
+					<article class="white">
+						<h5 class="title">Contacts</h5>
+						<p>
+							<strong>Phone: </strong> +123456789 <br> 
+						    <strong>Fax:</strong> +123456789
+						</p>
+
+						 <div class="btn-group white">
+						    <a class="btn btn-facebook" title="Facebook" target="_blank" href="#"><i class="fab fa-facebook-f  fa-fw"></i></a>
+						    <a class="btn btn-instagram" title="Instagram" target="_blank" href="#"><i class="fab fa-instagram  fa-fw"></i></a>
+						    <a class="btn btn-youtube" title="Youtube" target="_blank" href="#"><i class="fab fa-youtube  fa-fw"></i></a>
+						    <a class="btn btn-twitter" title="Twitter" target="_blank" href="#"><i class="fab fa-twitter  fa-fw"></i></a>
+						</div>
+					</article>
+				</aside>
+			</div> 
+
+-->
+			<br> 
 		</section>
 		<section class="footer-bottom row border-top-white">
 			<div class="col-sm-6"> 
@@ -20,30 +70,20 @@
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
 
- 
-<script src="<?php echo base_url(); ?>assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/js/jquery.easy-autocomplete.min.js"></script> 
-<script src="<?php echo base_url(); ?>assets/js/keys.js"></script> 
-<script src="<?php echo base_url(); ?>assets/js/script.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <!-- JS file -->
+  <script src="<?= base_url()?>assets/js/jquery.easy-autocomplete.min.js"></script> 
+ <script src="<?= base_url()?>assets/js/keys.js"></script> 
+
+  <script>
 
 
-<script>
-
-
-//const TRANSFER_PROTOCAL = window.location.protocol;
-//const HOST_NAME = window.location.hostname;
-
-// form location 
-const  categorySuggesstion = TRANSFER_PROTOCAL+'//'+HOST_NAME+PATH_NAME+'CategoryListLocation';
-const ProductSuggesstion = TRANSFER_PROTOCAL+'//'+HOST_NAME+PATH_NAME+'ProductSuggestions';
-
-console.log(window.location);
-
-  
+    // http://localhost/canbelessprice/api/category_list_location
+    // http://localhost/canbelessprice/api/product_sugesstion
 
     $.ajax({
       type: 'POST',
-      url: categorySuggesstion,
+      url: ORIGIN+"/canbelessprice/api/category_list_location",
       data: {token: 'abcd'},
       dataType: "json",
       success: function(resultData) 
@@ -51,7 +91,7 @@ console.log(window.location);
           
 
            var options = {
-           url: ProductSuggesstion,
+           url: ORIGIN+"/canbelessprice/api/product_sugesstion",
            categories: resultData
          ,
     
@@ -68,8 +108,18 @@ $("#categories-basic").easyAutocomplete(options);
       }
 });
 
+   
 
 
+
+
+
+
+  
+ 
 </script>
+
+
+
 </body>
 </html>
