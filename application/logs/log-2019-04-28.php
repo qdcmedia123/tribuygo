@@ -1230,3 +1230,21 @@ ERROR - 2019-04-28 15:15:41 --> Severity: Notice --> Undefined index: HOST_NAME 
 INFO - 2019-04-28 15:15:41 --> Helper loaded: server_helper
 INFO - 2019-04-28 15:15:41 --> Final output sent to browser
 DEBUG - 2019-04-28 15:15:41 --> Total execution time: 0.0029
+INFO - 2019-04-28 15:27:41 --> Config Class Initialized
+INFO - 2019-04-28 15:27:41 --> Hooks Class Initialized
+DEBUG - 2019-04-28 15:27:41 --> UTF-8 Support Enabled
+INFO - 2019-04-28 15:27:41 --> Utf8 Class Initialized
+INFO - 2019-04-28 15:27:41 --> URI Class Initialized
+INFO - 2019-04-28 15:27:41 --> Router Class Initialized
+INFO - 2019-04-28 15:27:41 --> Output Class Initialized
+INFO - 2019-04-28 15:27:41 --> Security Class Initialized
+DEBUG - 2019-04-28 15:27:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2019-04-28 15:27:41 --> Input Class Initialized
+INFO - 2019-04-28 15:27:41 --> Language Class Initialized
+INFO - 2019-04-28 15:27:41 --> Loader Class Initialized
+INFO - 2019-04-28 15:27:41 --> Helper loaded: url_helper
+INFO - 2019-04-28 15:27:41 --> Controller Class Initialized
+ERROR - 2019-04-28 15:27:41 --> Severity: Notice --> Undefined index: HOST_NAME /var/www/html/canbelessprice/application/helpers/server_helper.php 3
+INFO - 2019-04-28 15:27:41 --> Helper loaded: server_helper
+INFO - 2019-04-28 15:27:41 --> Final output sent to browser
+DEBUG - 2019-04-28 15:27:41 --> Total execution time: 0.0019
