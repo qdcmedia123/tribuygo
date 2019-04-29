@@ -1,69 +1,17 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CanBeLessPrice extends CI_Controller {
+class Common  {
 
-public function __construct() {
-       
+	private $CI;
 
-        parent:: __construct();
-        ini_set('display_errors', 1);
-        $this->load->helper('url');
-        
-   
+    public function __construct()
+    {
+        $this->CI =& get_instance();
     }
 
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-
-
-		$searchString = $this->input->post('search') ?? '';
-
-		$m = new Memcached();
-		$m->addServer('localhost', 11211);
-		$productTitles = $m->get('product_title');
-		$searchKeys = $m->get('search_key_words');
-		$productSearchResult = $m->get('product_search_result');
-
-
-		$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys)) : [];
-		
-		
-		//$_SESSION['test'] = rand(1, 10);
-
-		$data = ['output' => $output, 'searchString' => $searchString];
-
-		$this->load->view('can-be-less-price/templates/header');
-		$this->load->view('can-be-less-price/contents/index', $data);
-		$this->load->view('can-be-less-price/templates/footer');
-	}
-
-	public function defaut_page() {
-
-
-		$this->load->view('lessprice/index');
-		
-
-	}
-
-
-	public function IfProductFound( 
+    public function IfProductFound( 
 						array $productTitles, 
 						string $searchString, 
 						array $productSearchResult, 
@@ -128,9 +76,58 @@ public function __construct() {
 	return $finding ? $finding : ['status' => 404, 'message' => 'Opps, We are unable to find anything right at the moment.', 'searchString' => $searchString];
 
 }
-	
-
-
 
 	
+// Commin data checking 
+public function RequiredForUsers() {
+
+	// Defining message 
+		$message = [];
+
+
+		// Request method must post 
+		if($this->CI->input->method() !== 'post') {
+
+			$message = [
+							'status' => '401',
+							'error' => 'Request method is not allowed.'
+						];
+
+			return $this->CI->output
+			->set_content_type('application/json')
+			->set_output(json_encode($message));
+
+		}
+	
+
+		if($this->CI->input->post('accesskey') === NULL) {
+
+			$message = [
+							'status' => '401',
+							'error' => 'Unauthorized, Access key is required.'
+						];
+
+			return $this->CI->output
+			->set_content_type('application/json')
+			->set_output(json_encode($message));
+		}
+
+		// Check the access key 
+
+		if($this->CI->input->post('accesskey') !== $this->CI->accessKey) {
+
+			$message = [
+							'status' => '401',
+							'error' => 'Unauthorized, Invalid access key.'
+						];
+
+			return $this->CI->output
+			->set_content_type('application/json')
+			->set_output(json_encode($message));
+		}
+
+		
+		return true;
+}
+
 }

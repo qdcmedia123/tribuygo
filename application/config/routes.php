@@ -52,8 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'CanBeLessPrice/defaut_page';
 $route['search'] = 'CanBeLessPrice/index';
-
-
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['api/fetch_all_product'] = 'FetchProductDetails/index';
@@ -61,6 +59,17 @@ $route['api/category_list_location'] = 'CategoryListLocation/index';
 $route['api/product_sugesstion'] = 'ProductSuggestions/index';
 $route['api/product_search_result'] = 'ProductSearchResult/index';
 
+
+/* Mobile api Routes */
+
+$route['api/mobile/getproducts']['post'] = 'MobileProducts/index';
+
+// Product location for jquery need json object to show the product in input file 
+$route['api/mobile/product_location']['post'] = 'MobileProducts/productLocations';
+
+// While user type user suggessiong need to showto product list 
+
+$route['api/mobile/product_sugesstion']['post'] = 'MobileProducts/productSugesstion';
 
 
 
