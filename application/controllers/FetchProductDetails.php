@@ -31,159 +31,159 @@ class FetchProductDetails extends CI_Controller {
 
 
 		$data = [
-				[
-					'url' => 'https://uae.souq.com/ae-en/'.$search_key.'/s/?as=1',
-					'attributes' => [
-										'title' => '//h1[@class ="itemTitle"]',
-										/*'logo' => '//img[@class="logo"]/@src',*/
-										'image' => '//a[@class="img-bucket img-link itemLink sPrimaryLink"]/img/@data-src',
-										'price' => "//h3[@class='itemPrice']",
-		                                'description'=> "//div[@class='col col-info item-content']/a/@href",
-		                                'review' => "//span[@class='rating-stars']",
-		                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",
-		                                'original_price' => "//span[@class='was block itemOldPrice show']",
-		                                /* 'discount_price' => "//span[@class='onoffer']",*/
-		                                                                                                                    
-									]
-				],
+    [
+      'url' => 'https://uae.souq.com/ae-en/'.$search_key.'/s/?as=1',
+      'attributes' => [
+                'title' => '//h1[@class ="itemTitle"]',
+                /*'logo' => '//img[@class="logo"]/@src',*/
+                'image' => '//a[@class="img-bucket img-link itemLink sPrimaryLink"]/img/@data-src',
+                'price' => "//h3[@class='itemPrice']",
+                                'description'=> "//div[@class='col col-info item-content']/a/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",
+                                'original_price' => "//span[@class='was block itemOldPrice show']",
+                                /* 'discount_price' => "//span[@class='onoffer']",*/
+                                                                                                                    
+              ]
+    ],
 
 
 
-		[
-					'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
-					'attributes' => [
-										'title' => '//p[@class ="comp-productcard__name"]',
-										/*'logo' => '//img[@class="c--logo"]/@src',*/
-										'image' => '//img[@class="comp-productcard__img"]//@src',
-										'price' => "//p[@class='comp-productcard__price']",
-		 								'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
-		                                //need to add host name fot the description url
-		                               /* 'review' => "//span[@class='rating-stars']",
-		                               'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                               'sim' => "//ul[@class='menu']/li/a",*/
-		                               'original_price' => "//p[@class='comp-productcard__price']",
-		                               /* 'discount_price' => "//span[@class='onoffer']",*/
-									]
-				],
+[
+      'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
+      'attributes' => [
+                'title' => '//p[@class ="comp-productcard__name"]',
+                /*'logo' => '//img[@class="c--logo"]/@src',*/
+                'image' => '//img[@class="comp-productcard__img"]//@src',
+                'price' => "//p[@class='comp-productcard__price']",
+                'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
+                                //need to add host name fot the description url
+                               /* 'review' => "//span[@class='rating-stars']",
+                               'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                               'sim' => "//ul[@class='menu']/li/a",*/
+                               'original_price' => "//p[@class='comp-productcard__price']",
+                               /* 'discount_price' => "//span[@class='onoffer']",*/
+              ]
+    ],
 
-		[
-					'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
-					'attributes' => [
-										'title' => '//a[@class ="product-item-link"]',
-										/*'logo' => '//a[@class="logo"]/img/@src',*/
-										'image' => '//img[@class="product-image-photo"]//@src',
-										'price' => "//span[@class='price']",
-		                                'description'=> "//a[@class='product-item-link']/@href",
-		                                /* 'review' => "//span[@class='rating-stars']",
-		                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",
-		                                'original_price' => "//p[@class='comp-productcard__price']",*/
-										'discount_price' => "//span[@class='onoffer']",
-									]
-				],
-		[
-					'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
-					'attributes' => [
-										'title' => '//span[@class ="variant-title"]/a',
-										/*'logo' => '//div[@class="logo"]//a/img/@src',*/
-										'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-										'price' => "//span[@class='variant-final-price']",
-		  								'description'=> "//span[@class='variant-title']/a/@href",
-		                                //need to add host name fot the description url
-		   								/* 'review' => "//span[@class='rating-stars']",
-		                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",*/
-		                                'original_price' => "//span[@class='variant-list-price']",
-										/*  'discount_price' => "//span[@class='variant-list-price']",*/
-									]
-				],
+[
+      'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
+      'attributes' => [
+                'title' => '//a[@class ="product-item-link"]',
+                /*'logo' => '//a[@class="logo"]/img/@src',*/
+                'image' => '//img[@class="product-image-photo"]//@src',
+                'price' => "//span[@class='price']",
+                                'description'=> "//a[@class='product-item-link']/@href",
+                                /* 'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",
+                                'original_price' => "//p[@class='comp-productcard__price']",*/
+                'discount_price' => "//span[@class='onoffer']",
+              ]
+    ],
+[
+      'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
+      'attributes' => [
+                'title' => '//span[@class ="variant-title"]/a',
+                /*'logo' => '//div[@class="logo"]//a/img/@src',*/
+                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+                'price' => "//span[@class='variant-final-price']",
+                  'description'=> "//span[@class='variant-title']/a/@href",
+                                //need to add host name fot the description url
+                  /* 'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",*/
+                                'original_price' => "//span[@class='variant-list-price']",
+                /*  'discount_price' => "//span[@class='variant-list-price']",*/
+              ]
+    ],
 
-		[
-					'url' => 'https://www.letstango.com/?q='.$search_key.'&idx=letsTango_default_products&p=0&is_v=1',
-					'attributes' => [
-										'title' => '//h1[@class ="line-clamp line-clamp-2"]',
-										/*'logo' => '//img[@class="brand-image-desktop"]/@src',*/
-										'image' => '//div[@class="thump_img"]//img/@src',
-										'price' => "//div[@class='dealblock_thump']//h2",
-		                                'description'=> "//div[@class='thump_img']/a/@href",
-										/* 'review' => "//span[@class='rating-stars']",
-		                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",
-		                                'original_price' => "//span[@class='variant-list-price']",
-										'discount_price' => "//span[@class='variant-list-price']",*/
-									]
-				],
+[
+      'url' => 'https://www.letstango.com/?q='.$search_key.'&idx=letsTango_default_products&p=0&is_v=1',
+      'attributes' => [
+                'title' => '//h1[@class ="line-clamp line-clamp-2"]',
+                /*'logo' => '//img[@class="brand-image-desktop"]/@src',*/
+                'image' => '//div[@class="thump_img"]//img/@src',
+                'price' => "//div[@class='dealblock_thump']//h2",
+                                'description'=> "//div[@class='thump_img']/a/@href",
+                /* 'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",
+                                'original_price' => "//span[@class='variant-list-price']",
+                'discount_price' => "//span[@class='variant-list-price']",*/
+              ]
+    ],
 
-				[
-					'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
-					'attributes' => [
-										'title' => '//span[@class = "variant-title"]/a',
-										/*'logo' => '//div[@class="logo"]//a//img/@src',*/
-										'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-										'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
-										'description'=> "//span[@class='variant-title']/a/@href",
-		                                //need to add host name fot the description url
-		                                /* 'review' => "//span[@class='rating-stars']",
-		                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",*/
-		                                 'original_price' => "//span[@class='variant-list-price']",
-										 /* 'discount_price' => "//span[@class='variant-list-price']",*/
-
-
-					]
-				],
-		[
-					'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
-					'attributes' => [
-										'title' => '//div[@class ="jsx-4075873112 name"]',
-										/*'logo' => '//a[@class="jsx-1430647631 logoContainer"]/img/@src',*/
-										'image' => '//div[@class="jsx-3461008014 mediaContainer"]//img/@src',
-										'price' => "//span[@class='jsx-3248044173 sellingPrice']",
-		                                'description'=> "//div[@class='jsx-4075873112 wrapper']/a/@href",
-		                                 //need to add host name fot the description url
-										/* 'review' => "//span[@class='rating-stars']",
-		                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
-		                                'sim' => "//ul[@class='menu']/li/a",*/
-		                                'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
-										 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
-
-									]
-				],
+    [
+      'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
+      'attributes' => [
+                'title' => '//span[@class = "variant-title"]/a',
+                /*'logo' => '//div[@class="logo"]//a//img/@src',*/
+                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+                'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
+                'description'=> "//span[@class='variant-title']/a/@href",
+                                //need to add host name fot the description url
+                                /* 'review' => "//span[@class='rating-stars']",
+                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",*/
+                                 'original_price' => "//span[@class='variant-list-price']",
+                 /* 'discount_price' => "//span[@class='variant-list-price']",*/
 
 
-		[
-					'url' => 'https://uae.microless.com/search/?query='.$search_key,
-					'attributes' => [
-										'title' => '//div[@class ="product-title"]/a',
-										/*'logo' => '//a[@class="site-logo"]/img/@src',*/
-										'image' => '//div[@class="product-image-wrap"]//img/@src',
-										'price' => "//span[@class='amount']",
-		  								'description'=> "//div[@class='product-title']/a/@href",
-		                                /* 'review' => "//span[@class='rating-stars']",*/
-										'shipping' => "//div[@class='free-shipping']",
-		                                /* 'sim' => "//ul[@class='menu']/li/a",,
-		                                'original_price' => "//span[@class='price-old']",
-										'discount_price' => "//div[@class='product-discount-badge']",*/
-									]
-				],
-		[
-					'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
-					'attributes' => [
-										'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
-										/*'logo' => '//img[@class="brand-image-desktop"]/@src',*/
-										'image' => '//img[@class="s-image"]/@src',
-										'price' => "//span[@class='a-color-base']",
-										'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
-										//need to add host name fot the description url
-		                                'review' => "//span[@class='starRating__count']",
-		                                'shipping' => "//span[@class='a-size-small a-color-secondary']",
-		                                /* 'sim' => "//ul[@class='menu']/li/a",,*/
-		                                'original_price' => "//span[@class='a-offscreen']",
-										/* 'discount_price' => "//div[@class='product-discount-badge']",*/
-									]
-				]
-		];
+      ]
+    ],
+[
+      'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
+      'attributes' => [
+                'title' => '//div[@class ="jsx-4075873112 name"]',
+                /*'logo' => '//a[@class="jsx-1430647631 logoContainer"]/img/@src',*/
+                'image' => '//div[@class="jsx-3461008014 mediaContainer"]//img/@src',
+                'price' => "//span[@class='jsx-3248044173 sellingPrice']",
+                                'description'=> "//div[@class='jsx-4075873112 wrapper']/a/@href",
+                                 //need to add host name fot the description url
+                /* 'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
+                                'sim' => "//ul[@class='menu']/li/a",*/
+                                'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
+                 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
+
+              ]
+    ],
+
+
+[
+      'url' => 'https://uae.microless.com/search/?query='.$search_key,
+      'attributes' => [
+                'title' => '//div[@class ="product-title"]/a',
+                /*'logo' => '//a[@class="site-logo"]/img/@src',*/
+                'image' => '//div[@class="product-image-wrap"]//img/@src',
+                'price' => "//span[@class='amount']",
+                  'description'=> "//div[@class='product-title']/a/@href",
+                                /* 'review' => "//span[@class='rating-stars']",*/
+                'shipping' => "//div[@class='free-shipping']",
+                                /* 'sim' => "//ul[@class='menu']/li/a",,
+                                'original_price' => "//span[@class='price-old']",
+                'discount_price' => "//div[@class='product-discount-badge']",*/
+              ]
+    ],
+[
+      'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
+      'attributes' => [
+                'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
+                /*'logo' => '//img[@class="brand-image-desktop"]/@src',*/
+                'image' => '//img[@class="s-image"]/@src',
+                'price' => "//span[@class='a-color-base']",
+                'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
+                //need to add host name fot the description url
+                                'review' => "//span[@class='starRating__count']",
+                                'shipping' => "//span[@class='a-size-small a-color-secondary']",
+                                /* 'sim' => "//ul[@class='menu']/li/a",,*/
+                                'original_price' => "//span[@class='a-offscreen']",
+                /* 'discount_price' => "//div[@class='product-discount-badge']",*/
+              ]
+    ]
+];
 
 
 
