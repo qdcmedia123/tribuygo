@@ -83,7 +83,7 @@
 
     $.ajax({
       type: 'POST',
-      url: ORIGIN+"/canbelessprice/api/category_list_location",
+      url: ORIGIN+'/api/category_list_location',
       data: {token: 'abcd'},
       dataType: "json",
       success: function(resultData) 
@@ -91,7 +91,7 @@
           
 
            var options = {
-           url: ORIGIN+"/canbelessprice/api/product_sugesstion",
+           url: ORIGIN+"/api/product_sugesstion",
            categories: resultData
          ,
     

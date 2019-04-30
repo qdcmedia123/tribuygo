@@ -9,14 +9,14 @@
 
 <title>Price Can Be Lesser</title>
 
-<link href="<?php echo base_url(); ?>/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<?php echo base_url(); ?>assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
 <!-- jQuery -->
-<script src="<?php echo base_url(); ?>/assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
 <!-- Bootstrap4 files-->
-<script src="<?php echo base_url(); ?>/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-<link href="<?php echo base_url(); ?>/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
 <!-- Font awesome 5 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -24,8 +24,8 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <!-- custom style -->
-<link href="<?php echo base_url(); ?>/assets/css/ui.css" rel="stylesheet" type="text/css"/>
-<link href="<?php echo base_url(); ?>/assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<link href="<?php echo base_url(); ?>assets/css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
 
 
 <!-- CSS file -->
@@ -36,7 +36,7 @@
 
 
 <!-- custom javascript -->
-<script src="<?php echo base_url(); ?>/assets/js/script.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/script.js" type="text/javascript"></script>
 
 <style>
 	
@@ -64,6 +64,7 @@ $(document).ready(function() {
 <body>
 
 <header class="section-header">
+
 <nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
 <div class="container">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
