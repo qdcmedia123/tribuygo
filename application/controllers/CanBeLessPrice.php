@@ -128,8 +128,19 @@ public function __construct() {
 	return $finding ? $finding : ['status' => 404, 'message' => 'Opps, We are unable to find anything right at the moment.', 'searchString' => $searchString];
 
 }
+
+	// Adminstrator Login view 
+	public function AdminLoginView() {
+
+		$this->load->view('login/index');
+		
+	}
 	
 
+	public function AdministratorLogin(string $username, string $password) {
+
+
+	}
 
 
 	

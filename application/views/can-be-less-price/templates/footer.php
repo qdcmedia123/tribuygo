@@ -80,11 +80,13 @@
 
     // http://localhost/canbelessprice/api/category_list_location
     // http://localhost/canbelessprice/api/product_sugesstion
+    var csrf_id = $('#csrf_ajax').val();
+    
 
     $.ajax({
       type: 'POST',
       url: ORIGIN+'/api/category_list_location',
-      data: {token: 'abcd'},
+      data: {csrf_test_name: csrf_id},
       dataType: "json",
       success: function(resultData) 
       { 

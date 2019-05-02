@@ -79,13 +79,21 @@ body{
 
 </head>
 <body>
+<?php
+$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
 
+?>
 
 <div class="wrap">
 <h2 align="center"><font color="black" size="15">tri<font color="red">buy<font color="orange">go</h2>
 <p style="font-size:30%;color:#000;" align="center">Find your Ideal Purchase and Compare Prices from Different Websites</p>
 
 <form method="POST" action = "search">
+  <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
+
    <div class="search">
       <input name = "search" type="text" class="searchTerm" placeholder="Type... eg: Samsung,Iphone...." id = "categories-basic" style = "width:100%;">
 
@@ -111,11 +119,13 @@ body{
 
     // http://localhost/canbelessprice/api/category_list_location
     // http://localhost/canbelessprice/api/product_sugesstion
-
+    // Get the id 
+    var csrfid = $('#csrf_ajax').val();
+    
     $.ajax({
       type: 'POST',
       url: ORIGIN+"/api/category_list_location",
-      data: {token: 'abcd'},
+      data: {csrf_test_name: csrfid},
       dataType: "json",
       success: function(resultData) 
       { 

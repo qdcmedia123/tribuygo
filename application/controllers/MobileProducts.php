@@ -122,7 +122,9 @@ public function __construct() {
         } 
 
 
-        return $this->output->set_output(json_encode($suggesstion));
+        $result['result'] = $suggesstion;
+         
+        return $this->output->set_output(json_encode($result));
         
         }
 
@@ -172,7 +174,10 @@ public function __construct() {
 		
 		} 
 
-		return $this->output->set_output(json_encode($suggesstion));
+		// Sugession 
+		$result['result'] = $suggesstion;
+
+		return $this->output->set_output(json_encode($result));
 		
 		}
 

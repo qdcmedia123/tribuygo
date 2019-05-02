@@ -78,6 +78,15 @@ $(document).ready(function() {
 </div> <!-- container //  -->
 </nav>
 
+<?php
+$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+?>
+
+
 <header class="section-header">
 <nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
 <div class="container">
@@ -101,7 +110,10 @@ $(document).ready(function() {
 
 
 	<div class="col-md-10">
-			<form action="<?=base_url()?>search" class="search-wrap" method = "POST">
+		
+
+			<form action="<?=base_url()?>search" class="search-wrap" method = "GET">
+				<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 				
 				<div class="input-group w-100">
 
