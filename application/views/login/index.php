@@ -38,7 +38,9 @@
   ?>
 
 <div class="wrapper fadeInDown">
+
   <h1><font color="black">Tri</font><font color="red">buy</font><font color="orange">go</font></h1>
+  <p style="font-size:12px;color:#000;" align="center;">Find your Ideal Purchase and Compare Prices from Different Websites</p>
   <div id="formContent">
     <!-- Tabs Titles -->
 

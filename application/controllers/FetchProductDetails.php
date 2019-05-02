@@ -27,7 +27,7 @@ class FetchProductDetails extends CI_Controller {
 
 		$internalErrors = libxml_use_internal_errors(true);
 
-		$search_key = urlencode('Apple MacBook Pro 15 inch 2018');
+		$search_key = urlencode('Apple iPhone Xs');
 
 
 		$data = [
