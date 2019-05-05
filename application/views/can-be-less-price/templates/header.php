@@ -112,7 +112,7 @@ $csrf = array(
 	<div class="col-md-10">
 		
 
-			<form action="<?=base_url()?>search" class="search-wrap" method = "GET">
+			<form action="<?=base_url()?>search" class="search-wrap" method = "POST">
 				<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 				
 				<div class="input-group w-100">
