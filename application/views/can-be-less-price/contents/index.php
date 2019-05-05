@@ -13,7 +13,6 @@ $logos = array(
       	'www.carrefouruae.com' => 'https://hybrisprod.azureedge.net/sys-master-prod/static_images/carrefour.svg',
 		'www.erosdigitalhome.ae' => 'https://cdn.erosdigitalhome.ae/pub/media/logo/default/english.png',
 		'www.axiomtelecom.com' => 'https://bab-assets2.babapi.ooo/img/lookandfeel/8687242/af55ef6287b71_axiomlogo.png.999xx.png',
-		'www.letstango.com' => 'https://www.letstango.com/skin/frontend/default/ltreact/images/lets-tango-logo-light.png',
   		'www.jumbo.ae' => 'https://bab-assets3.babapi.ooo/img/lookandfeel/0441617/da39a3ee5e6b4b0d3255b_jumbo.png.999xx.png',
 		'www.noon.com' => 'https://k.nooncdn.com/s/app/2019/com-www-bigalog/f668c69a972129bbd6f74d6331994b19084e8636/static/images/noon_logo_black_english.svg',
 		'uae.microless.com' => 'https://uae.microless.com/cdn/microless-svg-logo-next.svg',
