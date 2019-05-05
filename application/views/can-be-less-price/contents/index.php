@@ -69,7 +69,19 @@ $logos = array(
 
 		$value['description'] = 'http://'.$key.'/'.$value['description'];
 
+
 	}
+
+
+	if(!filter_var($value['image'], FILTER_VALIDATE_URL)) {
+
+		$value['image'] = 'http://'.$key.'/'.$value['image'];
+
+
+	}
+
+
+	
 ?>
 
 <article class="card card-product">
@@ -78,6 +90,7 @@ $logos = array(
 		<aside class="col-sm-3">
 			<div class="img-wrap">
 				
+
 				<img src="<?= $value['image']?>">
 
 			</div>
