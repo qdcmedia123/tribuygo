@@ -1,8 +1,15 @@
 <?php 
 
+// Updated script 
+/*
+https://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png
+*/
+
 $logos = array(
    
-        'uae.souq.com' => 'https://cf1.s3.souqcdn.com/public/style/img/en/souqAmazon-logo-v2.png',
+        'www.amazon.ae' => 'https://tribuygo.com/assets/images/amazon_ae.jpg',
+        'www.ebay.com' => 'https://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png',
+        'www.virginmegastore.ae' => 'https://www.virginmobile.ae/site/template/img/virgin-logo.png',
       	'www.carrefouruae.com' => 'https://hybrisprod.azureedge.net/sys-master-prod/static_images/carrefour.svg',
 		'www.erosdigitalhome.ae' => 'https://cdn.erosdigitalhome.ae/pub/media/logo/default/english.png',
 		'www.axiomtelecom.com' => 'https://bab-assets2.babapi.ooo/img/lookandfeel/8687242/af55ef6287b71_axiomlogo.png.999xx.png',
