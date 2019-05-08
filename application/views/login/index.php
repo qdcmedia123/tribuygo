@@ -37,6 +37,25 @@
 
   ?>
 
+  <?php
+$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+?>
+
+<?php 
+
+
+
+$error = $this->session->flashdata('errors')['error'] ?? '';
+$data = $this->session->flashdata('errors')['data'] ?? '';
+
+
+;?>
+
+
 <div class="wrapper fadeInDown">
 
   <h1><font color="black">Tri</font><font color="red">buy</font><font color="orange">go</font></h1>
@@ -49,22 +68,25 @@
      
     </div>
 
+
+
     <!-- Login Form -->
-    <form method = "post" action = "#">
- 
+    <form method = "post" action = "administrator/login_request">
+
+      <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
     
     
-      <input type="text" class="form-control <?= $errors['username'] ? 'is-invalid' : '';?> fadeIn second" id="validationServer01" placeholder="Please enter username"  required>
+      <input name = "username" value = "<?= $data['username'] ?? ''; ?>" type="text" class="form-control <?= $error['username'] ? 'is-invalid' : '';?> fadeIn second" id="validationServer01" placeholder="Please enter username"  required>
      
       <div class="invalid-feedback">
-         <?= $errors['username'] ?? '' ?>
+         <?= $error['username'] ?? '' ?>
       </div>
 
 
 
-       <input type="text" class="form-control <?= $errors['password'] ? 'is-invalid' : '';?> fadeIn second" id="validationServer01" placeholder="Please enter password"  required>
+       <input name = "password" type="text" class="form-control <?= $error['password'] ? 'is-invalid' : '';?> fadeIn second" id="validationServer01" placeholder="Please enter password"  required>
     <div class="invalid-feedback">
-       <?= $errors['password'] ?? '' ?>
+       <?= $error['password'] ?? '' ?>
       </div>
     
       <input type="submit" class="fadeIn fourth" value="Log In">

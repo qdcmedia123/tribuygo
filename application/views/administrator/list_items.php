@@ -35,6 +35,8 @@
             </div>
           </form>
 
+          
+
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -59,9 +61,7 @@
             </li>
 
            
-            <?php
-echo $this->uri->segment(3);
-            ?>
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
@@ -91,20 +91,52 @@ echo $this->uri->segment(3);
         </nav>
         <!-- End of Topbar -->
 
+        <?= $json_data = '';?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Dashboard</h1>
-          
+           <?php if(isset($result)) :?>
+
+            <?php $decodeData = json_decode($result, true); ?>
+
+            <!-- If json encode is true -->
+            <?php if($decodeData !== false || $decodeData !== null) :?>
+
+              <!-- If Json data is decode -->
+            <?php 
+             
+              $json_data = json_encode($decodeData);
+              
+            ?>
+              <!--- end json decode -->
+           
+
+            <?php endif; ?>
+            <?php endif; ?>
+
+             
+           <?php
+
+              //echo "<pre>";
+              //print_R($result);
+              //echo "</pre>";
+            ?>
 
           <!-- DataTales Example -->
           
+        <div id = "json-collasped"></div>
+        <div id = "json"></div>
+        <div id="element"></div>
         </div>
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
 
+
+
+
       <!-- Footer -->
- <?php $this->load->view('administrator/templates/footer'); ?>
+ <?php $this->load->view('administrator/templates/footer', ['result' => $json_data]); ?>

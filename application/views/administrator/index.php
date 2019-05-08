@@ -1,5 +1,6 @@
 <?php $this->load->view('administrator/templates/header'); ?>
 
+
 <body id="page-top">
 
   <!-- Page Wrapper -->
@@ -94,7 +95,12 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Dashboard</h1>
-          
+          <?php 
+
+echo "<pre>";
+var_dump($this->session->has_userdata('administrator')); 
+echo "</pre>";
+?>
 
           <!-- DataTales Example -->
           

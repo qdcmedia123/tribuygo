@@ -91,6 +91,9 @@ $csrf = array(
 <h2 align="center"><font color="black" size="15">tri<font color="red">buy<font color="orange">go</h2>
 <p style="font-size:30%;color:#000;" align="center">Find your Ideal Purchase and Compare Prices from Different Websites</p>
 
+
+
+
 <form method="POST" action = "search">
   <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 

@@ -129,12 +129,6 @@ public function __construct() {
 
 }
 
-	// Adminstrator Login view 
-	public function AdminLoginView() {
-
-		$this->load->view('login/index');
-		
-	}
 	
 
 	public function AdministratorLogin(string $username, string $password) {
