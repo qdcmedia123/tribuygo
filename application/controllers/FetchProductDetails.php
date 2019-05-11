@@ -341,9 +341,16 @@ class FetchProductDetails extends CI_Controller {
 			
 			} else {
 
-				$memSearchedKeyword = $memSearchedKeyword;
-				$memProductTitles = $memProductTitles;
-				$productSearchResult = $productSearchResult;
+				// Find the array index of title 
+        $keyIndex = array_search($search_key, $memSearchedKeyword);
+
+        // if index found 
+        if($keyIndex !== false ){
+
+         
+          $memProductTitles[$keyIndex] = $productTitle;
+          $productSearchResult[$keyIndex] = $c;
+        }
 
 			}
 
