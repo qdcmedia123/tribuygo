@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-	<title>Search until you die.</title>
+  
+  <title>Find your Ideal Purchase and Compare Prices from Different Websites.</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 
@@ -13,9 +13,9 @@
 <link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
 
 
-	<style>
-	
-	@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+  <style>
+  
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
   background: #f2f2f2;
@@ -72,6 +72,15 @@ body{
   width:90%;
 }
 
+.footer-warper{
+
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+ 
+ text-align: center;
+
+}
 </style>
 
 
@@ -88,15 +97,23 @@ $csrf = array(
 ?>
 
 <div class="wrap">
-<h2 align="center"><font color="black" size="15">tri<font color="red">buy<font color="orange">go</h2>
-<p style="font-size:30%;color:#000;" align="center">Find your Ideal Purchase and Compare Prices from Different Websites</p>
+<h2 align="center">
+  <font color="black" size="15">tri</font>
+  <font color="red" size="15">buy</font>
+  <font color="orange" size="15">go</font>
+</h2>
+
+
+
+<p style="color:#000;" align="center">Find your Ideal Purchase and Compare Prices from Different Websites</p>
 
 
 
 
-<form method="POST" action = "search">
+<form method="POST" action = "search" id = "search-form-6767">
   <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 
+  
    <div class="search">
       <input name = "search" type="text" class="searchTerm" placeholder="Type... eg: Samsung,Iphone...." id = "categories-basic" style = "width:100%;">
 
@@ -109,7 +126,14 @@ $csrf = array(
    
    </div>
 </form>
+
+
+
+
 </div>
+
+
+
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
    <!-- JS file -->
@@ -139,10 +163,17 @@ $csrf = array(
            categories: resultData
          ,
     
-        list: {
-    match: {
-      enabled: true
-    }
+      list: {
+        
+        onClickEvent: function() { 
+            
+            var value = $("#categories-basic").getSelectedItemData();
+            $('#search-form-6767').submit();
+            
+          },
+        match: {
+        enabled: true
+       }
   }
 
 

@@ -98,6 +98,12 @@
          ,
     
         list: {
+        	onClickEvent: function() { 
+            
+            
+            $('#search-form-6767').submit();
+            
+          },
     match: {
       enabled: true
     }
