@@ -4,7 +4,20 @@
   
   <title>Find your Ideal Purchase and Compare Prices from Different Websites.</title>
 
+<<<<<<< HEAD
    <style>
+=======
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- CSS file -->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.min.css"> 
+
+<!-- Additional CSS Themes file - not required-->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+>>>>>>> develop
   
   @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -154,12 +167,17 @@ $csrf = array(
 
 
 
+
 </div>
 
 </main>
 <footer class="footer mt-auto py-3">
   <div class="container">
+<<<<<<< HEAD
   	<span class="text-muted">Copyright © 2019 QDC - Quality Digital Community | Powered by QDC - <a style = "text-decoration: none; color:red;" href = "https://www.qdcmedia.com/">Quality Digital Community</a></span>
+=======
+  	<span class="text-muted">Copyright © 2019 QDC - Quality Digital Community | Powered by QDC - <a href = "https://www.qdcmedia.com/" target = "_blank">Quality Digital Community</a></span>
+>>>>>>> develop
 
    
 
