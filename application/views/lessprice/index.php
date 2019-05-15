@@ -151,12 +151,13 @@ $csrf = array(
 
 
 
+
 </div>
 
 </main>
 <footer class="footer mt-auto py-3">
   <div class="container">
-  	<span class="text-muted">Copyright © 2019 QDC - Quality Digital Community | Powered by QDC - <a href = "https://www.qdcmedia.com/">Quality Digital Community</a></span>
+  	<span class="text-muted">Copyright © 2019 QDC - Quality Digital Community | Powered by QDC - <a href = "https://www.qdcmedia.com/" target = "_blank">Quality Digital Community</a></span>
 
    
 
