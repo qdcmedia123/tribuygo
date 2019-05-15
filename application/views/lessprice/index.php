@@ -4,21 +4,12 @@
   
   <title>Find your Ideal Purchase and Compare Prices from Different Websites.</title>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-
-<!-- CSS file -->
-<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.min.css"> 
-
-<!-- Additional CSS Themes file - not required-->
-<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
-
-
-  <style>
+   <style>
   
   @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body{
-  background: #f2f2f2;
+  background: #fff;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -45,14 +36,15 @@ body{
 .searchButton {
   position: absolute;  
   bottom:1px;
-  right: -50px;
+  right: -65px;
   width: 40px;
-  height: 36px;
+  height: 37px;
   border: 1px solid #00B4CC;
   background: #00B4CC;
   text-align: center;
   color: #fff;
-  border-radius: 5px;
+
+  border-radius: 0px 30px 30px 0px; ;
   cursor: pointer;
   font-size: 20px;
 
@@ -69,25 +61,56 @@ body{
 
 .easy-autocomplete{
 
-  width:90%;
+  width:100%;
 }
 
-.footer-warper{
-
+.footer{
+background-color: #f8f9fa!important;
   width: 100%;
   position: absolute;
   bottom: 0px;
- 
  text-align: center;
 
 }
+a{
+	text-decoration: none;
+	color:none;
+}
+
+
 </style>
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- CSS file -->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.min.css"> 
+
+<!-- Additional CSS Themes file - not required-->
+<link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
 
 
 </head>
 <body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+               <button type="button" class="btn btn-danger">Join Us</button>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+
 <?php
 $csrf = array(
         'name' => $this->security->get_csrf_token_name(),
@@ -96,6 +119,7 @@ $csrf = array(
 
 ?>
 
+<main>
 <div class="wrap">
 <h2 align="center">
   <font color="black" size="15">tri</font>
@@ -115,7 +139,7 @@ $csrf = array(
 
   
    <div class="search">
-      <input name = "search" type="text" class="searchTerm" placeholder="Type... eg: Samsung,Iphone...." id = "categories-basic" style = "width:100%;">
+      <input name = "search" type="text" class="form-control" placeholder="Type... eg: Samsung,Iphone...." id = "categories-basic" style = "width:100%;">
 
 
       
@@ -132,6 +156,18 @@ $csrf = array(
 
 </div>
 
+</main>
+<footer class="footer mt-auto py-3">
+  <div class="container">
+  	<span class="text-muted">Copyright © 2019 QDC - Quality Digital Community | Powered by QDC - <a style = "text-decoration: none; color:red;" href = "https://www.qdcmedia.com/">Quality Digital Community</a></span>
+
+   
+
+
+  </div>
+</footer>
+
+
 
 
 
@@ -139,6 +175,14 @@ $csrf = array(
    <!-- JS file -->
   <script src="<?= base_url()?>assets/js/jquery.easy-autocomplete.min.js"></script> 
    <script src="<?= base_url()?>assets/js/keys.js"></script> 
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script>
 
