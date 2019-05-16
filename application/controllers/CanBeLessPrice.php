@@ -131,8 +131,100 @@ public function __construct() {
 
 	
 
-	public function AdministratorLogin(string $username, string $password) {
+	public function  joinus() {
 
+		$this->load->view('can-be-less-price/templates/header');
+		$this->load->view('can-be-less-price/contents/joinus');
+		$this->load->view('can-be-less-price/templates/footer');
+	}
+
+	public function joinUsRequest(){
+
+		// Return somet
+		$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+		extract($this->input->post());
+
+		// defined variable 
+
+
+		// Return something 
+		$response = ['result' => '', 'csrf' => $csrf, 'data' => $this->input->post(), 'success' => true];
+
+		return $this->output->set_output(json_encode($response));
+		
+	}
+
+	public function joinUsRequestValidation(string $email,
+											string $message,
+											string $mobile,
+											string $name,
+											string $subject
+											) {
+
+		// Return message 
+		$errors = [];
+
+		// followin varialbe is required 
+		// email, message, mobile, name, subject 
+		// status on errro 411 length required 
+		// Check the name 
+		if(!isset($name) || strlen($name) < 2) {
+
+			// Message 
+			$errors = ['error' => 'Name is required.', 'status' => 411];
+
+			// Return error 
+			return $errors;
+
+		}
+
+		if(!isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+			// Message 
+			$errors = ['error' => 'Email addresss required.', 'status' => 411];
+
+			// Return error 
+			return $errors;
+		}
+
+		// Message 
+		if(!isset($message) || strlen($message) < 5) {
+
+			// Message 
+			$errors = ['error' => 'Email addresss required.', 'status' => 411];
+
+			// Return error 
+			return $errors;
+		}
+
+		// Check number 
+		$regression = '/^[0-9]$/';
+
+		if(!isset($mobile) || !preg_match($mobile)) {
+
+			// Message 
+			$errors = ['error' => 'Mobile number is required.', 'status' => 411];
+
+			// Return error 
+			return $errors;
+		}
+	
+		// Check the  subject 
+		if(!isset($subject) || strlen($subject) < 2) {
+
+			// Message 
+			$errors = ['error' => 'Subject is  required.', 'status' => 411];
+
+			// Return error 
+			return $errors;
+		}
+
+		// Return true 
+		return true;
 
 	}
 

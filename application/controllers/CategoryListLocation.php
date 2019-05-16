@@ -75,6 +75,12 @@ class CategoryListLocation extends CI_Controller {
         // Sugesstion 
         $suggesstion = [];
 
+         $csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+
         // Loop each keyworld 
         if(is_array($searchKeys ) && count($searchKeys ) > 0) {
 
@@ -90,13 +96,17 @@ class CategoryListLocation extends CI_Controller {
                     ];
         } 
 
+       
 
-        return $this->output->set_output(json_encode($suggesstion));
+        // Get data and csrf token togather 
+        $outputData = ['csrf' => $csrf, 'getautolocation' => $suggesstion];
+
+        return $this->output->set_output(json_encode($outputData));
         
         }
 
         // REST FUL ERROR MESSAGE 
-        $msg = json_encode(['status' => '404', 'message' => 'Opps, We are unable to find something.']);
+        $msg = json_encode(['status' => '404', 'message' => 'Opps, We are unable to find something.', 'csrf' => $csrf]);
 
         // Send message 
         return $this->output->set_output(json_encode($msg));

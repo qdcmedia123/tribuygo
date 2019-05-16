@@ -55,15 +55,20 @@
 -->
 			<br> 
 		</section>
+
+
+
 		<section class="footer-bottom row border-top-white">
-			<div class="col-sm-6"> 
-				<p class="text-white-50"> Made with <3 <br>  by Vosidiy M.</p>
-			</div>
-			<div class="col-sm-6 text-right">
-				<p class="text-sm-right text-white-50">
-	Copyright &copy 2018 <br>
-<a href="" class="text-white-50">Kepp Searching</a>
-				</p>
+			
+
+			<div class = "col-md-12" >
+				
+				<div class = "footer-inner">
+					
+<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;">Quality Digital Community </a><br/>
+	
+  	 <a href = "https://www.qdcmedia.com/">Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
+				</div>
 			</div>
 		</section> <!-- //footer-top -->
 	</div><!-- //container -->
@@ -74,10 +79,14 @@
    <!-- JS file -->
   <script src="<?= base_url()?>assets/js/jquery.easy-autocomplete.min.js"></script> 
  <script src="<?= base_url()?>assets/js/keys.js"></script> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <script>
 
-
+$.alert({
+    title: 'Alert!',
+    content: 'Simple alert!',
+});
     // http://localhost/canbelessprice/api/category_list_location
     // http://localhost/canbelessprice/api/product_sugesstion
     var csrf_id = $('#csrf_ajax').val();
@@ -90,11 +99,15 @@
       dataType: "json",
       success: function(resultData) 
       { 
-          
+          //const csrfname = resultData.csrf.name;
+      	const csrfhash = resultData.csrf.hash;
+
+      	 $('#csrf_ajax').val(csrfhash);
+
 
            var options = {
            url: ORIGIN+"/api/product_sugesstion",
-           categories: resultData
+           categories: resultData.getautolocation
          ,
     
         list: {
