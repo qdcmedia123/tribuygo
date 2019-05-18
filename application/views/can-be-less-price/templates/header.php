@@ -66,7 +66,11 @@
 }
 
 .section-content{
+<<<<<<< HEAD
 	
+=======
+	min-height: 300px;
+>>>>>>> develop
 }
 
 
@@ -154,10 +158,15 @@ $csrf = array(
 	<div class="col-md-2">
 
 		
+<<<<<<< HEAD
 <h1><font color="black">tri</font>
 	<font color="red">buy</font>
 	<font color="orange">go</font>
 </h1>
+=======
+<h1><font color="black">tri</font><font color="red">buy</font>
+	<font color="orange">go</font></h1>
+>>>>>>> develop
 
 	</div>
 

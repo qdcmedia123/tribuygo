@@ -229,5 +229,135 @@ public function __construct() {
 	}
 
 
+	public function joinUsRequest() {
+
+		$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+		$data = ['result' => [], 'csrf' => $csrf, 'data' => $this->input->post()];
+
+		echo (json_encode($data));
+	}
+
+
+	public function enquiryRequest() {
+
+		$csrf = array(
+        'name' => $this->security->get_csrf_token_name(),
+        'hash' => $this->security->get_csrf_hash()
+);
+
+		// Extract all variable 
+		// Errors 
+		$errors = '';
+		$success = '1';
+
+
+		if($this->enquiryValidation($this->input->post()) !== true) {
+
+			$errors = $this->enquiryValidation($this->input->post());
+			$success = false;
+		}
+
+		
+		// if error is empty 
+		if($errors  === '') {
+			// Extract post 
+			extract($this->input->post());
+
+			$subject = 'Thank you for contacting us, We will get back to you sortly.';
+			// Send email to the client 
+			if($this->sendMail($message, $email, $subject) !== true) {
+
+				$errors = ['Can not send the email'];
+			}
+
+		}
+			
+		$data = ['csrf' => $csrf, 'data' => $this->input->post(), 'error' => $errors , 'success' => $success];
+
+		return $this->output->set_output(json_encode($data));
+		
+	}
+
+	public function enquiryValidation(array $enquiry_form) {
+
+		//data: {name: "a", mobile: "", email: "", subject: "", message: ""}
+		// Extract 
+		extract($enquiry_form);
+
+		// Errors 
+		$errors = [];
+
+		if(strlen($name) < 1) {
+
+			$errors['name'] = 'Name field is required';
+		}
+
+		// Check mobile 
+		if(strlen($mobile) < 8) {
+
+			$errors['mobile'] = 'Mobile number is required.';
+		}
+
+		// Check email address '
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  			
+  			$errors['email'] = 'Email address is required.';
+		} 
+
+		// Subject 
+		if (strlen($subject) < 2) {
+  			
+  			$errors['subject'] = 'Subject is required.';
+		}
+
+		//  
+
+		if (strlen($message) < 2) {
+  			
+  			$errors['message'] = 'Please type some message.';
+		}
+
+		return count($errors) < 1 ? true : $errors;
+
+	}
+
+	// Send mail 
+	public function sendMail(string $message, string $to, string $subject):bool {
+
+		// Variable used here 
+		$tribuygo = 'info@tribuygo.com';
+		$subject_tribuygo = 'A Client has send to request message.';
+
+
+		$headers  = "From: Tribuygo < info@tribuygo.com >\n";
+		$headers .= "Cc: Tribuygo < info@tribuygo.com  >\n"; 
+		$headers .= "X-Sender: Tribuygo < info@tribuygo.com >\n";
+		$headers .= 'X-Mailer: PHP/' . phpversion();
+		$headers .= "X-Priority: 1\n"; // Urgent message!
+		$headers .= "Return-Path: info@tribuygo.com\n"; // Return path for errors
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+
+		if(!mail($to, $subject, $message, $headers)) {
+
+			return false;
+		}
+
+		if(!mail($tribuygo, $subject_tribuygo, $message, $headers)) {
+
+			return false;
+		}
+
+		return true;
+
+
+	}
+
+
+
 	
 }
