@@ -157,10 +157,7 @@ $csrf = array(
 
 		
 
-<h1><font color="black">tri</font>
-	<font color="red">buy</font>
-	<font color="orange">go</font>
-</h1>
+
 
 <h1><font color="black">tri</font><font color="red">buy</font>
 	<font color="orange">go</font></h1>
