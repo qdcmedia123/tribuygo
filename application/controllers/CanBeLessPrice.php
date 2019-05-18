@@ -229,17 +229,7 @@ public function __construct() {
 	}
 
 
-	public function joinUsRequest() {
-
-		$csrf = array(
-        'name' => $this->security->get_csrf_token_name(),
-        'hash' => $this->security->get_csrf_hash()
-);
-
-		$data = ['result' => [], 'csrf' => $csrf, 'data' => $this->input->post()];
-
-		echo (json_encode($data));
-	}
+	
 
 
 	public function enquiryRequest() {
