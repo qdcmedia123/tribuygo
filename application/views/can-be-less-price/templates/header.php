@@ -46,7 +46,27 @@
 
 	}
 
-	.
+	.custom33{
+
+		padding: 0.5rem 0rem;
+	}
+
+	.footer-inner{
+
+		text-align: center;
+		display: block;
+		position: relative
+	}
+
+	.bg-secondary {
+    background-color:#f8f9fa!important;
+}
+
+.section-content{
+	min-height: 300px;
+}
+
+
 	}
 </style>
 <script type="text/javascript">
@@ -62,6 +82,31 @@ $(document).ready(function() {
 
 </head>
 <body>
+<div class="container">
+<div class="row ">
+	<div class="col-md-2">
+	</div>
+
+	<div class="col-md-10">
+		
+		<nav class="custom33 navbar-expand-lg navbar-light">
+
+   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+               <button type="button" class="btn btn-danger">Join Us</button>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+
+	</div>
+</div>
+</div>
+	
+
 
 <header class="section-header">
 
@@ -106,7 +151,8 @@ $csrf = array(
 	<div class="col-md-2">
 
 		
-<h1><font color="black">tri</font><font color="red">buy</font><font color="orange">go</font></h1>
+<h1><font color="black">tri</font><font color="red">buy</font>
+	<font color="orange">go</font></h1>
 
 	</div>
 
