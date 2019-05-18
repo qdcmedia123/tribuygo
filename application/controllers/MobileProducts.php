@@ -43,7 +43,7 @@ public function __construct() {
 		}
 
 		// Search string must send 
-		if(strlen($this->input->post('search')) < 3) {
+		if(strlen($this->input->post('search')) < 2) {
 
 			$message = [
 							'status' => '411',
