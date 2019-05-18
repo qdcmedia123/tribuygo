@@ -125,11 +125,11 @@ a{
              &nbsp; &nbsp;
             <li class="nav-item">
             	
-<<<<<<< HEAD
+
                <button type="button" class="btn btn-default" id = "join-us">Join Us</button>
-=======
-               <button type="button" class="btn btn-warning" id = "join-us">Join Us</button>
->>>>>>> develop
+
+               
+
             </li>
             
         </ul>
