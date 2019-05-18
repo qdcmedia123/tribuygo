@@ -99,11 +99,11 @@ class CategoryListLocation extends CI_Controller {
        
 
         // Get data and csrf token togather 
-<<<<<<< HEAD
+
         $outputData = ['csrf' => $csrf, 'getautolocation' => $suggesstion];
-=======
+
         $outputData = ['csrf' => $csrf, 'getautolocation' => $suggesstion, 'data' => $this->input->post()];
->>>>>>> develop
+
 
         return $this->output->set_output(json_encode($outputData));
         
