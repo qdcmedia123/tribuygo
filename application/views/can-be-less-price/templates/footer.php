@@ -83,10 +83,7 @@
 
   <script>
 
-$.alert({
-    title: 'Alert!',
-    content: 'Simple alert!',
-});
+
     // http://localhost/canbelessprice/api/category_list_location
     // http://localhost/canbelessprice/api/product_sugesstion
     var csrf_id = $('#csrf_ajax').val();
