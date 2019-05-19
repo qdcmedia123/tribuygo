@@ -337,7 +337,7 @@ public function __construct() {
 
 	    // This is client will receive the email from tribuy go 
 	    $mail->setFrom('info@tribuygo.com', 'Mailer');
-	    $mail->addAddress('bharatrose1@gmail.com', 'Bharat Shah');     // Add a recipient
+	    $mail->addAddress($to, 'Client');     // Add a recipient
 	    
 	    
 	    $mail->addReplyTo('info@tribuygo.com', 'Information');
@@ -361,7 +361,7 @@ public function __construct() {
 	    // This is where we will receive the email 
 	    $mail->setFrom('info@tribuygo.com', 'Mailer');
 	    $mail->addAddress('info@tribuygo.com', 'Tribuygo.com');
-	    $mail->addReplyTo('bharatrose1@gmail.com', 'Information');
+	    $mail->addReplyTo($to, 'Information');
 
 	    $mail->Subject = $subject;
 	    $mail->Body    = $message;
