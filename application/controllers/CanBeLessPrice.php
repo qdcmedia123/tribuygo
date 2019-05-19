@@ -259,10 +259,10 @@ public function __construct() {
 
 			$subject = 'Thank you for contacting us, We will get back to you sortly.';
 			// Send email to the client 
-			if($this->sendMail($message, $email, $subject) !== true) {
+			// 
+			$this->SendMailToRecipent($message, $email, $subject);
+			
 
-				$errors = ['Can not send the email'];
-			}
 
 		}
 			
@@ -315,35 +315,62 @@ public function __construct() {
 
 	}
 
-	// Send mail 
-	public function sendMail(string $message, string $to, string $subject):bool {
+	
 
-		// Variable used here 
-		$tribuygo = 'info@tribuygo.com';
-		$subject_tribuygo = 'A Client has send to request message.';
+	public function SendMailToRecipent(string $message, string $to, string $subject){
+
+		// load the library 
+		$this->load->library("Phpmailer_library");
+		
+		$mail = $this->phpmailer_library->load();
+
+	
+	    //Server settings
+	    $mail->SMTPDebug = false;                                       // Enable verbose debug output
+	    $mail->isSMTP();                                            // Set mailer to use SMTP
+	    $mail->Host       = 'smtp.office365.com';  // Specify main and backup SMTP servers
+	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+	    $mail->Username   = 'info@tribuygo.com';                     // SMTP username
+	    $mail->Password   = 'Qdc@media123';                               // SMTP password
+	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+	    $mail->Port       = 587;                                    // TCP port to connect to
+
+	    // This is client will receive the email from tribuy go 
+	    $mail->setFrom('info@tribuygo.com', 'Mailer');
+	    $mail->addAddress('bharatrose1@gmail.com', 'Bharat Shah');     // Add a recipient
+	    
+	    
+	    $mail->addReplyTo('info@tribuygo.com', 'Information');
+	    //$mail->addCC('cc@example.com');
+	    //$mail->addBCC('bcc@example.com');
+
+	    
+
+	    // Content
+	    $mail->isHTML(true);                                  // Set email format to HTML
+	    $mail->Subject = 'Thank you for contacting us';
+	    $mail->Body    = 'Our customer service processing your request, we will get back to you sortly';
+	    $mail->AltBody = 'Our customer service processing your request, we will get back to you sortly';
+
+	    $mail->send();
+
+	    // Clear all recepinent 
+		$mail->ClearAllRecipients();
 
 
-		$headers  = "From: Tribuygo < info@tribuygo.com >\n";
-		$headers .= "Cc: Tribuygo < info@tribuygo.com  >\n"; 
-		$headers .= "X-Sender: Tribuygo < info@tribuygo.com >\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();
-		$headers .= "X-Priority: 1\n"; // Urgent message!
-		$headers .= "Return-Path: info@tribuygo.com\n"; // Return path for errors
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=iso-8859-1\n";
+	    // This is where we will receive the email 
+	    $mail->setFrom('info@tribuygo.com', 'Mailer');
+	    $mail->addAddress('info@tribuygo.com', 'Tribuygo.com');
+	    $mail->addReplyTo('bharatrose1@gmail.com', 'Information');
 
-		if(!mail($to, $subject, $message, $headers)) {
+	    $mail->Subject = $subject;
+	    $mail->Body    = $message;
+	    $mail->AltBody = $message;
 
-			return false;
-		}
+	    $mail->send();
 
-		if(!mail($tribuygo, $subject_tribuygo, $message, $headers)) {
-
-			return false;
-		}
 
 		return true;
-
 
 	}
 
