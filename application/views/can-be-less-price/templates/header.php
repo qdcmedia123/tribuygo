@@ -62,12 +62,7 @@
     background-color:#f8f9fa!important;
 }
 
-.section-content{
-	min-height: 300px;
-}
 
-
-	}
 </style>
 <script type="text/javascript">
 /// some script
