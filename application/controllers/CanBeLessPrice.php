@@ -332,8 +332,8 @@ public function __construct() {
 	    $mail->isSMTP();                                            // Set mailer to use SMTP
 	    $mail->Host       = 'smtp.office365.com';  // Specify main and backup SMTP servers
 	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	    $mail->Username   = 'info@tribuygo.com';                     // SMTP username
-	    $mail->Password   = 'Qdc@media123';                               // SMTP password
+	    $mail->Username   = 'support@tribuygo.com';                     // SMTP username
+	    $mail->Password   = '$qdc$12345678$';                               // SMTP password
 	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
 	    $mail->Port       = 587;                                    // TCP port to connect to
 

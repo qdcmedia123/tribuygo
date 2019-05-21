@@ -126,7 +126,7 @@ a{
             <li class="nav-item">
             	
 
-               <button type="button" class="btn btn-default" id = "join-us" disabled>Join Us</button>
+               <button type="button" class="btn btn-default" id = "join-us" >Join Us</button>
 
                
 
