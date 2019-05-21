@@ -8,11 +8,6 @@ Tribuygo Find your Ideal Purchase and Compare Prices from Different Websites
 
 PHP7.0, Codeignitor, MYSQL, Apache, Memcached 
 
-```
-Give examples
-```
-
-
 
 ## Running the tests
 
