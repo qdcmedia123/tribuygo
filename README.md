@@ -35,7 +35,7 @@ Deoloying the project to AWS Server
 ## Built With
 
 * [codeigniter](https://codeigniter.com/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
+* [memcached] (https://memcached.org/)-  Free & open source, high-performance, distributed memory object caching system, generic in nature
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
@@ -51,8 +51,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
