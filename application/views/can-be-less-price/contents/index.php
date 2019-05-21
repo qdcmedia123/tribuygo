@@ -1,4 +1,31 @@
 <?php 
+function GetAEDToUSD( string $aedPrice):string {
+
+	// Check if pattern math
+	if(!preg_match('/[0-9.]/', $aedPrice)) {
+
+		return false;
+	}
+	// Set money to local 
+	setlocale(LC_MONETARY,"en_US.UTF-8");
+
+	// USD Conversation 
+	$usdConversion = 3.67250;
+
+	// Remove anthing except number 
+	$aedPrice = preg_replace('/[^0-9.]/', '', $aedPrice);
+
+	// USD PRice 
+	$usdPrice = $aedPrice / $usdConversion;
+
+	 // Then make it number formate 
+	 $usdPrice  = money_format("%.2n", $usdPrice);
+
+	 // Return USD Price
+	 return $usdPrice.' USD';
+
+}
+
 
 // Updated script 
 /*
@@ -158,14 +185,43 @@ $logos = array(
 				
 			
 		</article> <!-- col.// -->
+		<?php 
+
+					if($key === 'www.amazon.com' || $key === 'www.ebay.com') {
+
+						$price = $value['price'] ?? '';
+						$original_price = $value['original_price'] ?? '';
+						$discount = $value['discount_price'] ?? '';
+						$shipping = $value['shipping'] ?? '';
+					} else {
+
+						$price = GetAEDToUSD($value['price']) ?? '';
+						$original_price = GetAEDToUSD($value['original_price']) ?? '';
+
+
+						$discount = $value['discount_price'] !== '' ? GetAEDToUSD($value['discount_price']) : '';
+
+
+						$shipping = $value['shipping'] !== '' ? GetAEDToUSD($value['shipping']) : '';
+					}
+					
+
+		?>
+
+
 		<aside class="col-sm-3 border-left">
 			<div class="action-wrap">
 				<div class="price-wrap h4">
-					<span class="price"> <?= $value['price']; ?> </span>	
-					<del class="price-old"> <?= $value['original_price']; ?></del>
+					<span class="price"> <?= $price ?> </span>	
+					<br/>
+					
+					<del class="price-old"> <?= $original_price; ?></del>
+
+
+
 				</div> <!-- info-price-detail // -->
-				<p class="text-success"><?= $value['shipping']?></p>
-				<p class="text-success"><?= $value['discount_price'] ?? '';?></p>
+				<p class="text-success"><?= $shipping ?? ''; ?></p>
+				<p class="text-success"><?= $discount ?? '';?></p>
 
 				<br>
 				<p>

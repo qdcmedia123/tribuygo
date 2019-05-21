@@ -319,6 +319,8 @@ public function __construct() {
 
 	public function SendMailToRecipent(string $message, string $to, string $subject){
 
+		// Extract the post message 
+
 		// load the library 
 		$this->load->library("Phpmailer_library");
 		
@@ -356,6 +358,16 @@ public function __construct() {
 
 	    // Clear all recepinent 
 		$mail->ClearAllRecipients();
+		/*
+		csrf_test_name:csrfid,
+        name: name.val(),
+        mobile: mobile.val(),
+        email: email.val(),
+        subject: subject.val(),
+        message: message.val()
+        */
+
+        extract($this->input->post());
 
 
 	    // This is where we will receive the email 
@@ -364,7 +376,16 @@ public function __construct() {
 	    $mail->addReplyTo($to, 'Information');
 
 	    $mail->Subject = $subject;
-	    $mail->Body    = $message;
+	    $mail->Body    = "Please find the below details of the client <br/>
+	    					<ul>
+	    						<li>Full Name: $name</li>
+	    						<li>Mobile: $number</li>
+	    						<li>Email Address: $email</li>
+	    						<li>Message:</li>
+	    						<br/>
+	    						$message
+	    					</ul>
+	    				";
 	    $mail->AltBody = $message;
 
 	    $mail->send();
@@ -375,6 +396,23 @@ public function __construct() {
 	}
 
 
+	public function testing() {
+
+		// Load unite Library 
+
+		$test = 1 +1 ;
+
+		$this->load->library('unit_test');
+
+		$expected_result = 1;
+
+		$test_name = 'Adds one plus one';
+
+		$this->unit->run($test, $expected_result, $test_name);
+
+		echo json_encode($this->unit->result());
+
+	}
 
 	
 }
