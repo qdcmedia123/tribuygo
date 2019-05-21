@@ -35,7 +35,7 @@ Deoloying the project to AWS Server
 ## Built With
 
 * [codeigniter](https://codeigniter.com/) - The web framework used
-* [memcached] (https://memcached.org/)-  Free & open source, high-performance, distributed memory object caching system, generic in nature
+* [memcached](https://memcached.org/)-  Free & open source, high-performance, distributed memory object caching system, generic in nature
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
