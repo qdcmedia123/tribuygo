@@ -379,7 +379,7 @@ public function __construct() {
 	    $mail->Body    = "Please find the below details of the client <br/>
 	    					<ul>
 	    						<li>Full Name: $name</li>
-	    						<li>Mobile: $number</li>
+	    						<li>Mobile: $mobile</li>
 	    						<li>Email Address: $email</li>
 	    						<li>Message:</li>
 	    						<br/>
