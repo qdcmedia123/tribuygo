@@ -347,12 +347,38 @@ public function __construct() {
 	    //$mail->addBCC('bcc@example.com');
 
 	    
+	    /*
+	    	Template 
 
+			Dear customer 
+
+			We appreciate your email, We shall get back to you in 2 working days.
+
+
+			Best Regards 
+
+			tribuygo Support Team 
+
+	    */
 	    // Content
 	    $mail->isHTML(true);                                  // Set email format to HTML
 	    $mail->Subject = 'Thank you for contacting us';
-	    $mail->Body    = 'Our customer service processing your request, we will get back to you sortly';
-	    $mail->AltBody = 'Our customer service processing your request, we will get back to you sortly';
+	    $mail->Body    = 'Dear customer 
+	    							<br/>
+	    				We appreciate your email, We shall get back to you in 2 working days.
+
+	    				<br/>
+	    				<br/>
+
+	    			Best Regards 
+
+	    			<br/>
+
+					tribuygo Support Team 
+
+
+	    					';
+	    //$mail->AltBody = 'Our customer service processing your request, we will get back to you sortly';
 
 	    $mail->send();
 
