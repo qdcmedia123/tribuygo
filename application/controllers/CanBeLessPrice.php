@@ -357,7 +357,7 @@ public function __construct() {
 	    $mail->Port       = 587;                                    // TCP port to connect to
 
 	    // This is client will receive the email from tribuy go 
-	    $mail->setFrom('support@tribuygo.com', 'Mailer');
+	    $mail->setFrom('info@tribuygo.com', 'Mailer');
 	    $mail->addAddress('bharatrose1@gmail.com', 'Client');     // Add a recipient
 	    
 	    
@@ -416,8 +416,8 @@ public function __construct() {
 
 
 	    // This is where we will receive the email 
-	    $mail->setFrom('support@tribuygo.com', 'Mailer');
-	    $mail->addAddress('support@tribuygo.com', 'Tribuygo.com');
+	    $mail->setFrom('info@tribuygo.com', 'Mailer');
+	    $mail->addAddress('info@tribuygo.com', 'Tribuygo.com');
 	    $mail->addReplyTo($to, 'Information');
 
 	    $mail->Subject = $subject;
