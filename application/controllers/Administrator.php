@@ -171,178 +171,247 @@ class Administrator extends CI_Controller {
 		$search_key = urlencode($keyword);
 
 
-		$data = [
-    [
-      
-      'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
-      'attributes' => [
-                'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
-                'image' => '//div[@class="a-section aok-relative s-image-fixed-height"]/img/@src',
-                'price' => "//span[@class='a-price-whole']",
+	$data = [
+
+
+
+
+		[
+			
+			'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
+			'attributes' => [
+								'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
+								'image' => '//div[@class="a-section aok-relative s-image-fixed-height"]/img/@src',
+								'price' => "//span[@class='a-price-whole']",
                                 'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='a-row']//span[@dir='auto']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-                'stock' => "//span[@class='a-color-price']",
-                'offer' => "//a[@class='a-link-normal']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='a-color-price']",
+								'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-              ]
-    ],
-    
-    [
-      
-      'url' => 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw='.$search_key.'&_sacat=0',
-      'attributes' => [
-                'title' => '//h3[@class ="s-item__title"]',
-                'image' => '//img[@class="s-item__image-img"]/@src',
-                'price' => "//span[@class='s-item__price']",
+							]
+		],
+		
+		[
+			
+			'url' => 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw='.$search_key.'&_sacat=0',
+			'attributes' => [
+								'title' => '//h3[@class ="s-item__title"]',
+								'image' => '//img[@class="s-item__image-img"]/@src',
+								'price' => "//div[@class='s-item__detail s-item__detail--primary']//span[@class='s-item__price']",
                                 'description'=> "//div[@class='s-item__image']//a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-                'stock' => "//span[@class='s-item__time-end']",
-                'offer' => "//a[@class='a-link-normal']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='s-item__time-end']",
+								'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-              ]
-    ],
-    
-        [
-      
-      'url' => 'https://www.virginmegastore.ae/en/search/?text='.$search_key,
-      'attributes' => [
-                'title' => '//a[@class ="name"]',
-                'image' => '//img[@itemprop="image"]/@src',
-                'price' => "//span[@class='price']",
+							]
+		],
+		
+				[
+			
+			'url' => 'https://www.virginmegastore.ae/en/search/?text='.$search_key,
+			'attributes' => [
+								'title' => '//a[@class ="name"]',
+								'image' => '//img[@itemprop="image"]/@src',
+								'price' => "//span[@class='price']",
                                 'description'=> "//a[@class='thumb']/@href",
                                 'review' => "//div[@class='tf-based']//div[@class='tf-count']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='tf-stars-svg']/@style",
-                'stock' => "//span[@class='s-item__time-end']",
-                'offer' => "//a[@class='a-link-normal']",
+								'ratings' => "//span[@class='tf-stars-svg']/@style",
+								'stock' => "//span[@class='s-item__time-end']",
+								'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-              ]
-    ],
+							]
+		],
 
 
 
 
 
 [
-      'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
-      'attributes' => [
-                'title' => '//a[@class ="product-item-link"]',
-                'image' => '//img[@class="product-image-photo"]//@src',
-                'price' => "//span[@class='price']",
+			'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
+			'attributes' => [
+								'title' => '//a[@class ="product-item-link"]',
+								'image' => '//img[@class="product-image-photo"]//@src',
+								'price' => "//span[@class='price']",
                                 'description'=> "//a[@class='product-item-link']/@href",
                                  'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//p[@class='comp-productcard__price']",
-                'discount_price' => "//span[@class='onoffer']",
-                'ratings' => "//span[@class='onoffer']",
-              ]
-    ],
+								'discount_price' => "//span[@class='onoffer']",
+								'ratings' => "//span[@class='onoffer']",
+							]
+		],
 [
-      'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
-      'attributes' => [
-                'title' => '//span[@class ="variant-title"]/a',
-                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-                'price' => "//span[@class='variant-final-price']",
-                  'description'=> "//span[@class='variant-title']/a/@href",
+			'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
+			'attributes' => [
+								'title' => '//span[@class ="variant-title"]/a',
+								'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+								'price' => "//span[@class='variant-final-price']",
+  								'description'=> "//span[@class='variant-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='variant-list-price']",
-                'discount_price' => "//span[@class='variant-list-price']",
-                'ratings' => "//span[@class='onoffer']",
-              ]
-    ],
+								'discount_price' => "//span[@class='variant-list-price']",
+								'ratings' => "//span[@class='onoffer']",
+							]
+		],
+			[
+			
+			'url' => 'https://www.newegg.com/global/ae-en/p/pl?d='.$search_key.'&ignorear=0&N=-1&isNodeId=1&Submit=ENE&DEPA=0&Order=BESTMATCH',
+			'attributes' => [
+								'title' => '//a[@class="item-title"]',
+								'image' => '//a[@class="item-img"]/img/@src',
+								'price' => '//li[@class="price-current"]',
+                                'description'=> '//a[@class="item-img"]/@href',
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='a-color-price']",
+								'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+							]
+		],
+
+		[
+			
+			'url' => 'https://www.etsy.com/search?q='.$search_key,
+			'attributes' => [
+								'title' => "//h2[@class='text-gray text-truncate mb-xs-0 text-body']",
+								'image' => "//img[@class='width-full display-block position-absolute ']/@src",
+								'price' => "//span[@class='currency-value']",
+                                'description'=> "//a[@data-palette-listing-image]/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='a-color-price']",
+								'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+							]
+		],
+
+		[
+			
+			'url' => 'https://www.alibaba.com/products/'.$search_key.'.html',
+			'attributes' => [
+								'title' => "//h2[@class='title two-line']//a/@title",
+								'image' => "//div[@class='offer-image-box']//img/@src",
+								'price' => "//div[@class='price']",
+                                'description'=> "//h2[@class='title two-line']//a/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='a-color-price']",
+								'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+							]
+		],
 
 
-
-    [
-      'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
-      'attributes' => [
-                'title' => '//span[@class = "variant-title"]/a',
-                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-                'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
-                'description'=> "//span[@class='variant-title']/a/@href",
+		[
+			'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
+			'attributes' => [
+								'title' => '//span[@class = "variant-title"]/a',
+								'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+								'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
+								'description'=> "//span[@class='variant-title']/a/@href",
                                 //need to add host name fot the description url
                                 'review' => "//span[@class='rating-stars']",
                                  'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                  'original_price' => "//span[@class='variant-list-price']",
-                'discount_price' => "//span[@class='variant-list-price']",
-                'ratings' => "//span[@class='tf-stars-svg']/@style",
+								'discount_price' => "//span[@class='variant-list-price']",
+								'ratings' => "//span[@class='tf-stars-svg']/@style",
 
 
-      ]
-    ],
+			]
+		],
 [
-      'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
-      'attributes' => [
-                'title' => "//div[@style ='overflow:hidden']/span",
-                'image' => '//div[@class="jsx-2714670158 mediaContainer"]/img/@src',
-                'price' => "//span[@class='jsx-3248044173 sellingPrice']",
-                                'description'=> "//a[@class='jsx-3796044909 product gridView']/@href",
+			'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
+			
+			'attributes' => [
+								'title' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]",
+								'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src",
+								'price' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]",
+                                'description'=> "//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href",
                                  //need to add host name fot the description url
-                'review' => "//span[@class='rating-stars']",
+								'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
-                 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
-                 'ratings' => "//span[@class='onoffer']",
+								 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
+								 'ratings' => "//span[@class='onoffer']",
+								
 
-              ]
-    ],
+								/*$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href")->item(0)->nodeValue;*/
+								 
+								 
+
+							]
+		],
 
 
 [
-      'url' => 'https://uae.microless.com/search/?query='.$search_key,
-      'attributes' => [
-                'title' => '//div[@class ="product-title"]/a',
-                'image' => '//div[@class="product-image-wrap"]//img/@src',
-                'price' => "//span[@class='amount']",
-                  'description'=> "//div[@class='product-title']/a/@href",
+			'url' => 'https://uae.microless.com/search/?query='.$search_key,
+			'attributes' => [
+								'title' => '//div[@class ="product-title"]/a',
+								'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src",
+								//$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src")->item(0)->nodeValue;
+								'price' => "//span[@class='amount']",
+  								'description'=> "//div[@class='product-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
-                'shipping' => "//div[@class='free-shipping']",
+								'shipping' => "//div[@class='free-shipping']",
                                 'original_price' => "//span[@class='price-old']",
-                'discount_price' => "//div[@class='product-discount-badge']",
-                'ratings' => "//span[@class='onoffer']",
-              ]
-    ],
+								'discount_price' => "//div[@class='product-discount-badge']",
+								'ratings' => "//span[@class='onoffer']",
+							]
+		],
 [
-      'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
-      'attributes' => [
-                'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
-                'image' => '//img[@class="s-image"]/@src',
-                'price' => "//span[@class='a-color-base']",
-                'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
-                //need to add host name fot the description url
+			'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
+			'attributes' => [
+								'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
+								'image' => '//img[@class="s-image"]/@src',
+								'price' => "//span[@class='a-color-base']",
+								'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
+								//need to add host name fot the description url
                                 'review' => "//span[@class='starRating__count']",
                                 'shipping' => "//span[@class='a-size-small a-color-secondary']",
                                'original_price' => "//span[@class='a-offscreen']",
-                'discount_price' => "//div[@class='product-discount-badge']",
-                'ratings' => "//span[@class='a-icon-alt']",
-              ]
-    ],
-    
-    [
-      'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
-      'attributes' => [
-                'title' => '//p[@class ="comp-productcard__name"]',
-                'image' => '//img[@class="comp-productcard__img"]//@src',
-                'price' => "//p[@class='comp-productcard__price']",
-                'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
+								'discount_price' => "//div[@class='product-discount-badge']",
+								'ratings' => "//span[@class='a-icon-alt']",
+							]
+		],
+		
+		[
+			'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
+			'attributes' => [
+								'title' => '//p[@class ="comp-productcard__name"]',
+								'image' => '//img[@class="comp-productcard__img"]//@src',
+								'price' => "//p[@class='comp-productcard__price']",
+ 								'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
                                'review' => "//span[@class='rating-stars']",
                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                'original_price' => "//p[@class='comp-productcard__price']",
                                'discount_price' => "//span[@class='onoffer']",
-                 'ratings' => "//div[@class='free-shipping fs-ab-black']",
-              ]
-    ]
+							   'ratings' => "//div[@class='free-shipping fs-ab-black']",
+							]
+		]
 ];
 
 

@@ -27,10 +27,7 @@ function GetAEDToUSD( string $aedPrice):string {
 }
 
 
-// Updated script 
-/*
-https://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png
-*/
+
 
 $logos = array(
    
@@ -44,6 +41,9 @@ $logos = array(
 		'www.noon.com' => 'https://k.nooncdn.com/s/app/2019/com-www-bigalog/f668c69a972129bbd6f74d6331994b19084e8636/static/images/noon_logo_black_english.svg',
 		'uae.microless.com' => 'https://uae.microless.com/cdn/microless-svg-logo-next.svg',
 		'www.amazon.com'=> 'https://images-na.ssl-images-amazon.com/images/G/01/rainier/available_at_amazon_1200x600_Nvz5h2M.png',
+		'www.newegg.com' => 'https://c1.neweggimages.com/WebResource/Themes/2005/Nest/logo_424x210.png',
+		'www.alibaba.com' => 'http://globalbizcircle.com/wp-content/uploads/2015/05/Alibaba-logo-300x300.jpg',
+		'www.etsy.com' => 'https://cdn.worldvectorlogo.com/logos/etsy.svg'
 
 );
 
@@ -91,8 +91,17 @@ $logos = array(
 <!-- Foreach data inside the index -->
 <?php foreach($result[$i] as $key => $value) :?>
 
+
+
 <?php 
+if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
+
+	$value['image'] = 'http:'.$value['image'];
+
+} else {
+
 	if(!filter_var($value['description'], FILTER_VALIDATE_URL)) {
+
 
 		$value['description'] = 'http://'.$key.'/'.$value['description'];
 
@@ -105,7 +114,15 @@ $logos = array(
 		$value['image'] = 'http://'.$key.'/'.$value['image'];
 
 
-	}
+	}	
+
+}
+
+
+	
+
+
+	
 
 
 	

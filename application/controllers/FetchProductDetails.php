@@ -31,6 +31,10 @@ class FetchProductDetails extends CI_Controller {
 
 
 		$data = [
+
+
+
+
     [
       
       'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
@@ -56,7 +60,7 @@ class FetchProductDetails extends CI_Controller {
       'attributes' => [
                 'title' => '//h3[@class ="s-item__title"]',
                 'image' => '//img[@class="s-item__image-img"]/@src',
-                'price' => "//span[@class='s-item__price']",
+                'price' => "//div[@class='s-item__detail s-item__detail--primary']//span[@class='s-item__price']",
                                 'description'=> "//div[@class='s-item__image']//a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
@@ -120,7 +124,62 @@ class FetchProductDetails extends CI_Controller {
                 'ratings' => "//span[@class='onoffer']",
               ]
     ],
+      [
+      
+      'url' => 'https://www.newegg.com/global/ae-en/p/pl?d='.$search_key.'&ignorear=0&N=-1&isNodeId=1&Submit=ENE&DEPA=0&Order=BESTMATCH',
+      'attributes' => [
+                'title' => '//a[@class="item-title"]',
+                'image' => '//a[@class="item-img"]/img/@src',
+                'price' => '//li[@class="price-current"]',
+                                'description'=> '//a[@class="item-img"]/@href',
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                'stock' => "//span[@class='a-color-price']",
+                'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+              ]
+    ],
 
+    [
+      
+      'url' => 'https://www.etsy.com/search?q='.$search_key,
+      'attributes' => [
+                'title' => "//h2[@class='text-gray text-truncate mb-xs-0 text-body']",
+                'image' => "//img[@class='width-full display-block position-absolute ']/@src",
+                'price' => "//span[@class='currency-value']",
+                                'description'=> "//a[@data-palette-listing-image]/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                'stock' => "//span[@class='a-color-price']",
+                'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+              ]
+    ],
+
+    [
+      
+      'url' => 'https://www.alibaba.com/products/'.$search_key.'.html',
+      'attributes' => [
+                'title' => "//h2[@class='title two-line']//a/@title",
+                'image' => "//div[@class='offer-image-box']//img/@src",
+                'price' => "//div[@class='price']",
+                                'description'=> "//h2[@class='title two-line']//a/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                'stock' => "//span[@class='a-color-price']",
+                'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+              ]
+    ],
 
 
     [
@@ -142,17 +201,26 @@ class FetchProductDetails extends CI_Controller {
     ],
 [
       'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
+      
       'attributes' => [
-                'title' => "//div[@style ='overflow:hidden']/span",
-                'image' => '//div[@class="jsx-2714670158 mediaContainer"]/img/@src',
-                'price' => "//span[@class='jsx-3248044173 sellingPrice']",
-                                'description'=> "//a[@class='jsx-3796044909 product gridView']/@href",
+                'title' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]",
+                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src",
+                'price' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]",
+                                'description'=> "//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href",
                                  //need to add host name fot the description url
                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
                  'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
                  'ratings' => "//span[@class='onoffer']",
+                
+
+                /*$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]")->item(0)->nodeValue;
+                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src")->item(0)->nodeValue;
+                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]")->item(0)->nodeValue;
+                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href")->item(0)->nodeValue;*/
+                 
+                 
 
               ]
     ],
@@ -162,7 +230,8 @@ class FetchProductDetails extends CI_Controller {
       'url' => 'https://uae.microless.com/search/?query='.$search_key,
       'attributes' => [
                 'title' => '//div[@class ="product-title"]/a',
-                'image' => '//div[@class="product-image-wrap"]//img/@src',
+                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src",
+                //$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src")->item(0)->nodeValue;
                 'price' => "//span[@class='amount']",
                   'description'=> "//div[@class='product-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
@@ -203,6 +272,7 @@ class FetchProductDetails extends CI_Controller {
               ]
     ]
 ];
+
 
 
 
