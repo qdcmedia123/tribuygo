@@ -147,12 +147,17 @@ public function __construct() {
 );
 
 		extract($this->input->post());
+		
+		$subject = '';
+
+		$error = $this->SendMailToRecipent($message, $email, $subject) !== true ? $this->SendMailToRecipent($message, $email, $subject) : [];
 
 		// defined variable 
 
 
+
 		// Return something 
-		$response = ['result' => '', 'csrf' => $csrf, 'data' => $this->input->post(), 'success' => true];
+		$response = ['result' => '', 'csrf' => $csrf, 'data' => $this->input->post(), 'success' => true, 'error' => []];
 
 		return $this->output->set_output(json_encode($response));
 		
@@ -319,6 +324,20 @@ public function __construct() {
 
 	public function SendMailToRecipent(string $message, string $to, string $subject){
 
+		// Somevariable is different 
+		$subject = '';
+		$website = $this->input->post('website') ?? '';
+		// contact type 
+		$contact_type = $this->input->post('contact_type') ?? '';
+
+		$additionalInfo = '';
+		// Two var is different 
+		if($website !== '') {
+
+			$additionalInfo = '<li>Website : '.$website.'</li>
+								<li>Contact Type: '.$contact_type.'</li>';
+		} 
+
 		// Extract the post message 
 
 		// load the library 
@@ -407,6 +426,7 @@ public function __construct() {
 	    						<li>Full Name: $name</li>
 	    						<li>Mobile: $mobile</li>
 	    						<li>Email Address: $email</li>
+	    						$additionalInfo
 	    						<li>Message:</li>
 	    						<br/>
 	    						$message

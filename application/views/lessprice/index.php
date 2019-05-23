@@ -114,6 +114,34 @@ a{
 
 </head>
 <body>
+
+ 
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style = "display:none;" id = "model7878">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" id = "close123">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+          <p>Please wait while sending the request.....</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
