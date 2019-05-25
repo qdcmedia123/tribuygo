@@ -137,7 +137,7 @@ $("#categories-basic").easyAutocomplete(options);
  
 </script>
 
-
+<script src="<?= base_url()?>assets/js/join-usform.js"></script> 
 
 </body>
 </html>

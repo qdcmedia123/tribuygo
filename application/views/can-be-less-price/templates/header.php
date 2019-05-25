@@ -80,6 +80,7 @@ $(document).ready(function() {
 
 </head>
 <body>
+
 <div class="container">
 <div class="row ">
 	<div class="col-md-2">
@@ -87,12 +88,22 @@ $(document).ready(function() {
 
 	<div class="col-md-10">
 		
-		<nav class="custom33 navbar-expand-lg navbar-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-               <button type="button" class="btn btn-danger">Join Us</button>
+               <button type="button" class="btn btn-default" id = "enquiry143">Enquiry</button>
+            </li>
+
+             &nbsp; &nbsp;
+            <li class="nav-item">
+            	
+
+               <button type="button" class="btn btn-default" id = "join-us" >Join Us</button>
+
+               
+
             </li>
             
         </ul>
@@ -100,7 +111,9 @@ $(document).ready(function() {
 </nav>
 
 
-	</div>
+</div>
+
+
 </div>
 </div>
 	
