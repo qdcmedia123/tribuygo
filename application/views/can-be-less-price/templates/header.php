@@ -41,6 +41,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
 
+
+
+
 <style>
 	
 	.easy-autocomplete{
@@ -111,7 +114,7 @@ $(document).ready(function() {
 
 	<div class="col-md-10">
 		
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light">
 
    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
@@ -140,6 +143,7 @@ $(document).ready(function() {
 </div>
 </div>
 	
+
 
 
 <header class="section-header">

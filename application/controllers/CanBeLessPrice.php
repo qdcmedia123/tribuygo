@@ -39,10 +39,17 @@ public function __construct() {
 		$m->addServer('localhost', 11211);
 		$productTitles = $m->get('product_title');
 		$searchKeys = $m->get('search_key_words');
-		$productSearchResult = $m->get('product_search_result');
+		/// $productSearchResult = $m->get('product_search_result');
+
+		// Get all keys 
+		$keys = $m->getAllKeys();
 
 
-		$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys)) : [];
+
+		$data = $this->GetOnlyProductFromMemcached($m, $keys);
+
+
+		$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $data, $searchKeys)) : [];
 		
 		
 		//$_SESSION['test'] = rand(1, 10);
@@ -52,6 +59,38 @@ public function __construct() {
 		$this->load->view('can-be-less-price/templates/header');
 		$this->load->view('can-be-less-price/contents/index', $data);
 		$this->load->view('can-be-less-price/templates/footer');
+	}
+
+	public function GetOnlyProductFromMemcached(Memcached $m, array $data) :array {
+
+		// Filter array 
+		$val = array_filter($data, array($this, 'getOnlyProductKey'));
+
+		// Sort 
+		sort($val);
+
+		// Array length 
+		$len = count($val);
+
+		// Product search result
+		$productSearchResult = [];
+
+		for($i = 0; $i < $len; $i++) {
+
+		$productSearchResult[] = $m->get($i);
+
+		}
+
+		// Return the data 
+		return $productSearchResult;
+
+	}
+
+	function getOnlyProductKey(string $var):string {
+	
+		$reg = '/^[0-9]$/';
+
+		return preg_match($reg, $var);
 	}
 
 	public function defaut_page() {
@@ -352,7 +391,7 @@ public function __construct() {
 	    $mail->Host       = 'smtp.office365.com';  // Specify main and backup SMTP servers
 	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
 	    $mail->Username   = 'info@tribuygo.com';                     // SMTP username
-	    $mail->Password   = '$QDC$12345678$';                               // SMTP password
+	    $mail->Password   = '@#QDC$#7564@';                               // SMTP password
 	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
 	    $mail->Port       = 587;                                    // TCP port to connect to
 

@@ -3,38 +3,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class FetchProductDetails extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{		
-		$doc = new DOMDocument();
+  /**
+   * Index Page for this controller.
+   *
+   * Maps to the following URL
+   *    http://example.com/index.php/welcome
+   *  - or -
+   *    http://example.com/index.php/welcome/index
+   *  - or -
+   * Since this controller is set as the default controller in
+   * config/routes.php, it's displayed at http://example.com/
+   *
+   * So any other public methods not prefixed with an underscore will
+   * map to /index.php/welcome/<method_name>
+   * @see https://codeigniter.com/user_guide/general/urls.html
+   */
+  public function index()
+  {   
+    $doc = new DOMDocument();
 
-		// Restore error level
-		//libxml_use_internal_errors(false);
+    // Restore error level
+    //libxml_use_internal_errors(false);
 
-		$internalErrors = libxml_use_internal_errors(true);
+    $internalErrors = libxml_use_internal_errors(true);
 
-		$search_key = urlencode('Apple iPhone 6');
-
-
-		$data = [
+    $search_key = urlencode('Apple iPhone 6');
 
 
-
-
+    $data = [
     [
       
       'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
@@ -60,7 +56,7 @@ class FetchProductDetails extends CI_Controller {
       'attributes' => [
                 'title' => '//h3[@class ="s-item__title"]',
                 'image' => '//img[@class="s-item__image-img"]/@src',
-                'price' => "//div[@class='s-item__detail s-item__detail--primary']//span[@class='s-item__price']",
+                'price' => "//span[@class='s-item__price']",
                                 'description'=> "//div[@class='s-item__image']//a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
@@ -124,62 +120,7 @@ class FetchProductDetails extends CI_Controller {
                 'ratings' => "//span[@class='onoffer']",
               ]
     ],
-      [
-      
-      'url' => 'https://www.newegg.com/global/ae-en/p/pl?d='.$search_key.'&ignorear=0&N=-1&isNodeId=1&Submit=ENE&DEPA=0&Order=BESTMATCH',
-      'attributes' => [
-                'title' => '//a[@class="item-title"]',
-                'image' => '//a[@class="item-img"]/img/@src',
-                'price' => '//li[@class="price-current"]',
-                                'description'=> '//a[@class="item-img"]/@href',
-                                'review' => "//span[@class='rating-stars']",
-                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
-                                'original_price' => "//span[@class='a-price-whole']",
-                                'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-                'stock' => "//span[@class='a-color-price']",
-                'offer' => "//a[@class='a-link-normal']",
-                                                                                                                    
-              ]
-    ],
 
-    [
-      
-      'url' => 'https://www.etsy.com/search?q='.$search_key,
-      'attributes' => [
-                'title' => "//h2[@class='text-gray text-truncate mb-xs-0 text-body']",
-                'image' => "//img[@class='width-full display-block position-absolute ']/@src",
-                'price' => "//span[@class='currency-value']",
-                                'description'=> "//a[@data-palette-listing-image]/@href",
-                                'review' => "//span[@class='rating-stars']",
-                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
-                                'original_price' => "//span[@class='a-price-whole']",
-                                'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-                'stock' => "//span[@class='a-color-price']",
-                'offer' => "//a[@class='a-link-normal']",
-                                                                                                                    
-              ]
-    ],
-
-    [
-      
-      'url' => 'https://www.alibaba.com/products/'.$search_key.'.html',
-      'attributes' => [
-                'title' => "//h2[@class='title two-line']//a/@title",
-                'image' => "//div[@class='offer-image-box']//img/@src",
-                'price' => "//div[@class='price']",
-                                'description'=> "//h2[@class='title two-line']//a/@href",
-                                'review' => "//span[@class='rating-stars']",
-                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
-                                'original_price' => "//span[@class='a-price-whole']",
-                                'discount_price' => "//span[@class='a-color-base']",
-                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-                'stock' => "//span[@class='a-color-price']",
-                'offer' => "//a[@class='a-link-normal']",
-                                                                                                                    
-              ]
-    ],
 
 
     [
@@ -201,26 +142,17 @@ class FetchProductDetails extends CI_Controller {
     ],
 [
       'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
-      
       'attributes' => [
-                'title' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]",
-                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src",
-                'price' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]",
-                                'description'=> "//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href",
+                'title' => "//div[@style ='overflow:hidden']/span",
+                'image' => '//div[@class="jsx-2714670158 mediaContainer"]/img/@src',
+                'price' => "//span[@class='jsx-3248044173 sellingPrice']",
+                                'description'=> "//a[@class='jsx-3796044909 product gridView']/@href",
                                  //need to add host name fot the description url
                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
                  'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
                  'ratings' => "//span[@class='onoffer']",
-                
-
-                /*$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]")->item(0)->nodeValue;
-                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src")->item(0)->nodeValue;
-                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]")->item(0)->nodeValue;
-                 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href")->item(0)->nodeValue;*/
-                 
-                 
 
               ]
     ],
@@ -230,8 +162,7 @@ class FetchProductDetails extends CI_Controller {
       'url' => 'https://uae.microless.com/search/?query='.$search_key,
       'attributes' => [
                 'title' => '//div[@class ="product-title"]/a',
-                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src",
-                //$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src")->item(0)->nodeValue;
+                'image' => '//div[@class="product-image-wrap"]//img/@src',
                 'price' => "//span[@class='amount']",
                   'description'=> "//div[@class='product-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
@@ -275,143 +206,142 @@ class FetchProductDetails extends CI_Controller {
 
 
 
+    $output = [];
 
-		$output = [];
-
-		$siva = [];
-
-
-		foreach ($data as $item) {
-		    $content = file_get_contents($item['url']);
-
-		    $doc->loadHTML($content);
-
-		    $xpath = new DomXPath($doc);
-
-		    // get grouped
-		    $groupedItems = [];
-
-		    // James
-		    $all = [];
+    $siva = [];
 
 
-		    foreach ($item['attributes'] as $key => $value) {
+    foreach ($data as $item) {
+        $content = file_get_contents($item['url']);
 
-		        if ($xpath->query($value) === false) {
+        $doc->loadHTML($content);
 
-		            continue;
-		            
-		        } else {
-		            $Inner = [];
+        $xpath = new DomXPath($doc);
 
-		            for ($j = 0; $j < $xpath->query($value)->length; $j++) {
-		               
-		               	// if($j === 15) { break; }
-		                $Inner[] = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));
-		            }
+        // get grouped
+        $groupedItems = [];
 
-		            $all[$key] = $Inner;
+        // James
+        $all = [];
 
 
-		            $val = $xpath->query($value)->item(0)->nodeValue ?? '';
+        foreach ($item['attributes'] as $key => $value) {
 
-		            $groupedItems[$key] = preg_replace('/\s\s+/', ' ', trim($val, "\t\n\r\0\x0B"));
-		        }
-		    }
+            if ($xpath->query($value) === false) {
+
+                continue;
+                
+            } else {
+                $Inner = [];
+
+                for ($j = 0; $j < $xpath->query($value)->length; $j++) {
+                   
+                    // if($j === 15) { break; }
+                    $Inner[] = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));
+                }
+
+                $all[$key] = $Inner;
 
 
+                $val = $xpath->query($value)->item(0)->nodeValue ?? '';
 
-		    $parseurl = parse_url($item['url'])['host'];
-
-		    $siva[$parseurl] = $all;
-
-		    $output ["$parseurl"] = $groupedItems;
-		}
-
-		// Get data 
-		$getData = [];
-
-
-		// Loop data throught the value 
-		foreach ($siva as $key => $value) {
-		    $getBlock = [];
+                $groupedItems[$key] = preg_replace('/\s\s+/', ' ', trim($val, "\t\n\r\0\x0B"));
+            }
+        }
 
 
 
-		    $howMany = count($value[key($value)]);
+        $parseurl = parse_url($item['url'])['host'];
+
+        $siva[$parseurl] = $all;
+
+        $output ["$parseurl"] = $groupedItems;
+    }
+
+    // Get data 
+    $getData = [];
 
 
-		    
-		    for ($i = 0; $i < $howMany; $i++) {
-		        $a = [];
+    // Loop data throught the value 
+    foreach ($siva as $key => $value) {
+        $getBlock = [];
 
 
-		        foreach ($value as $k => $v) {
-		            $a[$k] = isset($value[$k][$i]) ? $value[$k][$i] : '';
-		        }
 
-		        $getBlock[] = $a;
-		    }
-		        
-		    $getData[$key] = $getBlock;
-		}
+        $howMany = count($value[key($value)]);
 
-		// Get max record 
-		$getMaxRecord = $this->GetMaxRecord($getData);
 
-		// Defining variable 
-		$b = [];
+        
+        for ($i = 0; $i < $howMany; $i++) {
+            $a = [];
 
-		// Defining 
-		$c = [];
 
-		// Loop through each data 
-		for ($i = 0; $i < $getMaxRecord; $i++) {
-			foreach ($getData as $key => $value) {
-				if (isset($getData[$key][$i])) {
-				    $b[$key] = $getData[$key][$i];
-				} else {
-				    unset($b[$key]);
-				}
-		}
+            foreach ($value as $k => $v) {
+                $a[$k] = isset($value[$k][$i]) ? $value[$k][$i] : '';
+            }
 
-			$c[] = $b;
-		}
+            $getBlock[] = $a;
+        }
+            
+        $getData[$key] = $getBlock;
+    }
 
-		$productTitle = $siva['www.amazon.ae']['title'] ?? '';
+    // Get max record 
+    $getMaxRecord = $this->GetMaxRecord($getData);
 
-		// Load the configuration file 
+    // Defining variable 
+    $b = [];
 
-		// Get the config keys 
+    // Defining 
+    $c = [];
+
+    // Loop through each data 
+    for ($i = 0; $i < $getMaxRecord; $i++) {
+      foreach ($getData as $key => $value) {
+        if (isset($getData[$key][$i])) {
+            $b[$key] = $getData[$key][$i];
+        } else {
+            unset($b[$key]);
+        }
+    }
+
+      $c[] = $b;
+    }
+
+    $productTitle = $siva['www.amazon.ae']['title'] ?? '';
+
+    // Load the configuration file 
+
+    // Get the config keys 
         $this->load->helper('server');
 
-		// Using Memcached 
+    // Using Memcached 
         $m = new Memcached();
 
         // Add server 
         $m->addServer(HOST_NAME, MEMCACHED_PORT);
 
 
-		// Get the product search title 
-		$memSearchedKeyword = $m->get('search_key_words');
-		$memProductTitles = $m->get('product_title');
-		// Product Search Result 
-		$productSearchResult = $m->get('product_search_result');
+    // Get the product search title 
+    $memSearchedKeyword = $m->get('search_key_words');
+    $memProductTitles = $m->get('product_title');
+    // Product Search Result 
+    $productSearchResult = $m->get('product_search_result');
 
 
 
-		if(is_array($memSearchedKeyword)) {
+    if(is_array($memSearchedKeyword)) {
 
-			if(!in_array($search_key, $memSearchedKeyword)) {
+      if(!in_array($search_key, $memSearchedKeyword)) {
 
-				array_push($memSearchedKeyword, $search_key);
-				array_push($memProductTitles, $productTitle);
-				array_push($productSearchResult, $c);
+        array_push($memSearchedKeyword, $search_key);
+        array_push($memProductTitles, $productTitle);
+        array_push($productSearchResult, $c);
 
-			
-			} else {
+      
+      } else {
 
-				// Find the array index of title 
+        // Find the array index of title 
         $keyIndex = array_search($search_key, $memSearchedKeyword);
 
         // if index found 
@@ -422,49 +352,49 @@ class FetchProductDetails extends CI_Controller {
           $productSearchResult[$keyIndex] = $c;
         }
 
-			}
+      }
 
-		} else {
+    } else {
 
-			// Initialize the array 
-			$memSearchedKeyword = [$search_key];
-			$memProductTitles = [$productTitle];
-			$productSearchResult = [$c];
-
-
-		}
+      // Initialize the array 
+      $memSearchedKeyword = [$search_key];
+      $memProductTitles = [$productTitle];
+      $productSearchResult = [$c];
 
 
-
-		// Check the product title 
-		$m->set('search_key_words', $memSearchedKeyword );
-		$m->set('product_title', $memProductTitles);
-		$m->set('product_search_result', $productSearchResult);
-
-		// Load view with all message 
-	
-		
-		
-		$message = 
-			[
-				'status' => 'success', 'message' => 'Product added sucessfull to you database'
-			];
+    }
 
 
 
+    // Check the product title 
+    $m->set('search_key_words', $memSearchedKeyword );
+    $m->set('product_title', $memProductTitles);
+    $m->set('product_search_result', $productSearchResult);
 
-		$this->load->view('can-be-less-price/templates/header.php');
-		$this->load->view('administrator/content/index', $message);
-		$this->load->view('can-be-less-price/templates/footer');
-	}
+    // Load view with all message 
+  
+    
+    
+    $message = 
+      [
+        'status' => 'success', 'message' => 'Product added sucessfull to you database'
+      ];
 
-	public function GetMaxRecord($records)	{
-	    return max(array_map(function ($items) {
-	        return count($items) ;
-	    }, $records));
-	}
 
-	
 
-	
+
+    $this->load->view('can-be-less-price/templates/header.php');
+    $this->load->view('administrator/content/index', $message);
+    $this->load->view('can-be-less-price/templates/footer');
+  }
+
+  public function GetMaxRecord($records)  {
+      return max(array_map(function ($items) {
+          return count($items) ;
+      }, $records));
+  }
+
+  
+
+  
 }

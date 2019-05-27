@@ -63,15 +63,53 @@ public function __construct() {
 		$m->addServer('localhost', 11211);
 		$productTitles = $m->get('product_title');
 		$searchKeys = $m->get('search_key_words');
-		$productSearchResult = $m->get('product_search_result');
+		
+		// Get all keys 
+		$keys = $m->getAllKeys();
+
+		$data = $this->GetOnlyProductFromMemcached($m, $keys);
 
 
-		$output = $searchString !== '' ? json_encode($this->common->IfProductFound($productTitles, $searchString, $productSearchResult, $searchKeys)) : [];
+		$output = $searchString !== '' ? json_encode($this->common->IfProductFound($productTitles, $searchString, $data, $searchKeys)) : [];
 		
 		return $this->output->set_output($output);
 
 
 	}
+
+	public function GetOnlyProductFromMemcached(Memcached $m, array $data) :array {
+
+		// Filter array 
+		$val = array_filter($data, array($this, 'getOnlyProductKey'));
+
+		// Sort 
+		sort($val);
+
+		// Array length 
+		$len = count($val);
+
+		// Product search result
+		$productSearchResult = [];
+
+		for($i = 0; $i < $len; $i++) {
+
+		$productSearchResult[] = $m->get($i);
+
+		}
+
+		// Return the data 
+		return $productSearchResult;
+
+	}
+
+	function getOnlyProductKey(string $var):string {
+	
+		$reg = '/^[0-9]$/';
+
+		return preg_match($reg, $var);
+	}
+
+
 
 
 	public function productLocations() {
@@ -200,15 +238,14 @@ public function __construct() {
 		$subject = '';
 		$website = $this->input->post('website') ?? '';
 		// contact type 
-		$contact_type = $this->input->post('contact_type') ?? '';
+		$contact_type = $this->input->post('contact_type') ?? $this->input->post('contacttype') ?? '';
 
 		$additionalInfo = '';
-		// Two var is different 
-		if($website !== '') {
+		
 
 			$additionalInfo = '<li>Website : '.$website.'</li>
 								<li>Contact Type: '.$contact_type.'</li>';
-		} 
+	
 
 		// Extract the post message 
 
@@ -224,7 +261,7 @@ public function __construct() {
 	    $mail->Host       = 'smtp.office365.com';  // Specify main and backup SMTP servers
 	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
 	    $mail->Username   = 'info@tribuygo.com';                     // SMTP username
-	    $mail->Password   = '$QDC$12345678$';                               // SMTP password
+	    $mail->Password   = '@#QDC$#7564@';                               // SMTP password
 	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
 	    $mail->Port       = 587;                                    // TCP port to connect to
 

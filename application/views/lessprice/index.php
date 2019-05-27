@@ -147,14 +147,28 @@ a{
    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-               <button type="button" class="btn btn-default" id = "enquiry143">Enquiry</button>
+               <button type="button" class="btn btn-default" id = "enquiry143" data-toggle="tooltip" data-html="true"  title = "<div>
+<p><b>Specific only for individual</b></p>
+<ul style = 'text-decoration: none; list-style: none; padding:0px;'>
+<li>Inquiries</li>
+<li>Concerns</li>
+<li>Sugession</li>
+</ul>
+</div>">Enquiry</button>
             </li>
 
              &nbsp; &nbsp;
             <li class="nav-item">
             	
 
-               <button type="button" class="btn btn-default" id = "join-us" >Join Us</button>
+               <button type="button" class="btn btn-default" id = "join-us" data-toggle="tooltip" data-html="true"  title = "<div>
+<p><b>Specific only for Adding/ Updating/ Removing</b></p>
+<ul style = 'text-decoration: none; list-style: none; padding:0px;'>
+<li>Advertisers</li>
+<li>Websites Owners</li>
+<li>e-Commerce Traders</li>
+</ul>
+</div>">Join Us</button>
 
                
 
@@ -222,7 +236,6 @@ $csrf = array(
 
 
 
-
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
    <!-- JS file -->
   <script src="<?= base_url()?>assets/js/jquery.easy-autocomplete.min.js"></script> 
@@ -247,7 +260,9 @@ $csrf = array(
 
 
 <script>
-
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 
     // http://localhost/canbelessprice/api/category_list_location

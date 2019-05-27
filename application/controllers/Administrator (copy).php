@@ -97,11 +97,18 @@ class Administrator extends CI_Controller {
 			// Add server 
 			$m->addServer(HOST_NAME, MEMCACHED_PORT);
 
-			
+			// Get the data from the array 
+			$getAllProduct = $m->get('product_search_result');
+
+			// Set index 
+			settype($index, 'integer');
+
+			// Get the index 
+			$getThePRoduct = $getAllProduct[$index];
 
 
 			// Set the resut 
-			return  json_encode($m->get($index) ?? ['status' => 404, 'message' => 'Unable to find the product']);	
+			return  json_encode($getAllProduct[$index] ? $getAllProduct[$index] : ['status' => 404, 'message' => 'Unable to find the product']);	
 
 	}
 
@@ -162,9 +169,6 @@ class Administrator extends CI_Controller {
 		$internalErrors = libxml_use_internal_errors(true);
 
 		$search_key = urlencode($keyword);
-
-		// count keyworld 
-  $countKeyword = str_word_count($keyword);
 
 
 	$data = [
@@ -280,7 +284,24 @@ class Administrator extends CI_Controller {
 							]
 		],
 
-		
+		[
+			
+			'url' => 'https://www.etsy.com/search?q='.$search_key,
+			'attributes' => [
+								'title' => "//h2[@class='text-gray text-truncate mb-xs-0 text-body']",
+								'image' => "//img[@class='width-full display-block position-absolute ']/@src",
+								'price' => "//span[@class='currency-value']",
+                                'description'=> "//a[@data-palette-listing-image]/@href",
+                                'review' => "//span[@class='rating-stars']",
+                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
+                                'original_price' => "//span[@class='a-price-whole']",
+                                'discount_price' => "//span[@class='a-color-base']",
+								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+								'stock' => "//span[@class='a-color-price']",
+								'offer' => "//a[@class='a-link-normal']",
+                                                                                                                    
+							]
+		],
 
 		[
 			
@@ -333,7 +354,12 @@ class Administrator extends CI_Controller {
                                 'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
 								 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
 								 'ratings' => "//span[@class='onoffer']",
-							
+								
+
+								/*$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]")->item(0)->nodeValue;
+								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href")->item(0)->nodeValue;*/
 								 
 								 
 
@@ -420,42 +446,8 @@ class Administrator extends CI_Controller {
 
 		            for ($j = 0; $j < $xpath->query($value)->length; $j++) {
 		               
-		               	// We need some filed is required such as title, price , image must matched 
-
-                    // if($j === 15) { break; }
-                    // Getting value 
-                    $valudNodes = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));;
-
-                    if($key === 'title' || $key === 'price' || $key === 'image') {
-
-                        // Check item containe something 
-                        if($valudNodes === '') {
-
-                            continue;
-                        }
-                    }
-
-
-                    /*
-                    // It must be title 
-                    if($key === 'title') {
-
-                        if($countKeyword < 3) {
-
-                        if(!strpos(strtolower($valudNodes), strtolower($keyword))) {
-
-                            continue;
-
-                         }
-                        
-                        }
-                        
-                        // Check that 
-
-                    }
-                    */
-
-                    $Inner[] = $valudNodes;
+		               	// if($j === 15) { break; }
+		                $Inner[] = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));
 		            }
 
 		            $all[$key] = $Inner;
@@ -464,8 +456,6 @@ class Administrator extends CI_Controller {
 		            $val = $xpath->query($value)->item(0)->nodeValue ?? '';
 
 		            $groupedItems[$key] = preg_replace('/\s\s+/', ' ', trim($val, "\t\n\r\0\x0B"));
-		        
-
 		        }
 		    }
 
@@ -550,62 +540,39 @@ class Administrator extends CI_Controller {
 
 
 
-		 // Defining index 
-    $i = 0;
+		if(is_array($memSearchedKeyword)) {
 
-    if(is_array($memSearchedKeyword)) {
+			if(!in_array($search_key, $memSearchedKeyword)) {
 
-      if(!in_array($search_key, $memSearchedKeyword)) {
+				array_push($memSearchedKeyword, $search_key);
+				array_push($memProductTitles, $productTitle);
+				array_push($productSearchResult, $c);
 
-        // Push the information 
-        array_push($memSearchedKeyword, $search_key);
-        array_push($memProductTitles, $productTitle);
+			
+			} else {
 
-        // get all memcached keys 
-        $keys = $m->getAllKeys();
+				$memSearchedKeyword = $memSearchedKeyword;
+				$memProductTitles = $memProductTitles;
+				$productSearchResult = $productSearchResult;
 
-        // Get only 
-        $val = array_filter($keys,"getOnlyProductKey");
-        
-        // Sort the  array 
-        sort($val);
-        $productSearchResult = $c;
-        // count the value 
-        $i = count($val);
+			}
 
-      
-      } else {
+		} else {
+
+			// Initialize the array 
+			$memSearchedKeyword = [$search_key];
+			$memProductTitles = [$productTitle];
+			$productSearchResult = [$c];
 
 
-        // Find the array index of title 
-        $i = array_search($search_key, $memSearchedKeyword);
-
-        // if index found 
-        if($i !== false ){
-
-         
-          $memProductTitles[$i] = $productTitle;
-          $productSearchResult  = $c;
-        }
-
-      }
-
-    } else {
-
-      // Initialize the array 
-      $memSearchedKeyword = [$search_key];
-      $memProductTitles = [$productTitle];
-      $productSearchResult = $c;
-
-
-    }
+		}
 
 
 
-    // Check the product title 
-    $m->set('search_key_words', $memSearchedKeyword );
-    $m->set('product_title', $memProductTitles);
-    $m->set($i, $productSearchResult);
+		// Check the product title 
+		$m->set('search_key_words', $memSearchedKeyword );
+		$m->set('product_title', $memProductTitles);
+		$m->set('product_search_result', $productSearchResult);
 
 		// Load view with all message 
 	
