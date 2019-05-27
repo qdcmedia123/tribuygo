@@ -75,7 +75,7 @@ public function __construct() {
 		// Product search result
 		$productSearchResult = [];
 
-		for($i = 0; $i < $len; $i++) {
+		for($i = 0; $i <= $len; $i++) {
 
 		$productSearchResult[] = $m->get($i);
 
