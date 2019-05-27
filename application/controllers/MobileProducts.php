@@ -104,7 +104,7 @@ public function __construct() {
 
 	function getOnlyProductKey(string $var):string {
 	
-		$reg = '/^[0-9]$/';
+		$reg = '/^[0-9]{1,}$/';
 
 		return preg_match($reg, $var);
 	}

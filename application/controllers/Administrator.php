@@ -621,7 +621,7 @@ class Administrator extends CI_Controller {
 	}
 
 	public function getOnlyProductKey($var) {
-    	$reg = '/^[0-9]$/';
+    	$reg = '/^[0-9]{1,}$/';
 
     	return preg_match($reg, $var);
 	}
