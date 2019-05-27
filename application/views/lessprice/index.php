@@ -162,7 +162,7 @@ a{
             	
 
                <button type="button" class="btn btn-default" id = "join-us" data-toggle="tooltip" data-html="true"  title = "<div>
-<p><b>Specific only for Adding/ Updating/ Removing</b></p>
+<p><b>Specific only for Adding/ Updating/ Removing (New/Existing)</b></p>
 <ul style = 'text-decoration: none; list-style: none; padding:0px;'>
 <li>Advertisers</li>
 <li>Websites Owners</li>
