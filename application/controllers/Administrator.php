@@ -549,7 +549,7 @@ class Administrator extends CI_Controller {
     $memSearchedKeyword = $m->get('search_key_words');
     $memProductTitles = $m->get('product_title');
     // Product Search Result 
-    $productSearchResult = $m->get('product_search_result');
+    $productSearchResult = '';
 
     // Defining index 
     $i = 0;
