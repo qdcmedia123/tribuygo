@@ -499,5 +499,15 @@ public function __construct() {
 
 	}
 
+	public function privacyandpolicy() {
+
+		$this->load->view('can-be-less-price/templates/header');
+		$this->load->view('can-be-less-price/contents/privacyandpolicy');
+		$this->load->view('can-be-less-price/templates/footer');
+	}
+
+
+	
+
 	
 }

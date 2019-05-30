@@ -38,6 +38,7 @@
 <!-- custom javascript -->
 <script src="<?php echo base_url(); ?>assets/js/script.js" type="text/javascript"></script>
 
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 
 
@@ -114,7 +115,7 @@ $(document).ready(function() {
 
 	<div class="col-md-10">
 		
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light">
 
    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
