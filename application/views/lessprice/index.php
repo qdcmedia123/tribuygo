@@ -229,6 +229,8 @@ $csrf = array(
   	<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;">Quality Digital Community </a><br/>
 	
   	 <a style = "text-decoration: none; color:#6c757d!important;" href = "https://www.qdcmedia.com/">Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
+     <br/>
+     <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;">Privacy and Policy</a>
 
   </div>
 </footer>
