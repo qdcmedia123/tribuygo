@@ -5,7 +5,7 @@
   <title>Tribuygo</title>
 
 
-   <style>
+  
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 
@@ -16,86 +16,9 @@
 <link rel="stylesheet" href="<?= base_url()?>assets/css/easy-autocomplete.themes.min.css"> 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <style>
 
-  
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+<link rel="stylesheet" href="<?= base_url()?>assets/css/custom123.css"> 
 
-body{
-  background: #fff;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.search {
-  width: 100%;
-  position: relative
-}
-
-.searchTerm {
-  float: left;
-  width: 100%;
-  border: 3px solid #00B4CC;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-
-.searchButton {
-  position: absolute;  
-  bottom:1px;
-  right: -65px;
-  width: 40px;
-  height: 37px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: center;
-  color: #fff;
-
-  border-radius: 0px 30px 30px 0px; ;
-  cursor: pointer;
-  font-size: 20px;
-
-}
-
-/*Resize the wrap to see the search bar change!*/
-.wrap{
-  width: 35%;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.easy-autocomplete{
-
-  width:100%;
-}
-
-.footer{
-background-color: #f8f9fa!important;
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
- text-align: center;
-
-}
-a{
-	text-decoration: none;
-	color:none;
-}
-
-
-
-
-
-
-</style>
 
 
 
@@ -224,6 +147,10 @@ $csrf = array(
 
 </main>
 <footer class="footer mt-auto py-3">
+
+  
+
+
   <div class="container">
 
   	<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;">Quality Digital Community </a><br/>
@@ -233,6 +160,22 @@ $csrf = array(
      <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;">Privacy and Policy</a>
 
   </div>
+
+  <div class="jsx-3729605677 appLinksModule">
+
+
+
+    <div class="jsx-3729605677 badgesContainer">
+
+    <a target="_blank" href="https://itunes.apple.com/ae/app/tribuygo/id1465088678?mt=8" rel="noopener noreferrer" aria-label="Visit the AppStore (opens in a new window)" class="jsx-3729605677 ios">ios App</a>
+
+
+      <a target="_blank" href="https://play.google.com/store/apps/details?id=com.qdc.tribuygo" rel="noopener noreferrer" aria-label="Visit the PlayStore (opens in a new window)" class="jsx-3729605677 android">Android App</a>
+
+    </div>
+
+  </div>
+
 </footer>
 
 

@@ -212,13 +212,11 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 						$shipping = $value['shipping'] ?? '';
 					} else {
 
+
+						
 						$price = GetAEDToUSD($value['price']) ?? '';
 						$original_price = GetAEDToUSD($value['original_price']) ?? '';
-
-
 						$discount = $value['discount_price'] !== '' ? GetAEDToUSD($value['discount_price']) : '';
-
-
 						$shipping = $value['shipping'] !== '' ? GetAEDToUSD($value['shipping']) : '';
 					}
 					

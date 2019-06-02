@@ -71,10 +71,31 @@
 
   	 <br/>
      <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;">Privacy and Policy</a>
+				
+ <div class="jsx-3729605677 appLinksModule">
+
+
+
+    <div class="jsx-3729605677 badgesContainer">
+
+    <a target="_blank" href="https://itunes.apple.com/ae/app/tribuygo/id1465088678?mt=8" rel="noopener noreferrer" aria-label="Visit the AppStore (opens in a new window)" class="jsx-3729605677 ios">ios App</a>
+
+
+      <a target="_blank" href="https://play.google.com/store/apps/details?id=com.qdc.tribuygo" rel="noopener noreferrer" aria-label="Visit the PlayStore (opens in a new window)" class="jsx-3729605677 android">Android App</a>
+
+    </div>
+
+  </div>
 				</div>
+
+
 			</div>
+
+
 		</section> <!-- //footer-top -->
 	</div><!-- //container -->
+
+
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
 
