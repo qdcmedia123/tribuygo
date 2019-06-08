@@ -9,6 +9,7 @@ public function __construct() {
         parent:: __construct();
         ini_set('display_errors', 1);
         $this->load->helper('url');
+        $this->load->helper('credential');
         
    
     }
@@ -388,15 +389,15 @@ public function __construct() {
 	    //Server settings
 	    $mail->SMTPDebug = false;                                       // Enable verbose debug output
 	    $mail->isSMTP();                                            // Set mailer to use SMTP
-	    $mail->Host       = 'smtp.office365.com';  // Specify main and backup SMTP servers
+	    $mail->Host       = SMTP_HOST;  // Specify main and backup SMTP servers
 	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-	    $mail->Username   = 'info@tribuygo.com';                     // SMTP username
-	    $mail->Password   = '$_REQUE123&nbsp;';                               // SMTP password
+	    $mail->Username   = SMTP_USERNAME;                     // SMTP username
+	    $mail->Password   = SMTP_PASSWORD;                               // SMTP password
 	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
 	    $mail->Port       = 587;                                    // TCP port to connect to
 
 	    // This is client will receive the email from tribuy go 
-	    $mail->setFrom('info@tribuygo.com', 'Mailer');
+	    $mail->setFrom(SMTP_USERNAME, 'Mailer');
 	    $mail->addAddress($to, 'Client');     // Add a recipient
 	    
 	    
@@ -455,8 +456,8 @@ public function __construct() {
 
 
 	    // This is where we will receive the email 
-	    $mail->setFrom('info@tribuygo.com', 'Mailer');
-	    $mail->addAddress('info@tribuygo.com', 'Tribuygo.com');
+	    $mail->setFrom(SMTP_USERNAME, 'Mailer');
+	    $mail->addAddress(SMTP_USERNAME, 'Tribuygo.com');
 	    $mail->addReplyTo($to, 'Information');
 
 	    $mail->Subject = $subject;
