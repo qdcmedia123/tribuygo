@@ -65,12 +65,12 @@
 				
 				<div class = "footer-inner">
 					
-<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;">Quality Digital Community </a><br/>
+<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;" target="_blank" >Quality Digital Community </a><br/>
 	
   	 <a href = "https://www.qdcmedia.com/">Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
 
   	 <br/>
-     <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;">Privacy and Policy</a>
+     <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;" target="_blank">Privacy and Policy</a>
 				
  <div class="jsx-3729605677 appLinksModule">
 
@@ -98,6 +98,16 @@
 
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
+
+<script>
+  
+  if (window.performance && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+    //window.location.reload();
+
+    alert('back');
+}
+</script>
+
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

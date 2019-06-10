@@ -9,6 +9,10 @@
 
 <title>Tribuygo</title>
 
+
+
+
+
 <link href="<?php echo base_url(); ?>assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
 <!-- jQuery -->
@@ -71,6 +75,14 @@
     background-color:#f8f9fa!important;
 }
 
+.rating-stars li.stars-active {
+     z-index: 0; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -82,6 +94,13 @@ $(document).ready(function() {
 
 }); 
 // jquery end
+</script>
+
+<script>
+  
+  if (window.performance && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+    window.location.reload();
+}
 </script>
 
 </head>

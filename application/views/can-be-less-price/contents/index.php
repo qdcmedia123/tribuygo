@@ -243,7 +243,7 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 					<a href="<?= $value['description']; ?>" target="_blank" class="btn btn-primary"> Buy now </a>
 					<a href="<?= $value['description']; ?>" target="_blank" class="btn btn-secondary"> Details  </a>
 				</p>
-				<a href="#"><i class="fa fa-heart"></i> Add to wishlist</a>
+				
 			</div> <!-- action-wrap.// -->
 			
 		</aside> <!-- col.// -->

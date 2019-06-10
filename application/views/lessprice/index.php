@@ -4,7 +4,12 @@
   
   <title>Tribuygo</title>
 
-
+<script>
+  
+  if (window.performance && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+    window.location.reload();
+} 
+</script>
   
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -122,7 +127,7 @@ $csrf = array(
 
 
 
-<form method="POST" action = "search" id = "search-form-6767">
+<form method="POST" action = "search" id = "search-form-6767" >
   <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 
   
@@ -139,10 +144,6 @@ $csrf = array(
    </div>
 </form>
 
-
-
-
-
 </div>
 
 </main>
@@ -153,11 +154,11 @@ $csrf = array(
 
   <div class="container">
 
-  	<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;">Quality Digital Community </a><br/>
+  	<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;" target="_blank">Quality Digital Community </a><br/>
 	
-  	 <a style = "text-decoration: none; color:#6c757d!important;" href = "https://www.qdcmedia.com/">Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
+  	 <a style = "text-decoration: none; color:#6c757d!important;" href = "https://www.qdcmedia.com/" target="_blank" >Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
      <br/>
-     <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;">Privacy and Policy</a>
+     <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;" target="_blank">Privacy and Policy</a>
 
   </div>
 
@@ -201,6 +202,7 @@ $csrf = array(
 	const csrfToken = 'nonthing';
 
 </script>
+
 
 
 
@@ -266,6 +268,8 @@ $("#categories-basic").easyAutocomplete(options);
   
  
 </script>
+
+
 
 <script src="<?= base_url()?>assets/js/join-usform.js"></script> 
 
