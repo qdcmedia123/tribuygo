@@ -34,33 +34,114 @@ public function __construct() {
 	{
 
 
-		$searchString = $this->input->post('search') ?? '';
+		//$searchString = $this->input->post('search') ?? '';
+
+		//$searchString = 'tv';
+
+		$searchString = $this->input->get('search', TRUE);
+		$page = $this->input->get('page', TRUE);
+		$searchString = urldecode($searchString);
 
 		$m = new Memcached();
+		
 		$m->addServer('localhost', 11211);
-		$productTitles = $m->get('product_title');
-		$searchKeys = $m->get('search_key_words');
-		/// $productSearchResult = $m->get('product_search_result');
-
-		// Get all keys 
+		// Get the product in array getOnlyProductAsArray(array $keys, Memcached $m)
 		$keys = $m->getAllKeys();
+		$searchKeys = $m->get('search_key_words');
 
+		//$products = getOnlyProductAsArray($keys, $m);
 
-
-		$data = $this->GetOnlyProductFromMemcached($m, $keys);
-
-
-		$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $data, $searchKeys)) : [];
+		$searchResult = $this->SearchProduct($m, $searchString,  $page);
 		
+		$didyoumean = false ;
+
+		// check that status is not 400
+		if($searchResult['status'] !== 400) {
+
+			// Then again go and search by the given suggessing 
+			$didyoumean = true;
+
+			$words = array_map('urldecode', $searchKeys);
+			$words = array_map('strtolower', $words);
+
+			$result = $this->didyoumean($words, $searchString);
+
+			// Get the string 
+			$didyoumean = $result['string'];
+
+			// Check if not empty 
+			if($didyoumean !== '') {
+
+				// Again search for 
+				$searchResult = $this->SearchProduct($m, $didyoumean,  $page);
+			}
+
+
+		}
+
+		//$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $data, $searchKeys)) : [];
 		
+		$searchResult['didyoumean'] = $didyoumean;
+
+
 		//$_SESSION['test'] = rand(1, 10);
 
-		$data = ['output' => $output, 'searchString' => $searchString];
+		$data = ['output' => $searchResult, 'searchString' => $searchString];
+
+		
 
 		$this->load->view('can-be-less-price/templates/header');
 		$this->load->view('can-be-less-price/contents/index', $data);
 		$this->load->view('can-be-less-price/templates/footer');
 	}
+
+
+	
+
+	public function didyoumean(array $words, string $input) {
+
+		// no shortest distance found, yet
+		$shortest = -1;
+
+		// Get all matched words 
+
+		// loop through words to find the closest
+		foreach ($words as $word) {
+
+		// calculate the distance between the input word,
+		// and the current word
+		$lev = levenshtein($input, $word);
+
+		// check for an exact match
+		if ($lev == 0) {
+
+		    // closest word is this one (exact match)
+		    $closest = $word;
+		    $shortest = 0;
+
+		    // break out of the loop; we've found an exact match
+		    break;
+		}
+
+		// if this distance is less than the next found shortest
+		// distance, OR if a next shortest word has not yet been found
+		if ($lev <= $shortest || $shortest < 0) {
+		    // set the closest match, and shortest distance
+		    $closest  = $word;
+		    $shortest = $lev;
+		}
+		}
+
+		// Return data 
+		return $shortest === 0 ? ['exactmatch' => true, 'string' => $closest, 'didyoumean' => null] : ['exactmatch' => null, 'string' => $closest, 'didyoumean' => true];
+
+
+
+}
+
+
+
+
 
 	public function GetOnlyProductFromMemcached(Memcached $m, array $data) :array {
 
@@ -101,6 +182,151 @@ public function __construct() {
 		
 
 	}
+
+
+public function getOnlyProductAsArray(array $keys, Memcached $m):array {
+
+$val = array_filter($keys, array($this, "getOnlyProductKey"));
+
+//sort($val);
+
+$len = count($val);
+
+//echo $len;
+// get all product 
+$getallProdcut = [];
+
+for($i = 0; $i <= $len; $i++) {
+
+    if($m->get($i) !== false ) {
+
+        $getallProdcut[] = $m->get($i);
+    }
+    
+}
+
+return $getallProdcut;
+
+}
+
+
+
+
+public function trimSearchKeyWord(string $string  ): string   {
+
+    $string = trim($string);
+    $string = rtrim($string);
+    $string = preg_replace('/\s\s+/', ' ', $string);
+    $string = strtolower($string);
+
+    // Return search string 
+    return $string;
+}
+
+
+public function SearchProduct(Memcached $m, string $searchString,  string $page) :array {
+
+    $stringToSearch = $this->trimSearchKeyWord($searchString);
+
+    $searchResult = [];
+    
+    // Get all the keys$ 
+    $keys = $m->getAllKeys();
+
+    // Count 
+    $keyscount = count($keys);
+
+    // Unset two key we already know that 
+    //unset($keys['product_title']);
+    //unset($keys['search_key_words']);
+
+   if (($donotneed = array_search('product_title', $keys)) !== false) {
+        
+        unset($keys[$donotneed]);
+    }
+
+    if (($donotneed = array_search('search_key_words', $keys)) !== false) {
+        
+        unset($keys[$donotneed]);
+    }
+
+
+
+    foreach($keys as $key => $value) {
+
+        $title = $m->get($keys[$value])['title'];
+
+        // Check string post if there is data 
+        if(stripos(strtolower($title), $stringToSearch) !== false) {
+
+            $searchResult[] = $m->get($keys[$value]);
+        }
+    }
+
+    /*
+    for($i = 0; $i < $keyscount; $i++) {
+
+        
+        // Here check with each 
+        // Get 
+        $title = $m->get($keys[$i])['title'];
+
+        // Check string post if there is data 
+        if(stripos(strtolower($title), $stringToSearch) !== false) {
+
+            $searchResult[] = $m->get($keys[$i]);
+        }
+
+
+
+    }
+    */
+
+    // Make the number of page 
+$perpage = 20;
+
+// Number of result 
+$numberOfResult = count($searchResult);
+
+// Number of pages 
+$numberOfPages = ceil($numberOfResult / $perpage);
+
+// Page number 
+$page = $page - 1;
+
+$whichpage = $page + 1;
+
+
+
+$skipfrom = $page * $perpage;
+
+
+
+
+$message = [
+            'status' => 404 , 
+            'message' => 'Sorry, We are unable to find anything at the moment.',
+            'search' => $searchString
+        ];
+
+
+return count($searchResult) > 0 ? 
+                            [    //'result' => $searchResult,
+                                'result' => count($searchResult) <= 20 ? $searchResult : array_splice($searchResult, $skipfrom , $perpage),
+
+                                'perpage' => $perpage,
+                                'numberOfPages' => $numberOfPages,
+                                'numberOfResult' => $numberOfResult,
+                                'page' => $whichpage,
+                                'status' => 400,
+                                'search' => $searchString,
+                                'whichpage'=>$whichpage
+                            ] : 
+                            ['result' => $message];
+
+
+}
+
 
 
 	public function IfProductFound( 

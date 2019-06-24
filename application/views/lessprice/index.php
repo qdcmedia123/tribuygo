@@ -5,12 +5,68 @@
   <title>Tribuygo</title>
 
 <script>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   
   if (window.performance && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
     window.location.reload();
 } 
 </script>
+  <style>
+    
+    .custom34 {
+      position: absolute;
+      top:150px;
+      right:5px;
+    }
+    .custom34 img {
+     width: 320px !important ;
+     height:559px !important;
+      
+     
+
+    }
+
+    .nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+@media only screen and (max-width: 800px) {
   
+  .custom34{
+      display: none;
+  }
+
+.wrap {
+    text-align: center;
+    width: 90% !important;
+    /*
+    position: absolute;
+    */
+    position: relative !important;
+    top: 100px !important;
+    left: 0 !important; 
+     transform: none !important; 
+
+}
+
+#search-form-6767{
+
+  width:100%;
+}
+
+.searchButton {
+  right: -35px !important ;
+}
+
+
+}
+
+
+
+
+  </style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 
@@ -122,19 +178,19 @@ $csrf = array(
 
 
 
-<p style="color:#000;" align="center">Find your Ideal Purchase and Compare Prices from Different Websites</p>
+<p style="color:#000;" align="center" class = "cusom">Find your Ideal Purchase and Compare Prices from Different Websites</p>
 
 
 
 
-<form method="POST" action = "search" id = "search-form-6767" >
+<form action = "search" id = "search-form-6767" >
   <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
-
+   
   
    <div class="search">
       <input name = "search" type="text" class="form-control" placeholder="Type... eg: Samsung,Iphone...." id = "categories-basic" style = "width:100%;">
 
-
+<input type="hidden" name="page" value="1" />
       
       <button type="submit" class="searchButton" style = "width:10%;">
         <i class="fa fa-search"></i>
@@ -144,9 +200,26 @@ $csrf = array(
    </div>
 </form>
 
+
+
 </div>
 
+   
+
+</div>
+
+</div>
+
+
+
 </main>
+
+
+<!--Carousel Wrapper-->
+
+<!--/.Carousel Wrapper-->
+
+
 <footer class="footer mt-auto py-3">
 
   
@@ -179,6 +252,69 @@ $csrf = array(
 
 </footer>
 
+
+
+<div class = "custom34">
+  <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+
+
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <div class="view">
+
+        <a href = "https://www.qdcmedia.com/" target = "_blank">
+        <img class="d-block w-100" src="<?= base_url()?>assets/images/qdc-ad.png"
+          alt="First slide" /></a>
+        <div class="mask rgba-black-light"></div>
+      </div>
+      <div class="carousel-caption">
+        
+       
+      </div>
+    </div>
+
+  
+
+
+    
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        
+        <a href = "https://www.instagram.com/max_motors_uae/">
+        <img class="d-block w-100" src="<?= base_url()?>assets/images/maxmotor.png"
+          alt="Third slide" target = "_blank"/> </a>
+
+        <div class="mask rgba-black-slight"></div>
+      </div>
+      <div class="carousel-caption">
+        
+      
+      </div>
+    </div>
+  </div>
+
+
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  <!--/.Controls-->
+</div>
 
 
 

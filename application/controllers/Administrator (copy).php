@@ -97,18 +97,11 @@ class Administrator extends CI_Controller {
 			// Add server 
 			$m->addServer(HOST_NAME, MEMCACHED_PORT);
 
-			// Get the data from the array 
-			$getAllProduct = $m->get('product_search_result');
-
-			// Set index 
-			settype($index, 'integer');
-
-			// Get the index 
-			$getThePRoduct = $getAllProduct[$index];
+			
 
 
 			// Set the resut 
-			return  json_encode($getAllProduct[$index] ? $getAllProduct[$index] : ['status' => 404, 'message' => 'Unable to find the product']);	
+			return  json_encode($m->get($index) ?? ['status' => 404, 'message' => 'Unable to find the product']);	
 
 	}
 
@@ -165,10 +158,15 @@ class Administrator extends CI_Controller {
 
 		// Restore error level
 		//libxml_use_internal_errors(false);
+		 // count keyworld 
+  		$countKeyword = str_word_count($keyword);
 
 		$internalErrors = libxml_use_internal_errors(true);
 
 		$search_key = urlencode($keyword);
+
+		// count keyworld 
+  $countKeyword = str_word_count($keyword);
 
 
 	$data = [
@@ -176,418 +174,456 @@ class Administrator extends CI_Controller {
 
 
 
-		[
-			
-			'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
-			'attributes' => [
-								'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
-								'image' => '//div[@class="a-section aok-relative s-image-fixed-height"]/img/@src',
-								'price' => "//span[@class='a-price-whole']",
+        [
+            
+            'url' => 'https://www.amazon.ae/s?k='.$search_key.'&ref=nb_sb_noss',
+            'attributes' => [
+                                'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
+                                'image' => '//div[@class="a-section aok-relative s-image-fixed-height"]/img/@src',
+                                'price' => "//span[@class='a-price-whole']",
                                 'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='a-row']//span[@dir='auto']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-								'stock' => "//span[@class='a-color-price']",
-								'offer' => "//a[@class='a-link-normal']",
+                                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                                'stock' => "//span[@class='a-color-price']",
+                                'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-							]
-		],
-		
-		[
-			
-			'url' => 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw='.$search_key.'&_sacat=0',
-			'attributes' => [
-								'title' => '//h3[@class ="s-item__title"]',
-								'image' => '//img[@class="s-item__image-img"]/@src',
-								'price' => "//div[@class='s-item__detail s-item__detail--primary']//span[@class='s-item__price']",
+                            ]
+        ],
+        
+        [
+            
+            'url' => 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw='.$search_key.'&_sacat=0',
+            'attributes' => [
+                                'title' => '//h3[@class ="s-item__title"]',
+                                'image' => '//img[@class="s-item__image-img"]/@src',
+                                'price' => "//div[@class='s-item__detail s-item__detail--primary']//span[@class='s-item__price']",
                                 'description'=> "//div[@class='s-item__image']//a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-								'stock' => "//span[@class='s-item__time-end']",
-								'offer' => "//a[@class='a-link-normal']",
+                                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                                'stock' => "//span[@class='s-item__time-end']",
+                                'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-							]
-		],
-		
-				[
-			
-			'url' => 'https://www.virginmegastore.ae/en/search/?text='.$search_key,
-			'attributes' => [
-								'title' => '//a[@class ="name"]',
-								'image' => '//img[@itemprop="image"]/@src',
-								'price' => "//span[@class='price']",
+                            ]
+        ],
+        
+                [
+            
+            'url' => 'https://www.virginmegastore.ae/en/search/?text='.$search_key,
+            'attributes' => [
+                                'title' => '//a[@class ="name"]',
+                                'image' => '//img[@itemprop="image"]/@src',
+                                'price' => "//span[@class='price']",
                                 'description'=> "//a[@class='thumb']/@href",
                                 'review' => "//div[@class='tf-based']//div[@class='tf-count']",
                                 'shipping' => "//span[@class='s-item__shipping s-item__logisticsCost']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='tf-stars-svg']/@style",
-								'stock' => "//span[@class='s-item__time-end']",
-								'offer' => "//a[@class='a-link-normal']",
+                                'ratings' => "//span[@class='tf-stars-svg']/@style",
+                                'stock' => "//span[@class='s-item__time-end']",
+                                'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-							]
-		],
+                            ]
+        ],
 
 
 
 
 
 [
-			'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
-			'attributes' => [
-								'title' => '//a[@class ="product-item-link"]',
-								'image' => '//img[@class="product-image-photo"]//@src',
-								'price' => "//span[@class='price']",
+            'url' => 'https://www.erosdigitalhome.ae/catalogsearch/result/?q='.$search_key,
+            'attributes' => [
+                                'title' => '//a[@class ="product-item-link"]',
+                                'image' => '//img[@class="product-image-photo"]//@src',
+                                'price' => "//span[@class='price']",
                                 'description'=> "//a[@class='product-item-link']/@href",
                                  'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//p[@class='comp-productcard__price']",
-								'discount_price' => "//span[@class='onoffer']",
-								'ratings' => "//span[@class='onoffer']",
-							]
-		],
+                                'discount_price' => "//span[@class='onoffer']",
+                                'ratings' => "//span[@class='onoffer']",
+                            ]
+        ],
 [
-			'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
-			'attributes' => [
-								'title' => '//span[@class ="variant-title"]/a',
-								'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-								'price' => "//span[@class='variant-final-price']",
-  								'description'=> "//span[@class='variant-title']/a/@href",
+            'url' => 'https://www.axiomtelecom.com/home/search?q='.$search_key,
+            'attributes' => [
+                                'title' => '//span[@class ="variant-title"]/a',
+                                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+                                'price' => "//span[@class='variant-final-price']",
+                                'description'=> "//span[@class='variant-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='variant-list-price']",
-								'discount_price' => "//span[@class='variant-list-price']",
-								'ratings' => "//span[@class='onoffer']",
-							]
-		],
-			[
-			
-			'url' => 'https://www.newegg.com/global/ae-en/p/pl?d='.$search_key.'&ignorear=0&N=-1&isNodeId=1&Submit=ENE&DEPA=0&Order=BESTMATCH',
-			'attributes' => [
-								'title' => '//a[@class="item-title"]',
-								'image' => '//a[@class="item-img"]/img/@src',
-								'price' => '//li[@class="price-current"]',
+                                'discount_price' => "//span[@class='variant-list-price']",
+                                'ratings' => "//span[@class='onoffer']",
+                            ]
+        ],
+            [
+            
+            'url' => 'https://www.newegg.com/global/ae-en/p/pl?d='.$search_key.'&ignorear=0&N=-1&isNodeId=1&Submit=ENE&DEPA=0&Order=BESTMATCH',
+            'attributes' => [
+                                'title' => '//a[@class="item-title"]',
+                                'image' => '//a[@class="item-img"]/img/@src',
+                                'price' => '//li[@class="price-current"]',
                                 'description'=> '//a[@class="item-img"]/@href',
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='a-row']//span[@dir='auto']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-								'stock' => "//span[@class='a-color-price']",
-								'offer' => "//a[@class='a-link-normal']",
+                                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                                'stock' => "//span[@class='a-color-price']",
+                                'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-							]
-		],
+                            ]
+        ],
 
-		[
-			
-			'url' => 'https://www.etsy.com/search?q='.$search_key,
-			'attributes' => [
-								'title' => "//h2[@class='text-gray text-truncate mb-xs-0 text-body']",
-								'image' => "//img[@class='width-full display-block position-absolute ']/@src",
-								'price' => "//span[@class='currency-value']",
-                                'description'=> "//a[@data-palette-listing-image]/@href",
-                                'review' => "//span[@class='rating-stars']",
-                                'shipping' => "//div[@class='a-row']//span[@dir='auto']",
-                                'original_price' => "//span[@class='a-price-whole']",
-                                'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-								'stock' => "//span[@class='a-color-price']",
-								'offer' => "//a[@class='a-link-normal']",
-                                                                                                                    
-							]
-		],
+        
 
-		[
-			
-			'url' => 'https://www.alibaba.com/products/'.$search_key.'.html',
-			'attributes' => [
-								'title' => "//h2[@class='title two-line']//a/@title",
-								'image' => "//div[@class='offer-image-box']//img/@src",
-								'price' => "//div[@class='price']",
+        [
+            
+            'url' => 'https://www.alibaba.com/products/'.$search_key.'.html',
+            'attributes' => [
+                                'title' => "//h2[@class='title two-line']//a/@title",
+                                'image' => "//div[@class='offer-image-box']//img/@src",
+                                'price' => "//div[@class='price']",
                                 'description'=> "//h2[@class='title two-line']//a/@href",
                                 'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='a-row']//span[@dir='auto']",
                                 'original_price' => "//span[@class='a-price-whole']",
                                 'discount_price' => "//span[@class='a-color-base']",
-								'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
-								'stock' => "//span[@class='a-color-price']",
-								'offer' => "//a[@class='a-link-normal']",
+                                'ratings' => "//span[@class='rating-stars']//i[@class ='star-rating-svg']//i/@style",
+                                'stock' => "//span[@class='a-color-price']",
+                                'offer' => "//a[@class='a-link-normal']",
                                                                                                                     
-							]
-		],
+                            ]
+        ],
 
 
-		[
-			'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
-			'attributes' => [
-								'title' => '//span[@class = "variant-title"]/a',
-								'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
-								'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
-								'description'=> "//span[@class='variant-title']/a/@href",
+        [
+            'url' => 'https://www.jumbo.ae/home/search?q='.$search_key.'/s/?as=1',
+            'attributes' => [
+                                'title' => '//span[@class = "variant-title"]/a',
+                                'image' => "//div[@id='content-slot']//div[@class='variant-image']//img/@src",
+                                'price' => "//div[@id='content-slot']//span[@class='variant-final-price']",
+                                'description'=> "//span[@class='variant-title']/a/@href",
                                 //need to add host name fot the description url
                                 'review' => "//span[@class='rating-stars']",
                                  'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                  'original_price' => "//span[@class='variant-list-price']",
-								'discount_price' => "//span[@class='variant-list-price']",
-								'ratings' => "//span[@class='tf-stars-svg']/@style",
+                                'discount_price' => "//span[@class='variant-list-price']",
+                                'ratings' => "//span[@class='tf-stars-svg']/@style",
 
 
-			]
-		],
+            ]
+        ],
 [
-			'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
-			
-			'attributes' => [
-								'title' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]",
-								'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src",
-								'price' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]",
+            'url' => 'https://www.noon.com/uae-en/search?q='.$search_key,
+            
+            'attributes' => [
+                                'title' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]",
+                                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src",
+                                'price' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]",
                                 'description'=> "//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href",
                                  //need to add host name fot the description url
-								'review' => "//span[@class='rating-stars']",
+                                'review' => "//span[@class='rating-stars']",
                                 'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                 'original_price' => "//span[@class='jsx-3248044173 preReductionPrice']",
-								 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
-								 'ratings' => "//span[@class='onoffer']",
-								
+                                 'discount_price' => "//span[@class='jsx-3248044173 discountBadge']",
+                                 'ratings' => "//span[@class='onoffer']",
+                            
+                                 
+                                 
 
-								/*$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'name')]")->item(0)->nodeValue;
-								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'imageContainer')]//div//div//img/@src")->item(0)->nodeValue;
-								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'sellingPrice')]")->item(0)->nodeValue;
-								 $nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product gridView')]/@href")->item(0)->nodeValue;*/
-								 
-								 
-
-							]
-		],
+                            ]
+        ],
 
 
 [
-			'url' => 'https://uae.microless.com/search/?query='.$search_key,
-			'attributes' => [
-								'title' => '//div[@class ="product-title"]/a',
-								'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src",
-								//$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src")->item(0)->nodeValue;
-								'price' => "//span[@class='amount']",
-  								'description'=> "//div[@class='product-title']/a/@href",
+            'url' => 'https://uae.microless.com/search/?query='.$search_key,
+            'attributes' => [
+                                'title' => '//div[@class ="product-title"]/a',
+                                'image' => "//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src",
+                                //$nodes = $xpath->query("//*[contains(concat(' ', normalize-space(@class), ' '), 'product-image')]//a//img/@data-src")->item(0)->nodeValue;
+                                'price' => "//span[@class='amount']",
+                                'description'=> "//div[@class='product-title']/a/@href",
                                 'review' => "//span[@class='rating-stars']",
-								'shipping' => "//div[@class='free-shipping']",
+                                'shipping' => "//div[@class='free-shipping']",
                                 'original_price' => "//span[@class='price-old']",
-								'discount_price' => "//div[@class='product-discount-badge']",
-								'ratings' => "//span[@class='onoffer']",
-							]
-		],
+                                'discount_price' => "//div[@class='product-discount-badge']",
+                                'ratings' => "//span[@class='onoffer']",
+                            ]
+        ],
 [
-			'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
-			'attributes' => [
-								'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
-								'image' => '//img[@class="s-image"]/@src',
-								'price' => "//span[@class='a-color-base']",
-								'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
-								//need to add host name fot the description url
+            'url' => 'https://www.amazon.com/s?k='.$search_key.'&ref=nb_sb_noss_2',
+            'attributes' => [
+                                'title' => '//span[@class ="a-size-medium a-color-base a-text-normal"]',
+                                'image' => '//img[@class="s-image"]/@src',
+                                'price' => "//span[@class='a-color-base']",
+                                'description'=> "//a[@class='a-link-normal a-text-normal']/@href",
+                                //need to add host name fot the description url
                                 'review' => "//span[@class='starRating__count']",
                                 'shipping' => "//span[@class='a-size-small a-color-secondary']",
                                'original_price' => "//span[@class='a-offscreen']",
-								'discount_price' => "//div[@class='product-discount-badge']",
-								'ratings' => "//span[@class='a-icon-alt']",
-							]
-		],
-		
-		[
-			'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
-			'attributes' => [
-								'title' => '//p[@class ="comp-productcard__name"]',
-								'image' => '//img[@class="comp-productcard__img"]//@src',
-								'price' => "//p[@class='comp-productcard__price']",
- 								'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
+                                'discount_price' => "//div[@class='product-discount-badge']",
+                                'ratings' => "//span[@class='a-icon-alt']",
+                            ]
+        ],
+        
+        [
+            'url' => 'https://www.carrefouruae.com/mafuae/en/search='.$search_key,
+            'attributes' => [
+                                'title' => '//p[@class ="comp-productcard__name"]',
+                                'image' => '//img[@class="comp-productcard__img"]//@src',
+                                'price' => "//p[@class='comp-productcard__price']",
+                                'description'=> "//div[@class='comp-productcard__wrap']/a/@href",
                                'review' => "//span[@class='rating-stars']",
                                'shipping' => "//div[@class='free-shipping fs-ab-black']",
                                'original_price' => "//p[@class='comp-productcard__price']",
                                'discount_price' => "//span[@class='onoffer']",
-							   'ratings' => "//div[@class='free-shipping fs-ab-black']",
-							]
-		]
+                               'ratings' => "//div[@class='free-shipping fs-ab-black']",
+                            ]
+        ]
 ];
 
 
 
-		$output = [];
-
-		$siva = [];
 
 
-		foreach ($data as $item) {
-		    $content = file_get_contents($item['url']);
+    $output = [];
 
-		    $doc->loadHTML($content);
-
-		    $xpath = new DomXPath($doc);
-
-		    // get grouped
-		    $groupedItems = [];
-
-		    // James
-		    $all = [];
+    $siva = [];
 
 
-		    foreach ($item['attributes'] as $key => $value) {
+    foreach ($data as $item) {
+        $content = file_get_contents($item['url']);
 
-		        if ($xpath->query($value) === false) {
+        $doc->loadHTML($content);
 
-		            continue;
-		            
-		        } else {
-		            $Inner = [];
+        $xpath = new DomXPath($doc);
 
-		            for ($j = 0; $j < $xpath->query($value)->length; $j++) {
-		               
-		               	// if($j === 15) { break; }
-		                $Inner[] = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));
-		            }
+        // get grouped
+        $groupedItems = [];
 
-		            $all[$key] = $Inner;
+        // James
+        $all = [];
 
 
-		            $val = $xpath->query($value)->item(0)->nodeValue ?? '';
+        foreach ($item['attributes'] as $key => $value) {
 
-		            $groupedItems[$key] = preg_replace('/\s\s+/', ' ', trim($val, "\t\n\r\0\x0B"));
-		        }
-		    }
+            if ($xpath->query($value) === false) {
 
+                continue;
+                
+            } else {
 
+                $Inner = [];
 
-		    $parseurl = parse_url($item['url'])['host'];
+                for ($j = 0; $j < $xpath->query($value)->length; $j++) {
+                   
+                    // We need some filed is required such as title, price , image must matched 
 
-		    $siva[$parseurl] = $all;
+                    // if($j === 15) { break; }
+                    // Getting value 
+                    $valudNodes = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));;
 
-		    $output ["$parseurl"] = $groupedItems;
-		}
+                    if($key === 'title' || $key === 'price' || $key === 'image') {
 
-		// Get data 
-		$getData = [];
+                        // Check item containe something 
+                        if($valudNodes === '') {
 
-
-		// Loop data throught the value 
-		foreach ($siva as $key => $value) {
-		    $getBlock = [];
-
-
-
-		    $howMany = count($value[key($value)]);
-
-
-		    
-		    for ($i = 0; $i < $howMany; $i++) {
-		        $a = [];
+                            continue;
+                        }
+                    }
 
 
-		        foreach ($value as $k => $v) {
-		            $a[$k] = isset($value[$k][$i]) ? $value[$k][$i] : '';
-		        }
+                    /*
+                    // It must be title 
+                    if($key === 'title') {
 
-		        $getBlock[] = $a;
-		    }
-		        
-		    $getData[$key] = $getBlock;
-		}
+                        if($countKeyword < 3) {
 
-		// Get max record 
-		$getMaxRecord = $this->GetMaxRecord($getData);
+                        if(!strpos(strtolower($valudNodes), strtolower($keyword))) {
 
-		// Defining variable 
-		$b = [];
+                            continue;
 
-		// Defining 
-		$c = [];
+                         }
+                        
+                        }
+                        
+                        // Check that 
 
-		// Loop through each data 
-		for ($i = 0; $i < $getMaxRecord; $i++) {
-			foreach ($getData as $key => $value) {
-				if (isset($getData[$key][$i])) {
-				    $b[$key] = $getData[$key][$i];
-				} else {
-				    unset($b[$key]);
-				}
-		}
+                    }
+                    */
 
-			$c[] = $b;
-		}
+                    $Inner[] = $valudNodes;
+                }
 
-		$productTitle = $siva['www.amazon.ae']['title'] ?? '';
+                $all[$key] = $Inner;
 
-		// Load the configuration file 
 
-		// Get the config keys 
-        $this->load->helper('server');
+                $val = $xpath->query($value)->item(0)->nodeValue ?? '';
 
-		// Using Memcached 
+                $groupedItems[$key] = preg_replace('/\s\s+/', ' ', trim($val, "\t\n\r\0\x0B"));
+            }
+        }
+
+
+
+        $parseurl = parse_url($item['url'])['host'];
+
+        $siva[$parseurl] = $all;
+
+        $output ["$parseurl"] = $groupedItems;
+    }
+
+    // Get data 
+    $getData = [];
+
+
+    // Loop data throught the value 
+    foreach ($siva as $key => $value) {
+        $getBlock = [];
+
+
+
+        $howMany = count($value[key($value)]);
+
+
+        
+        for ($i = 0; $i < $howMany; $i++) {
+            $a = [];
+
+
+            foreach ($value as $k => $v) {
+                $a[$k] = isset($value[$k][$i]) ? $value[$k][$i] : '';
+            }
+
+            $getBlock[] = $a;
+        }
+            
+        $getData[$key] = $getBlock;
+    }
+
+    // Get max record 
+    $getMaxRecord = $this->GetMaxRecord($getData);
+
+    // Defining variable 
+    $b = [];
+
+    // Defining 
+    $c = [];
+
+    // Loop through each data 
+    for ($i = 0; $i < $getMaxRecord; $i++) {
+      foreach ($getData as $key => $value) {
+        if (isset($getData[$key][$i])) {
+            $b[$key] = $getData[$key][$i];
+        } else {
+            unset($b[$key]);
+        }
+    }
+
+      $c[] = $b;
+    }
+
+    $productTitle = $siva['www.amazon.ae']['title'] ?? '';
+
+    // Load the configuration file 
+
+    // Get the config keys 
+      //  $this->load->helper('server');
+
+    // Using Memcached 
         $m = new Memcached();
 
         // Add server 
-        $m->addServer(HOST_NAME, MEMCACHED_PORT);
+    $m->addServer('localhost', 11211);
 
 
-		// Get the product search title 
-		$memSearchedKeyword = $m->get('search_key_words');
-		$memProductTitles = $m->get('product_title');
-		// Product Search Result 
-		$productSearchResult = $m->get('product_search_result');
+    // Get the product search title 
+    $memSearchedKeyword = $m->get('search_key_words');
+    $memProductTitles = $m->get('product_title');
+    // Product Search Result 
+    $productSearchResult = '';
+
+    // Defining index 
+    $i = 0;
+
+    if(is_array($memSearchedKeyword)) {
+
+      if(!in_array($search_key, $memSearchedKeyword)) {
+
+        // Push the information 
+        array_push($memSearchedKeyword, $search_key);
+        array_push($memProductTitles, $productTitle);
+
+        // get all memcached keys 
+        $keys = $m->getAllKeys();
+
+        // Get only 
+        $val = array_filter($keys,array($this, "getOnlyProductKey"));
+        
+        // Sort the  array 
+        sort($val);
+        $productSearchResult = $c;
+        // count the value 
+        $i = count($val);
+
+      
+      } else {
+
+
+        // Find the array index of title 
+        $i = array_search($search_key, $memSearchedKeyword);
+
+        // if index found 
+        if($i !== false ){
+
+         
+          $memProductTitles[$i] = $productTitle;
+          $productSearchResult  = $c;
+        }
+
+      }
+
+    } else {
+
+      // Initialize the array 
+      $memSearchedKeyword = [$search_key];
+      $memProductTitles = [$productTitle];
+      $productSearchResult = $c;
+
+
+    }
 
 
 
-		if(is_array($memSearchedKeyword)) {
+    // Check the product title 
+    $m->set('search_key_words', $memSearchedKeyword );
+    $m->set('product_title', $memProductTitles);
+    $m->set($i, $productSearchResult);
 
-			if(!in_array($search_key, $memSearchedKeyword)) {
+    // Load view with all message 
+  
+    
+    
+    $message = 
+      [
+        'status' => 'success', 'message' => 'Product added sucessfull to you database'
+      ];
 
-				array_push($memSearchedKeyword, $search_key);
-				array_push($memProductTitles, $productTitle);
-				array_push($productSearchResult, $c);
-
-			
-			} else {
-
-				$memSearchedKeyword = $memSearchedKeyword;
-				$memProductTitles = $memProductTitles;
-				$productSearchResult = $productSearchResult;
-
-			}
-
-		} else {
-
-			// Initialize the array 
-			$memSearchedKeyword = [$search_key];
-			$memProductTitles = [$productTitle];
-			$productSearchResult = [$c];
-
-
-		}
-
-
-
-		// Check the product title 
-		$m->set('search_key_words', $memSearchedKeyword );
-		$m->set('product_title', $memProductTitles);
-		$m->set('product_search_result', $productSearchResult);
-
-		// Load view with all message 
-	
-		
-		
-		$message = 
-			[
-				'status' => 'success', 'message' => 'Product added sucessfull to you database'
-			];
-
-
-
-
-		//return json_encode($message);
 		return true;
+	}
+
+	public function getOnlyProductKey($var) {
+    	$reg = '/^[0-9]{1,}$/';
+
+    	return preg_match($reg, $var);
 	}
 
 	public function Login($username, $password){

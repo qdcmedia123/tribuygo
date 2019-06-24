@@ -1,4 +1,5 @@
 <?php 
+
 function GetAEDToUSD( string $aedPrice):string {
 
 	// Check if pattern math
@@ -78,46 +79,83 @@ $logos = array(
 
 <!-- Check if result is set -->
 <?php
-	$decode = json_decode($output, true);
-	$result = $decode['result'] ?? null;
+	$value = $output['result'];
+	$countValue = count($value);
+
 ?>
 
+<!--
+[perpage] => 20
+    [numberOfPages] => 32
+    [numberOfResult] => 634
+    [page] => 32
+    [status] => 400
+    [search] => mouse
+    [whichpage] => 32
+
+-->
 <!-- Check if it is not null -->
-<?php if($result !== null) :?>
+<?php if($output['status'] === 400 && $countValue > 0):?>
+
+<?php if ($output['didyoumean'] !== false) :?>
+
+<div class="alert alert-light">
+	
+	 <strong>Did you mean: &nbsp; </strong>  <?= $output['didyoumean']; ?>
+</div>
+
+<?php endif; ?>
+
+
+<div class="alert alert-info">
+  <strong>Number of result:</strong> <?= $output['numberOfResult']; ?> Items &nbsp; &nbsp;
+  <strong>Page:</strong> <?= $output['whichpage']; ?> &nbsp; &nbsp;
+  <strong>Result for:</strong> <?= $output['search']; ?> &nbsp; &nbsp;
+  <strong>Number of pages :</strong> <?= $output['numberOfPages']; ?> 
+</div> 
+
 
 <!-- Count the result in the array -->
-<?php for($i = 0; $i < count($result); $i++) :?>
+<?php for($i = 0; $i < $countValue; $i++) :?>
 
 <!-- Foreach data inside the index -->
-<?php foreach($result[$i] as $key => $value) :?>
+
 
 
 
 <?php 
-if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
+if ($value[$i]['website'] === 'www.alibaba.com' || $value[$i]['website'] === 'www.newegg.com') {
 
-	$value['image'] = 'http:'.$value['image'];
+	$value[$i]['image'] = 'http:'.$value[$i]['image'];
 
 } else {
 
-	if(!filter_var($value['description'], FILTER_VALIDATE_URL)) {
+	if(!filter_var($value[$i]['description'], FILTER_VALIDATE_URL)) {
 
 
-		$value['description'] = 'http://'.$key.'/'.$value['description'];
+		$value[$i]['description'] = 'http://'.$value[$i]['website'].'/'.$value[$i]['description'];
 
 
 	}
 
 
-	if(!filter_var($value['image'], FILTER_VALIDATE_URL)) {
+	if(!filter_var($value[$i]['image'], FILTER_VALIDATE_URL)) {
 
-		$value['image'] = 'http://'.$key.'/'.$value['image'];
+		$value[$i]['image'] = 'http://'.$value[$i]['website'].'/'.$value[$i]['image'];
 
 
 	}	
 
 }
 
+
+if(
+	$value[$i]['image'] === 'https://ir.ebaystatic.com/cr/v/c1/s_1x2.gif' || 
+	$value[$i]['image'] === 'http://www.ebay.com/'){
+
+
+	continue;
+}
 
 	
 
@@ -135,12 +173,12 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 			<div class="img-wrap">
 				
 
-				<img src="<?= $value['image']?>">
+				<img src="<?= $value[$i]['image']?>">
 
 			</div>
 		</aside> <!-- col.// -->
 		<article class="col-sm-6">
-				<h5 class="title"> <?= $value['title']?></h5>
+				<h5 class="title"> <?= $value[$i]['title']?></h5>
 				<div class="rating-wrap  mb-2">
 					<ul class="rating-stars">
 						<li style="width:80%" class="stars-active"> 
@@ -158,11 +196,11 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 					<?php
 					$review = '';
 
-						if(isset($value['review'])){
+						if(isset($value[$i]['review'])){
 
-							if($value['review'] !== '') {
+							if($value[$i]['review'] !== '') {
 
-								$review = $value['review'] . 'reviews';
+								$review = $value[$i]['review'] . 'reviews';
 							}
 						}
 					?>
@@ -194,7 +232,7 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 			text-shadow: 0 1px black;
 		    background: #333; /* For browsers that don't support RGBA */
 		    background: rgba(0,0,0,0.18);
-		    padding: 4px 8px;" src="<?= $logos[$key];?>" alt="">
+		    padding: 4px 8px;" src="<?= $logos[$value[$i]['website']];?>" alt="">
 
 </dt>
 			</dl> 
@@ -206,18 +244,18 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 
 					if($key === 'www.amazon.com' || $key === 'www.ebay.com') {
 
-						$price = $value['price'] ?? '';
-						$original_price = $value['original_price'] ?? '';
-						$discount = $value['discount_price'] ?? '';
-						$shipping = $value['shipping'] ?? '';
+						$price = $value[$i]['price'] ?? '';
+						$original_price = $value[$i]['original_price'] ?? '';
+						$discount = $value[$i]['discount_price'] ?? '';
+						$shipping = $value[$i]['shipping'] ?? '';
 					} else {
 
 
 						
-						$price = GetAEDToUSD($value['price']) ?? '';
-						$original_price = GetAEDToUSD($value['original_price']) ?? '';
-						$discount = $value['discount_price'] !== '' ? GetAEDToUSD($value['discount_price']) : '';
-						$shipping = $value['shipping'] !== '' ? GetAEDToUSD($value['shipping']) : '';
+						$price = GetAEDToUSD($value[$i]['price']) ?? '';
+						$original_price = GetAEDToUSD($value[$i]['original_price']) ?? '';
+						$discount = $value[$i]['discount_price'] !== '' ? GetAEDToUSD($value[$i]['discount_price']) : '';
+						$shipping = $value[$i]['shipping'] !== '' ? GetAEDToUSD($value[$i]['shipping']) : '';
 					}
 					
 
@@ -240,8 +278,8 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 
 				<br>
 				<p>
-					<a href="<?= $value['description']; ?>" target="_blank" class="btn btn-primary"> Buy now </a>
-					<a href="<?= $value['description']; ?>" target="_blank" class="btn btn-secondary"> Details  </a>
+					<a href="<?= $value[$i]['description']; ?>" target="_blank" class="btn btn-primary"> Buy now </a>
+					<a href="<?= $value[$i]['description']; ?>" target="_blank" class="btn btn-secondary"> Details  </a>
 				</p>
 				
 			</div> <!-- action-wrap.// -->
@@ -252,10 +290,22 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 </article> <!-- card product .// -->
 
 
-<?php endforeach; ?>
-<!-- End foreach data here -->
+
 
 <?php endfor; ?>
+
+<div class="wrapper">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <ul id="pagination-demo" class="pagination-sm pull-right"></ul>
+      </div>
+    </div>
+
+    <div id="page-content" class="page-content">Page 1</div>
+  </div>
+</div>
 
 <?php else: ?>
 
@@ -288,5 +338,6 @@ if ($key === 'www.alibaba.com' || $key === 'www.newegg.com') {
 
 </div> <!-- container .//  -->
 </section>
+
 
 

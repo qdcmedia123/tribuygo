@@ -180,6 +180,43 @@ $("#categories-basic").easyAutocomplete(options);
 </script>
 
 <script src="<?= base_url()?>assets/js/join-usform.js"></script> 
+<script src="<?= base_url()?>assets/js/jquery.twbsPagination.min.js"></script> 
+<script>
+
+	<?php if(isset($output['numberOfResult'])) :?>
+
+		<?php if($output['numberOfResult'] > 20) :?>
+
+			$('#pagination-demo').twbsPagination({
+        totalPages: <?= $output['numberOfPages']; ?>,
+        visiblePages: <?= $output['numberOfPages'] > 2 ? 3 : $output['numberOfPages'] ;?>,
+        next: 'Next',
+        prev: 'Prev',
+        startPage:<?= $output['whichpage'] ;?>,
+        onPageClick: function (event, page) {
+            //fetch content and render here
+            // Setting up the url 
+            
+           
+        }
+    }).on("page", function (event, page) {
+
+    		// Setting up
+    		 var url = '<?= base_url()?>search?search=<?= urlencode($output['search'])?>&page='+page;
+
+            console.log(url);
+            //window.location.href = url;
+			window.location.href = url;
+            $('#page-content').text('Page ' + page) + ' content here';
+    });
+
+		<?php endif; ?>
+
+	<?php endif; ?>
+	
+	
+</script>
+
 
 </body>
 </html>

@@ -83,6 +83,10 @@
     overflow: hidden;
 }
 
+.pagination {
+margin: 0px !important;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -237,13 +241,13 @@ $csrf = array(
 	<div class="col-md-10">
 		
 
-			<form action="<?=base_url()?>search" class="search-wrap" method = "POST" id = "search-form-6767">
+			<form action="<?=base_url()?>search" class="search-wrap" id = "search-form-6767">
 				<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" id = "csrf_ajax"/>
 				
 				<div class="input-group w-100">
 
-				    <input name = "search" type="text" class="form-control"  placeholder="Search" id = "categories-basic" style = "width:100%;">
-				      
+				    <input value = "<?= urldecode ($_GET['search']) ?? ''; ?>" name = "search" type="text" class="form-control"  placeholder="Search" id = "categories-basic" style = "width:100%;">
+				    <input type="hidden" name="page" value="1" />
 				      <button class="btn btn-primary" type="submit" style="width:10%;" >
 				        <i class="fa fa-search" style=""></i>
 				      </button>

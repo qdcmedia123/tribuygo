@@ -431,6 +431,19 @@ class Administrator extends CI_Controller {
                     // Getting value 
                     $valudNodes = preg_replace('/\s\s+/', ' ', trim($xpath->query($value)->item($j)->nodeValue, "\t\n\r\0\x0B"));;
 
+                    // Some data need to be escaped proovided by ebay 
+                    // Ebay some images is not provided thefore we need to escape those data 
+                    // We are not storing those data in our database 
+
+                    // IF key is image 
+                    if($key === 'image') {
+
+                        // if value is static images
+                        if ($valudNodes === 'https://ir.ebaystatic.com/cr/v/c1/s_1x2.gif') {
+
+                            continue;
+                        }
+                    }
                     if($key === 'title' || $key === 'price' || $key === 'image') {
 
                         // Check item containe something 
@@ -439,26 +452,6 @@ class Administrator extends CI_Controller {
                             continue;
                         }
                     }
-
-
-                    /*
-                    // It must be title 
-                    if($key === 'title') {
-
-                        if($countKeyword < 3) {
-
-                        if(!strpos(strtolower($valudNodes), strtolower($keyword))) {
-
-                            continue;
-
-                         }
-                        
-                        }
-                        
-                        // Check that 
-
-                    }
-                    */
 
                     $Inner[] = $valudNodes;
                 }
@@ -489,15 +482,10 @@ class Administrator extends CI_Controller {
     foreach ($siva as $key => $value) {
         $getBlock = [];
 
-
-
         $howMany = count($value[key($value)]);
 
-
-        
         for ($i = 0; $i < $howMany; $i++) {
             $a = [];
-
 
             foreach ($value as $k => $v) {
                 $a[$k] = isset($value[$k][$i]) ? $value[$k][$i] : '';
@@ -508,6 +496,8 @@ class Administrator extends CI_Controller {
             
         $getData[$key] = $getBlock;
     }
+
+
 
     // Get max record 
     $getMaxRecord = $this->GetMaxRecord($getData);
@@ -523,6 +513,9 @@ class Administrator extends CI_Controller {
       foreach ($getData as $key => $value) {
         if (isset($getData[$key][$i])) {
             $b[$key] = $getData[$key][$i];
+            $b[$key]['website'] = $key;
+
+
         } else {
             unset($b[$key]);
         }
@@ -531,27 +524,46 @@ class Administrator extends CI_Controller {
       $c[] = $b;
     }
 
+
+$total = count($c);
+
+$singleArray = [];
+
+
+
+for($j = 0; $j < $total; $j++) {
+
+    // Loop each 
+    foreach($c[$j] as $key => $value) {
+
+        // Get value 
+        $singleArray[] = $value;
+    }
+}
+
+
+
+
     $productTitle = $siva['www.amazon.ae']['title'] ?? '';
 
     // Load the configuration file 
 
     // Get the config keys 
-      //  $this->load->helper('server');
+        $this->load->helper('server');
+
 
     // Using Memcached 
         $m = new Memcached();
 
         // Add server 
-    $m->addServer('localhost', 11211);
+    $m->addServer(HOST_NAME, MEMCACHED_PORT);
 
 
     // Get the product search title 
     $memSearchedKeyword = $m->get('search_key_words');
     $memProductTitles = $m->get('product_title');
-    // Product Search Result 
-    $productSearchResult = '';
-
-    // Defining index 
+    // get all memcached keys 
+    $keys = $m->getAllKeys();
     $i = 0;
 
     if(is_array($memSearchedKeyword)) {
@@ -562,14 +574,11 @@ class Administrator extends CI_Controller {
         array_push($memSearchedKeyword, $search_key);
         array_push($memProductTitles, $productTitle);
 
-        // get all memcached keys 
-        $keys = $m->getAllKeys();
-
         // Get only 
-        $val = array_filter($keys,array($this, "getOnlyProductKey"));
+        $val = array_filter($keys, array($this, "getOnlyProductKey"));
         
         // Sort the  array 
-        sort($val);
+        //sort($val);
         $productSearchResult = $c;
         // count the value 
         $i = count($val);
@@ -577,40 +586,63 @@ class Administrator extends CI_Controller {
       
       } else {
 
-
         // Find the array index of title 
         $i = array_search($search_key, $memSearchedKeyword);
 
         // if index found 
         if($i !== false ){
 
-         
           $memProductTitles[$i] = $productTitle;
-          $productSearchResult  = $c;
+         // $productSearchResult  = $c;
         }
 
       }
 
     } else {
 
-      // Initialize the array 
       $memSearchedKeyword = [$search_key];
       $memProductTitles = [$productTitle];
-      $productSearchResult = $c;
-
 
     }
 
-
-
-    // Check the product title 
     $m->set('search_key_words', $memSearchedKeyword );
     $m->set('product_title', $memProductTitles);
-    $m->set($i, $productSearchResult);
 
-    // Load view with all message 
-  
-    
+    // Count the result 
+    $countResult = count($singleArray);
+
+    // Coun the already have data 
+    $products = $this->getOnlyProductAsArray($keys, $m);
+
+    // coun the product 
+    if(is_array($products) && count($products) > 0) {
+
+        // How many proudct 
+        $coundOldProudct = count($products);
+
+        // count new product that we have got 
+        $countNewProduct = count($singleArray);
+
+        // Loop through 
+        $totalCount = $countNewProduct + $countNewProduct;
+
+        // Loop through and add the product 
+        for($j = 0; $j < $countResult; $j++) {
+
+            $m->set($coundOldProudct + $j, $singleArray[$j]);
+        }
+
+    } else {
+
+        // loop each data 
+         for($j = 0; $j< $countResult; $j++) {
+
+            $m->set($j, $singleArray[$j]);
+    }
+
+    }
+
+    // Load view with all message   
     
     $message = 
       [
@@ -619,6 +651,32 @@ class Administrator extends CI_Controller {
 
 		return true;
 	}
+
+
+    public function getOnlyProductAsArray(array $keys, Memcached $m):array {
+
+        $val = array_filter($keys,"getOnlyProductKey");
+
+        //sort($val);
+
+        $len = count($val);
+
+        //echo $len;
+        // get all product 
+        $getallProdcut = [];
+
+        for($i = 0; $i <= $len; $i++) {
+
+            if($m->get($i) !== false ) {
+
+                $getallProdcut[] = $m->get($i);
+            }
+            
+        }
+
+        return $getallProdcut;
+
+}
 
 	public function getOnlyProductKey($var) {
     	$reg = '/^[0-9]{1,}$/';
