@@ -151,7 +151,8 @@ if ($value[$i]['website'] === 'www.alibaba.com' || $value[$i]['website'] === 'ww
 
 if(
 	$value[$i]['image'] === 'https://ir.ebaystatic.com/cr/v/c1/s_1x2.gif' || 
-	$value[$i]['image'] === 'http://www.ebay.com/'){
+	$value[$i]['image'] === 'http://www.ebay.com/' ||
+	$value[$i]['image'] === 'http://img.alicdn.com/tfs/TB1S_7kkY5YBuNjSspoXXbeNFXa-700-700.jpg_350x350.jpg'){
 
 
 	continue;

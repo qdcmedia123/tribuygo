@@ -14,9 +14,9 @@
   <style>
     
     .custom34 {
-      width: 35%;
+      
 position: absolute;
-top: 60%;
+bottom: 5px;
 left: 50%;
 transform: translate(-50%, -50%);
       
@@ -25,7 +25,7 @@ transform: translate(-50%, -50%);
 
     .custom34 img {
      
-      
+      width:100%;
      
 
     }
@@ -193,22 +193,26 @@ $csrf = array(
 <!--/.Carousel Wrapper-->
 
 
-<footer class="footer mt-auto py-3">
+
+<footer class="footer mt-auto py-3" style = "min-height: 250px;">
+
 
   
-
-
-  <div class="container">
-
-  	<span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;" target="_blank">Quality Digital Community </a><br/>
-	
-  	 <a style = "text-decoration: none; color:#6c757d!important;" href = "https://www.qdcmedia.com/" target="_blank" >Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
+<div class="container-fluid"> <!-- If Needed Left and Right Padding in 'md' and 'lg' screen means use container class -->
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <span class="text-muted"> Powered by  <a href = "https://www.qdcmedia.com/" style = "color:red;" target="_blank">Quality Digital Community </a><br/>
+  
+     <a style = "text-decoration: none; color:#6c757d!important;" href = "https://www.qdcmedia.com/" target="_blank" >Copyright© <?= date('Y'); ?> All Right Reserved By QDC </a></span>
      <br/>
      <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;" target="_blank">Privacy and Policy</a>
-
-  </div>
-
-  <div class="jsx-3729605677 appLinksModule">
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img src="image.png" />
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    
+                    <div class="jsx-3729605677 appLinksModule">
 
 
 
@@ -220,13 +224,26 @@ $csrf = array(
       <a target="_blank" href="https://play.google.com/store/apps/details?id=com.qdc.tribuygo" rel="noopener noreferrer" aria-label="Visit the PlayStore (opens in a new window)" class="jsx-3729605677 android">Android App</a>
 
     </div>
+  </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+  <div class="container">
+
+  	
 
   </div>
+
+  
 
 </footer>
 
 
-<!--
+
 <div class = "custom34">
   <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
  
@@ -287,7 +304,7 @@ $csrf = array(
   </a>
   
 </div>
--->
+
 
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
