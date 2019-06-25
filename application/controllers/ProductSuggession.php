@@ -50,7 +50,7 @@ class ProductSugesstion extends CI_Controller {
 		
 		} 
 
-		return $this->output->set_output(json_encode($suggesstion));
+		return $this->output->set_output(json_encode($searchKeys));
 		
 		}
 

@@ -226,17 +226,16 @@ $csrf = array(
 </footer>
 
 
-
+<!--
 <div class = "custom34">
   <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-  <!--Indicators-->
+ 
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-2" data-slide-to="1"></li>
     <li data-target="#carousel-example-2" data-slide-to="2"></li>
   </ol>
-  <!--/.Indicators-->
-  <!--Slides-->
+  
 
 
   <div class="carousel-inner" role="listbox">
@@ -259,7 +258,7 @@ $csrf = array(
 
     
     <div class="carousel-item">
-      <!--Mask color-->
+     
       <div class="view">
         
         <a href = "https://www.instagram.com/max_motors_uae/">
@@ -276,8 +275,8 @@ $csrf = array(
   </div>
 
 
-  <!--/.Slides-->
-  <!--Controls-->
+ 
+
   <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -286,9 +285,9 @@ $csrf = array(
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-  <!--/.Controls-->
+  
 </div>
-
+-->
 
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -333,36 +332,16 @@ $(function () {
       dataType: "json",
       success: function(resultData) 
       { 
-          
-      	// Set the csrf token again 
-      	// 
-      	//const csrfname = resultData.csrf.name;
-      	const csrfhash = resultData.csrf.hash;
+          //console.log(resultData)
+      	//var resdata = JSON.parse(resultData);
+        console.log(resultData);
 
-      	 $('#csrf_ajax').val(csrfhash);
-
-           var options = {
-           url: ORIGIN+"/api/product_sugesstion",
-           categories: resultData.getautolocation
-         ,
-    
-      list: {
-        
-        onClickEvent: function() { 
-            
-            var value = $("#categories-basic").getSelectedItemData();
-            $('#search-form-6767').submit();
-            
-          },
-        match: {
-        enabled: true
-       }
-  }
-
-
+        var options = {
+  data: resultData.getautolocation
 };
 
-$("#categories-basic").easyAutocomplete(options);
+
+        $("#categories-basic").easyAutocomplete(options);
       }
 
 });

@@ -96,13 +96,15 @@ class CategoryListLocation extends CI_Controller {
                     ];
         } 
 
-       
+        // $insert = array_map(array($this,'putArray'), $insert);
+
+       $searchKeys = array_map(array($this, 'ucfirst_urlDecode'), $searchKeys);
 
         // Get data and csrf token togather 
 
-        $outputData = ['csrf' => $csrf, 'getautolocation' => $suggesstion];
+        $outputData = ['csrf' => $csrf, 'getautolocation' => $searchKeys];
 
-        $outputData = ['csrf' => $csrf, 'getautolocation' => $suggesstion, 'data' => $this->input->post()];
+        $outputData = ['csrf' => $csrf, 'getautolocation' => $searchKeys, 'data' => $this->input->post()];
 
 
         return $this->output->set_output(json_encode($outputData));
@@ -115,6 +117,11 @@ class CategoryListLocation extends CI_Controller {
         // Send message 
         return $this->output->set_output(json_encode($msg));
         
+    }
+
+    public function ucfirst_urlDecode($value) {
+
+      return urldecode(ucwords($value));
     }
 
 
