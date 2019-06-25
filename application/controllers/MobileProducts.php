@@ -274,13 +274,13 @@ public function trimSearchKeyWord(string $string  ): string   {
 	public function productLocations() {
 
 
-		
+		/*
 		// Check everthing is passing 
 		if($this->common->RequiredForUsers() !== true) {
 
 			 return $this->common->RequiredForUsers();
 		}
-		
+		*/
 
 		// Set content header type 
         header('Content-Type: application/json'); 
@@ -319,7 +319,8 @@ public function trimSearchKeyWord(string $string  ): string   {
         } 
 
 
-        $result['result'] = $suggesstion;
+
+        $result['result'] = $searchKeys;
          
         return $this->output->set_output(json_encode($result));
         
@@ -335,13 +336,14 @@ public function trimSearchKeyWord(string $string  ): string   {
 
 
     public function productSugesstion() {
-
+    	/*
     	// Check everthing is passing 
 		if($this->common->RequiredForUsers() !== true) {
 
 			 return $this->common->RequiredForUsers();
 		}
 		
+		*/
     	// Set the header 
 		header('Content-Type: application/json'); 
 		
@@ -363,6 +365,8 @@ public function trimSearchKeyWord(string $string  ): string   {
 
 		$suggesstion = [];
 
+		$searchKeys = array_map(array($this, 'ucfirst_urlDecode'), $searchKeys);
+
 		if(is_array($productTitles) && count($productTitles) === count($searchKeys )) {
 
 		foreach($searchKeys as $key => $value ) {
@@ -372,7 +376,7 @@ public function trimSearchKeyWord(string $string  ): string   {
 		} 
 
 		// Sugession 
-		$result['result'] = $suggesstion;
+		$result['result'] = $searchKeys;
 
 		return $this->output->set_output(json_encode($result));
 		
@@ -388,6 +392,11 @@ public function trimSearchKeyWord(string $string  ): string   {
 		}
 
 		// Sending emails 
+
+		public function ucfirst_urlDecode($value) {
+
+      return urldecode(ucwords($value));
+    }
 
     		
 
