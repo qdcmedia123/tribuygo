@@ -89,9 +89,8 @@ public function __construct() {
 
 		//$_SESSION['test'] = rand(1, 10);
 
-		$data = ['output' => $searchResult, 'searchString' => $searchString];
 
-		 return $this->output->set_output(json_encode($data));
+		 return $this->output->set_output(json_encode($searchResult));
 
 		
 	}
@@ -178,24 +177,7 @@ public function SearchProduct(Memcached $m, string $searchString,  string $page)
         }
     }
 
-    /*
-    for($i = 0; $i < $keyscount; $i++) {
 
-        
-        // Here check with each 
-        // Get 
-        $title = $m->get($keys[$i])['title'];
-
-        // Check string post if there is data 
-        if(stripos(strtolower($title), $stringToSearch) !== false) {
-
-            $searchResult[] = $m->get($keys[$i]);
-        }
-
-
-
-    }
-    */
 
     // Make the number of page 
 $perpage = 20;
@@ -237,7 +219,7 @@ return count($searchResult) > 0 ?
                                 'search' => $searchString,
                                 'whichpage'=>$whichpage
                             ] : 
-                            ['result' => $message];
+                             $message;
 
 
 }
@@ -650,106 +632,5 @@ public function trimSearchKeyWord(string $string  ): string   {
 	
 
 
-	public function SearchProduct(Memcached $m, string $searchString,  string $page) :array {
-
-    $stringToSearch = $this->trimSearchKeyWord($searchString);
-
-    $searchResult = [];
-    
-    // Get all the keys$ 
-    $keys = $m->getAllKeys();
-
-    // Count 
-    $keyscount = count($keys);
-
-    // Unset two key we already know that 
-    //unset($keys['product_title']);
-    //unset($keys['search_key_words']);
-
-   if (($donotneed = array_search('product_title', $keys)) !== false) {
-        
-        unset($keys[$donotneed]);
-    }
-
-    if (($donotneed = array_search('search_key_words', $keys)) !== false) {
-        
-        unset($keys[$donotneed]);
-    }
-
-
-
-    foreach($keys as $key => $value) {
-
-        $title = $m->get($keys[$value])['title'];
-
-        // Check string post if there is data 
-        if(stripos(strtolower($title), $stringToSearch) !== false) {
-
-            $searchResult[] = $m->get($keys[$value]);
-        }
-    }
-
-    /*
-    for($i = 0; $i < $keyscount; $i++) {
-
-        
-        // Here check with each 
-        // Get 
-        $title = $m->get($keys[$i])['title'];
-
-        // Check string post if there is data 
-        if(stripos(strtolower($title), $stringToSearch) !== false) {
-
-            $searchResult[] = $m->get($keys[$i]);
-        }
-
-
-
-    }
-    */
-
-    // Make the number of page 
-$perpage = 20;
-
-// Number of result 
-$numberOfResult = count($searchResult);
-
-// Number of pages 
-$numberOfPages = ceil($numberOfResult / $perpage);
-
-// Page number 
-$page = $page - 1;
-
-$whichpage = $page + 1;
-
-
-
-$skipfrom = $page * $perpage;
-
-
-
-
-$message = [
-            'status' => 404 , 
-            'message' => 'Sorry, We are unable to find anything at the moment.',
-            'search' => $searchString
-        ];
-
-
-return count($searchResult) > 0 ? 
-                            [    //'result' => $searchResult,
-                                'result' => count($searchResult) <= 20 ? $searchResult : array_splice($searchResult, $skipfrom , $perpage),
-
-                                'perpage' => $perpage,
-                                'numberOfPages' => $numberOfPages,
-                                'numberOfResult' => $numberOfResult,
-                                'page' => $whichpage,
-                                'status' => 400,
-                                'search' => $searchString,
-                                'whichpage'=>$whichpage
-                            ] : 
-                            ['result' => $message];
-
-
-}
+	
 	}

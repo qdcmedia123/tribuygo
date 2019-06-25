@@ -1,6 +1,6 @@
 <?php 
 
-function GetAEDToUSD( string $aedPrice):string {
+function GetAEDToUSD( $aedPrice):string {
 
 	// Check if pattern math
 	if(!preg_match('/[0-9.]/', $aedPrice)) {
@@ -165,6 +165,8 @@ if(
 
 	
 ?>
+
+
 
 <article class="card card-product">
 	<div class="card-body">

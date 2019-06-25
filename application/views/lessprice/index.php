@@ -32,6 +32,24 @@
 }
 
 
+@media only screen and (max-width: 1124px) {
+
+.custom34 {
+      position: absolute;
+      top:150px;
+      right:1px;
+    }
+
+.custom34 img {
+     width: 200px !important ;
+     height:320px !important;
+      
+
+    }
+
+
+}
+
 @media only screen and (max-width: 800px) {
   
   .custom34{
