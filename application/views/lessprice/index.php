@@ -337,7 +337,12 @@ $(function () {
         console.log(resultData);
 
         var options = {
-  data: resultData.getautolocation
+  data: resultData.getautolocation,
+  list: {
+    match: {
+      enabled: true
+    }
+  }
 };
 
 
