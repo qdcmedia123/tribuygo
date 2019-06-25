@@ -3,12 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Administrator extends CI_Controller { 
 
-	// Username 
-	private $username = 'info@qdc.ae';
-	private $password;
+    // Username 
+    private $username = 'info@qdc.ae';
+    private $password;
 
 
-	public function __construct() {
+    public function __construct() {
         
         parent:: __construct();
 
@@ -26,150 +26,150 @@ class Administrator extends CI_Controller {
    }
 
 
-	public function index(){
+    public function index(){
 
-		if($this->session->has_userdata('administrator') !== true) {
+        if($this->session->has_userdata('administrator') !== true) {
 
-			redirect('/login');
-		}
+            redirect('/login');
+        }
 
-		$this->load->view('administrator/index');
-		
-	}
+        $this->load->view('administrator/index');
+        
+    }
 
-	public function keywords() {
+    public function keywords() {
 
-		// Load the keywords from db 
-		$keywords = $this->getKeywords();
+        // Load the keywords from db 
+        $keywords = $this->getKeywords();
 
-		// Get the all keywords here 
-		$this->load->view('administrator/keywords', $keywords); 
-	}
+        // Get the all keywords here 
+        $this->load->view('administrator/keywords', $keywords); 
+    }
 
-	public function addKeywords() {
+    public function addKeywords() {
 
-		$this->load->view('administrator/add_keywords'); 
-	}
+        $this->load->view('administrator/add_keywords'); 
+    }
 
-	// Get the keywords 
-	public function getKeywords():array {
+    // Get the keywords 
+    public function getKeywords():array {
 
-		// Result = 
-		$result = []; 
-		
-		// Using Memcached 
+        // Result = 
+        $result = []; 
+        
+        // Using Memcached 
         $m = new Memcached();
 
         // Add server 
         $m->addServer(HOST_NAME, MEMCACHED_PORT);
 
         // Get the search keys 
-		$searchKeys = $m->get('search_key_words');
+        $searchKeys = $m->get('search_key_words');
 
-		// Get the all search 
-		count($searchKeys) > 0 ? $result['result'] = $searchKeys : $result['result'] = 'Unable to find antyhing.';
+        // Get the all search 
+        count($searchKeys) > 0 ? $result['result'] = $searchKeys : $result['result'] = 'Unable to find antyhing.';
 
-		// Return result 
-		return $result; 
+        // Return result 
+        return $result; 
 
-	}
+    }
 
-	// List items under the keyswords 
-	public function listItemUnderTheKeyWords() {
+    // List items under the keyswords 
+    public function listItemUnderTheKeyWords() {
 
-																						
-			// Check something found  
-			
-			// Json encode 
-			$result['result'] = $this->GetProductByIndex();
+                                                                                        
+            // Check something found  
+            
+            // Json encode 
+            $result['result'] = $this->GetProductByIndex();
 
-			$this->load->view('administrator/list_items', $result);
-	}
+            $this->load->view('administrator/list_items', $result);
+    }
 
-	public function GetProductByIndex() {
+    public function GetProductByIndex() {
 
-			$index =  $this->uri->segment(3);
-			// Get the items 
+            $index =  $this->uri->segment(3);
+            // Get the items 
 
-			// Using Memcached 
-			$m = new Memcached();
+            // Using Memcached 
+            $m = new Memcached();
 
-			// Add server 
-			$m->addServer(HOST_NAME, MEMCACHED_PORT);
+            // Add server 
+            $m->addServer(HOST_NAME, MEMCACHED_PORT);
 
-			
-
-
-			// Set the resut 
-			return  json_encode($m->get($index) ?? ['status' => 404, 'message' => 'Unable to find the product']);	
-
-	}
-
-	// Add keyword to the script to memcached 
-	public function addKeyWordToMemcached() {
-
-		header('Content-Type: application/json'); 
-		// Defining message 
-		
-
-		// Check if data posted 
-		$keyword = $this->input->post('keyword');
-
-		// If null 
-		if($keyword === NULL || strlen($keyword) < 3) {
-
-			$message = ['error' => ['message'=> 'Keyword must string length must be greater then 2']];
-
-			// return $this->output->set_output(json_encode($result));
-			// Return message 
-			return $this->output->set_output(json_encode($message));
+            
 
 
-		}
+            // Set the resut 
+            return  json_encode($m->get($index) ?? ['status' => 404, 'message' => 'Unable to find the product']);   
 
-		// Run the script 
-		if($this->FetchAndSetProducts($keyword) === true) {
+    }
 
-			return $this->output->set_output(json_encode(['success' => true]));
-			
-		}
+    // Add keyword to the script to memcached 
+    public function addKeyWordToMemcached() {
 
-		// Set some error 
-		$message = ['error' => ['message'=> 'Something went wrong.']];
+        header('Content-Type: application/json'); 
+        // Defining message 
+        
 
-		return $this->output->set_output(json_encode($message));
+        // Check if data posted 
+        $keyword = $this->input->post('keyword');
 
-	}
+        // If null 
+        if($keyword === NULL || strlen($keyword) < 3) {
 
+            $message = ['error' => ['message'=> 'Keyword must string length must be greater then 2']];
 
-	
-
-	public function GetMaxRecord($records)	{
-	    return max(array_map(function ($items) {
-	        return count($items) ;
-	    }, $records));
-	}
-
+            // return $this->output->set_output(json_encode($result));
+            // Return message 
+            return $this->output->set_output(json_encode($message));
 
 
-	public function FetchAndSetProducts($keyword)
-	{		
-		$doc = new DOMDocument();
+        }
 
-		// Restore error level
-		//libxml_use_internal_errors(false);
-		 // count keyworld 
-  		$countKeyword = str_word_count($keyword);
+        // Run the script 
+        if($this->FetchAndSetProducts($keyword) === true) {
 
-		$internalErrors = libxml_use_internal_errors(true);
+            return $this->output->set_output(json_encode(['success' => true]));
+            
+        }
 
-		$search_key = urlencode($keyword);
+        // Set some error 
+        $message = ['error' => ['message'=> 'Something went wrong.']];
 
-		// count keyworld 
+        return $this->output->set_output(json_encode($message));
+
+    }
+
+
+    
+
+    public function GetMaxRecord($records)  {
+        return max(array_map(function ($items) {
+            return count($items) ;
+        }, $records));
+    }
+
+
+
+    public function FetchAndSetProducts($keyword)
+    {       
+        $doc = new DOMDocument();
+
+        // Restore error level
+        //libxml_use_internal_errors(false);
+         // count keyworld 
+        $countKeyword = str_word_count($keyword);
+
+        $internalErrors = libxml_use_internal_errors(true);
+
+        $search_key = urlencode($keyword);
+
+        // count keyworld 
   $countKeyword = str_word_count($keyword);
 
 
-	$data = [
+    $data = [
 
 
 
@@ -649,8 +649,8 @@ for($j = 0; $j < $total; $j++) {
         'status' => 'success', 'message' => 'Product added sucessfull to you database'
       ];
 
-		return true;
-	}
+        return true;
+    }
 
 
     public function getOnlyProductAsArray(array $keys, Memcached $m):array {
@@ -678,126 +678,126 @@ for($j = 0; $j < $total; $j++) {
 
 }
 
-	public function getOnlyProductKey($var) {
-    	$reg = '/^[0-9]{1,}$/';
+    public function getOnlyProductKey($var) {
+        $reg = '/^[0-9]{1,}$/';
 
-    	return preg_match($reg, $var);
-	}
+        return preg_match($reg, $var);
+    }
 
-	public function Login($username, $password){
+    public function Login($username, $password){
 
-		
+        
 
-		// Defining message 
-		$message = [];
+        // Defining message 
+        $message = [];
 
-		// Both index must set 
-		if($username === NULL || $password === NULL) {
+        // Both index must set 
+        if($username === NULL || $password === NULL) {
 
-			return [
-						'username' => 'Username is required.',
-						'password' => 'Password is required'
-					];		
-		}	
+            return [
+                        'username' => 'Username is required.',
+                        'password' => 'Password is required'
+                    ];      
+        }   
 
-		// Check if user is authenicated 
-		if($this->username !== $username) {
+        // Check if user is authenicated 
+        if($this->username !== $username) {
 
-			return ['username' => 'Please enter valid username.'];
-		}
+            return ['username' => 'Please enter valid username.'];
+        }
 
-		// Check password  
-		if(!password_verify($password, $this->password)) {
+        // Check password  
+        if(!password_verify($password, $this->password)) {
 
-			return ['password' => 'Please enter valid password.'];
-		}
+            return ['password' => 'Please enter valid password.'];
+        }
 
-		// return true 
-		return true;
+        // return true 
+        return true;
 
-	}
+    }
 
-	// Get admin login 
-	public function SetAdminSession() {
+    // Get admin login 
+    public function SetAdminSession() {
 
-		// Get the username 
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+        // Get the username 
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
 
-		// is Valid login 
-		$isLoginValid = $this->Login($username, $password);
+        // is Valid login 
+        $isLoginValid = $this->Login($username, $password);
 
-		// Set the data 
-		$data = $this->input->post();
+        // Set the data 
+        $data = $this->input->post();
 
-		// Data tod return 
-		$unSuccessData['data'] = $data;
+        // Data tod return 
+        $unSuccessData['data'] = $data;
 
-		// Check the method 
-		if($isLoginValid !== true) {
+        // Check the method 
+        if($isLoginValid !== true) {
 
-			$unSuccessData['error'] = $isLoginValid;
+            $unSuccessData['error'] = $isLoginValid;
 
-			$this->session->set_flashdata('errors', $unSuccessData);
+            $this->session->set_flashdata('errors', $unSuccessData);
 
-			redirect('/login');
-		}
+            redirect('/login');
+        }
 
-		// Regenare session id 
-		$userdata['administrator'] = array('username' => $username, 'passowrd' => $password, 'date' => date('Y-m-d H:i:s'));
+        // Regenare session id 
+        $userdata['administrator'] = array('username' => $username, 'passowrd' => $password, 'date' => date('Y-m-d H:i:s'));
 
-		
-		// Set the session data 
-		$this->session->set_userdata($userdata);
+        
+        // Set the session data 
+        $this->session->set_userdata($userdata);
 
-		// Redirect to the admin page 
-		redirect('/administrator');
+        // Redirect to the admin page 
+        redirect('/administrator');
 
-	}
+    }
 
-	
-	public function ErrorOutput(array $message):CI_Output{
+    
+    public function ErrorOutput(array $message):CI_Output{
 
-		// Change the message variable 
-			$message = [
-							'error' => $message
-						];
+        // Change the message variable 
+            $message = [
+                            'error' => $message
+                        ];
 
-			// return message 
-			return $this->output->set_output(json_encode($message));
-	}
-	
+            // return message 
+            return $this->output->set_output(json_encode($message));
+    }
+    
 
 
-	// Adminstrator Login view 
-	public function AdminLoginView() {
+    // Adminstrator Login view 
+    public function AdminLoginView() {
 
-		if($this->session->has_userdata('administrator') === true) {
+        if($this->session->has_userdata('administrator') === true) {
 
-			redirect('/administrator');
-		}
-		
+            redirect('/administrator');
+        }
+        
 
-		$this->load->view('login/index');
-		
-	}
+        $this->load->view('login/index');
+        
+    }
 
-	// Logout administrator 
-	public function LogoutAdmin() {
+    // Logout administrator 
+    public function LogoutAdmin() {
 
-		if($this->session->has_userdata('administrator') === true) {
+        if($this->session->has_userdata('administrator') === true) {
 
-			// Unset user data session administrator 
-			$this->session->unset_userdata('administrator');
-			
-			redirect('/login');
-		}
+            // Unset user data session administrator 
+            $this->session->unset_userdata('administrator');
+            
+            redirect('/login');
+        }
 
-		redirect('/login');
+        redirect('/login');
 
-	}
-	
-	
+    }
+    
+    
 
 }
 

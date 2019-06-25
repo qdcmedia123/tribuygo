@@ -14,72 +14,27 @@
   <style>
     
     .custom34 {
-      position: absolute;
-      top:150px;
-      right:5px;
+      width: 35%;
+position: absolute;
+top: 60%;
+left: 50%;
+transform: translate(-50%, -50%);
+      
     }
+
+
     .custom34 img {
-     width: 320px !important ;
-     height:559px !important;
+     
       
      
 
     }
 
-    .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
-}
+   
 
 
-@media only screen and (max-width: 1124px) {
-
-.custom34 {
-      position: absolute;
-      top:150px;
-      right:1px;
-    }
-
-.custom34 img {
-     width: 200px !important ;
-     height:320px !important;
-      
-
-    }
 
 
-}
-
-@media only screen and (max-width: 800px) {
-  
-  .custom34{
-      display: none;
-  }
-
-.wrap {
-    text-align: center;
-    width: 90% !important;
-    /*
-    position: absolute;
-    */
-    position: relative !important;
-    top: 100px !important;
-    left: 0 !important; 
-     transform: none !important; 
-
-}
-
-#search-form-6767{
-
-  width:100%;
-}
-
-.searchButton {
-  right: -35px !important ;
-}
-
-
-}
 
 
 

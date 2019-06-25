@@ -180,7 +180,7 @@ public function SearchProduct(Memcached $m, string $searchString,  string $page)
 
 
     // Make the number of page 
-$perpage = 20;
+$perpage = 100;
 
 // Number of result 
 $numberOfResult = count($searchResult);
