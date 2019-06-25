@@ -138,19 +138,15 @@
       dataType: "json",
       success: function(resultData) 
       { 
-          //const csrfname = resultData.csrf.name;
-      	const csrfhash = resultData.csrf.hash;
+          //console.log(resultData)
+      	//var resdata = JSON.parse(resultData);
+        console.log(resultData);
 
-      	 $('#csrf_ajax').val(csrfhash);
+        var options = {
+  data: resultData.getautolocation,
 
-
-           var options = {
-           url: ORIGIN+"/api/product_sugesstion",
-           categories: resultData.getautolocation
-         ,
-    
-        list: {
-        	onClickEvent: function() { 
+  list: {
+    onClickEvent: function() { 
             
             
             $('#search-form-6767').submit();
@@ -160,9 +156,9 @@
       enabled: true
     }
   }
-
-
 };
+
+
 
 $("#categories-basic").easyAutocomplete(options);
       }
