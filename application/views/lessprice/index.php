@@ -351,7 +351,9 @@ $(function () {
       { 
           //console.log(resultData)
       	//var resdata = JSON.parse(resultData);
-        console.log(resultData);
+        const csrfhash = resultData.csrf.hash;          //var resdata = JSON.parse(resultData);
+        
+         $('#csrf_ajax').val(csrfhash);
 
         var options = {
   data: resultData.getautolocation,
