@@ -208,7 +208,7 @@ $csrf = array(
      <a href = "<?= base_url()?>privacy-and-policy" style = "color:#000000; text-decoration: none;" target="_blank">Privacy and Policy</a>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <img src="image.png" />
+                    
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     
@@ -289,6 +289,23 @@ $csrf = array(
       
       </div>
     </div>
+
+    <div class="carousel-item">
+     
+      <div class="view">
+        
+        <a href = "#">
+        <img class="d-block w-100" src="<?= base_url()?>assets/images/noosmall.png"
+          alt="Third slide" target = "_blank"/> </a>
+
+        <div class="mask rgba-black-slight"></div>
+      </div>
+      <div class="carousel-caption">
+        
+      
+      </div>
+    </div>
+
   </div>
 
 
