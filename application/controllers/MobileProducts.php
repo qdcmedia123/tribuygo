@@ -623,6 +623,13 @@ public function trimSearchKeyWord(string $string  ): string   {
 						'url' => 'https:www.qdcmedia.com/' 
 					];
 
+		$images[] = [
+						'name' => 'QDC',
+						'image_url'=> 'https://tribuygo.com/assets/images/mobiles/noosmall.png',
+						'url' => '#' 
+					];
+
+
 		// Result 
 		$result['result'] = $images;
 
