@@ -353,6 +353,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+/*
 
     // http://localhost/canbelessprice/api/category_list_location
     // http://localhost/canbelessprice/api/product_sugesstion
@@ -393,16 +394,8 @@ $(function () {
       }
 
 });
-
+*/
    
-
-
-
-
-
-
-  
- 
 </script>
 
 

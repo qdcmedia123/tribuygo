@@ -131,6 +131,7 @@
     var csrf_id = $('#csrf_ajax').val();
     
 
+
     $.ajax({
       type: 'POST',
       url: ORIGIN+'/api/category_list_location',
@@ -138,6 +139,7 @@
       dataType: "json",
       success: function(resultData) 
       { 
+
           //console.log(resultData)
       	//var resdata = JSON.parse(resultData);
         const csrfhash = resultData.csrf.hash;	      	//var resdata = JSON.parse(resultData);
@@ -161,9 +163,14 @@
 };
 
 
+var options = {data: {}};
 
 $("#categories-basic").easyAutocomplete(options);
-      }
+      
+
+  }
+
+  
 });
 
    
@@ -179,6 +186,8 @@ $("#categories-basic").easyAutocomplete(options);
 
 <script src="<?= base_url()?>assets/js/join-usform.js"></script> 
 <script src="<?= base_url()?>assets/js/jquery.twbsPagination.min.js"></script> 
+
+
 <script>
 
 	<?php if(isset($output['numberOfResult'])) :?>
