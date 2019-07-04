@@ -97,14 +97,20 @@ $logos = array(
 <!-- Check if it is not null -->
 <?php if($output['status'] === 400 && $countValue > 0):?>
 
-<?php if ($output['didyoumean'] !== false) :?>
 
+<?php //if ($output['didyoumean'] !== false) :?>
+
+<!--
 <div class="alert alert-light">
 	
-	 <strong>Did you mean: &nbsp; </strong>  <?= $output['didyoumean']; ?>
-</div>
 
-<?php endif; ?>
+	 <strong>Did you mean: &nbsp; </strong>  <? $output['didyoumean']; ?>
+
+
+</div>
+-->
+
+<?php //endif; ?>
 
 
 <div class="alert alert-info">
