@@ -317,6 +317,22 @@ $csrf = array(
       </div>
     </div>
 
+     <div class="carousel-item">
+     
+      <div class="view">
+        
+        <a href = "#">
+        <img class="d-block w-100" src="<?= base_url()?>assets/images/win-i-pad.png"
+          alt="Third slide" target = "_blank"/> </a>
+
+        <div class="mask rgba-black-slight"></div>
+      </div>
+      <div class="carousel-caption">
+        
+      
+      </div>
+    </div>
+
   </div>
 
 

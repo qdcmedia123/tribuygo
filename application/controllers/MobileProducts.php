@@ -624,10 +624,18 @@ public function trimSearchKeyWord(string $string  ): string   {
 					];
 
 		$images[] = [
-						'name' => 'QDC',
+						'name' => 'Noos Mall',
 						'image_url'=> 'https://tribuygo.com/assets/images/mobiles/noosmall.png',
+						'url' => 'www.noosmall.com' 
+					];
+
+		$images[] = [
+						'name' => 'offer',
+						'image_url'=> 'https://tribuygo.com/assets/images/mobiles/win-i-pad.png',
 						'url' => '#' 
 					];
+
+					
 
 
 		// Result 
