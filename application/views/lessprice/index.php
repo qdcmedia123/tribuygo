@@ -321,7 +321,7 @@ $csrf = array(
      
       <div class="view">
         
-        <a href = "#">
+        <a href = "http://onelink.to/yrshq9">
         <img class="d-block w-100" src="<?= base_url()?>assets/images/win-i-pad.png"
           alt="Third slide" target = "_blank"/> </a>
 
