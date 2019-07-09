@@ -40,7 +40,7 @@ public function __construct() {
 
 		//$searchString = $this->input->post('search') ?? '';
 
-		//$searchString = 'tv';
+		//$searchS
 		/*
 
 		$searchString = $this->input->get('search', TRUE);
@@ -98,10 +98,11 @@ public function __construct() {
 		 //$searchString = $this->input->post('search') ?? '';
 
 		//$searchString = 'tv';
+		 
 
-		$searchString = $this->input->post('search', TRUE);
+		$searchString = $this->input->get('search', TRUE);
 		
-		$page = $this->input->post('page', TRUE);
+		$page = $this->input->get('page', TRUE);
 		
 		$searchString = urldecode($searchString);
 		
@@ -218,6 +219,8 @@ public function __construct() {
 
 		//echo json_encode($result);
 		return $this->output->set_output(json_encode($result));
+
+		
 
 		
 	}
