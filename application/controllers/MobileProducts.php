@@ -762,7 +762,7 @@ public function trimSearchKeyWord(string $string  ): string   {
 		$images[] = [
 						'name' => 'offer',
 						'image_url'=> 'https://tribuygo.com/assets/images/mobiles/win-i-pad.png',
-						'url' => '#' 
+						'url' => 'https://tribuygo.com/contest/formpage.html' 
 					];
 
 					
