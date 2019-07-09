@@ -10,6 +10,8 @@ public function __construct() {
         ini_set('display_errors', 1);
         $this->load->helper('url');
         $this->load->helper('credential');
+
+        
         
    
     }
@@ -42,57 +44,123 @@ public function __construct() {
 		$searchString = $this->input->get('search', TRUE);
 		$page = $this->input->get('page', TRUE);
 		$searchString = urldecode($searchString);
-
 		$m = new Memcached();
+
 		
 		$m->addServer('localhost', 11211);
 		// Get the product in array getOnlyProductAsArray(array $keys, Memcached $m)
 		$keys = $m->getAllKeys();
+		
 		$searchKeys = $m->get('search_key_words');
 
-		//$products = getOnlyProductAsArray($keys, $m);
 
-		$searchResult = $this->SearchProduct($m, $searchString,  $page);
-		
-		$didyoumean = false ;
-
-		// check that status is not 400
-		if($searchResult['status'] !== 400) {
-
-			// Then again go and search by the given suggessing 
-			$didyoumean = true;
-
-			$words = array_map('urldecode', $searchKeys);
-			$words = array_map('strtolower', $words);
-
-			$result = $this->didyoumean($words, $searchString);
-
-			// Get the string 
-			$didyoumean = $result['string'];
-
-			// Check if not empty 
-			if($didyoumean !== '') {
-
-				// Again search for 
-				$searchResult = $this->SearchProduct($m, $didyoumean,  $page);
-			}
+$client = new MongoDB\Client("mongodb://localhost:27017");
+$collection = $client->tribuygo->products;
 
 
-		}
+		// Number of rows 
+	$numOfRows = $collection->count(
+								['$text' => [ '$search' => $searchString]], 
+							
+								['score' => ['$meta' => "text Score"],
+								'projection' => ['_id' => true]
+						    ]);
+// Make the number of page 
+$perpage = 20;
 
-		//$output = $searchString !== '' ? json_encode($this->IfProductFound($productTitles, $searchString, $data, $searchKeys)) : [];
-		
-		$searchResult['didyoumean'] = $didyoumean;
+$totalResult = $numOfRows;
+
+// Number of result 
+$numberOfResult = $totalResult;
+
+// Number of pages 
+$numberOfPages = ceil($numberOfResult / $perpage);
+
+$page = $page ?? 1;
 
 
-		//$_SESSION['test'] = rand(1, 10);
+// Page number 
+$page = $page - 1;
 
-		$data = ['output' => $searchResult, 'searchString' => $searchString];
+$whichpage = $page + 1;
+
+$skipfrom = $page * $perpage;
+
+
+
+// Setting options 
+$options =  [
+	'limit' => $perpage,
+    'skip' => $skipfrom,
+    'projection' => [
+    	 "title"=> true,
+        "image"=> true,
+        "price"=> true,
+        "description"=> true,
+        "review"=> true,
+        "shipping"=> true,
+        "original_price"=> true,
+        "discount_price"=> true,
+        "ratings"=> true,
+        "stock"=> true,
+        "offer"=> true,
+        "website"=> true,
+        "keyword"=> true,
+        'score' => ['$meta' => 'textScore'],
+	],
+    'sort' => [
+        'score' => ['$meta' => 'textScore']
+        ]
+];
+
+
+$search = ['$text' => [ '$search' => $searchString]];
+
+
+$result = $collection->find( $search, $options);
+
+
+
+
+$papgeResult = [];
+
+
+foreach ($result as $entry) {
+
+	$papgeResult[] = $entry;
+}
+
+
+
+$message = [
+            'status' => 404 , 
+            'message' => 'Sorry, We are unable to find anything at the moment.',
+            'search' => $searchString
+        ];
+
+$result =  $totalResult > 0 ? 
+                            [	//'result' => $searchResult,
+                                'result' => $papgeResult,
+                                'search' => $searchString,
+                                'perpage' => $perpage,
+                                'numberOfPages' => $numberOfPages,
+                                'numberOfResult' => $numberOfResult,
+                                'whichpage' => $whichpage,
+                                'page' => $whichpage,
+                                'status' => 400,
+                                'didyoumean' => false
+                            ] : 
+                            $message;
+
+
+
+
+//echo json_encode($result);
 
 		
 
 		$this->load->view('can-be-less-price/templates/header');
-		$this->load->view('can-be-less-price/contents/index', $data);
+		$this->load->view('can-be-less-price/contents/index', ['output' => $result]);
 		$this->load->view('can-be-less-price/templates/footer');
 	}
 
@@ -321,7 +389,8 @@ return count($searchResult) > 0 ?
                                 'page' => $whichpage,
                                 'status' => 400,
                                 'search' => $searchString,
-                                'whichpage'=>$whichpage
+                                'whichpage'=>$whichpage,
+                                'page' => $whichpage
                             ] : 
                             ['result' => $message];
 

@@ -98,19 +98,6 @@ $logos = array(
 <?php if($output['status'] === 400 && $countValue > 0):?>
 
 
-<?php //if ($output['didyoumean'] !== false) :?>
-
-<!--
-<div class="alert alert-light">
-	
-
-	 <strong>Did you mean: &nbsp; </strong>  <? $output['didyoumean']; ?>
-
-
-</div>
--->
-
-<?php //endif; ?>
 
 
 <div class="alert alert-info">
@@ -320,18 +307,14 @@ if(
 
 <!-- Check that if variable array is empty -->
 
-<?php if(count($output) === 0):?>
+<?php if($output['status'] === 404):?>
 
-<?php else: ?>
 
- <?php
-  
-   	$message = json_decode($output, true);
 
-   ?>
+ 
 
 <div class="alert alert-info" role="alert">
-<?= $message['message'].' '.$message['searchString'] ;?>
+Sorry, We are unable to find anything for <?= $output['search'] ;?>
 </div>
 
 <?php endif; ?>

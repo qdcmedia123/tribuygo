@@ -142,8 +142,8 @@
 
           //console.log(resultData)
       	//var resdata = JSON.parse(resultData);
-        const csrfhash = resultData.csrf.hash;	      	//var resdata = JSON.parse(resultData);
-       
+        //const csrfhash = resultData.csrf.hash;	      	//var resdata = JSON.parse(resultData);
+       const csrfhash = '';	
        	 $('#csrf_ajax').val(csrfhash);
 
         var options = {
@@ -163,7 +163,7 @@
 };
 
 
-var options = {data: {}};
+
 
 $("#categories-basic").easyAutocomplete(options);
       
@@ -217,11 +217,16 @@ $("#categories-basic").easyAutocomplete(options);
             $('#page-content').text('Page ' + page) + ' content here';
     });
 
+   
+    
+
 		<?php endif; ?>
 
+
+	
 	<?php endif; ?>
 	
-	
+
 </script>
 
 
