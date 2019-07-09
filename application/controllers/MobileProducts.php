@@ -37,9 +37,11 @@ public function __construct() {
 	{
 
 
+
 		//$searchString = $this->input->post('search') ?? '';
 
 		//$searchString = 'tv';
+		/*
 
 		$searchString = $this->input->get('search', TRUE);
 		$page = $this->input->get('page', TRUE);
@@ -87,10 +89,135 @@ public function __construct() {
 		$searchResult['didyoumean'] = $didyoumean;
 
 
-		//$_SESSION['test'] = rand(1, 10);
+		
 
 
 		 return $this->output->set_output(json_encode($searchResult));
+		 */
+
+		 //$searchString = $this->input->post('search') ?? '';
+
+		//$searchString = 'tv';
+
+		$searchString = $this->input->post('search', TRUE);
+		
+		$page = $this->input->post('page', TRUE);
+		
+		$searchString = urldecode($searchString);
+		
+		$m = new Memcached();
+
+
+		$m->addServer('localhost', 11211);
+		// Get the product in array getOnlyProductAsArray(array $keys, Memcached $m)
+		$keys = $m->getAllKeys();
+
+		$searchKeys = $m->get('search_key_words');
+
+
+		$client = new MongoDB\Client("mongodb://localhost:27017");
+		$collection = $client->tribuygo->products;
+
+
+		// Number of rows 
+		$numOfRows = $collection->count(
+								['$text' => [ '$search' => $searchString]], 
+							
+								['score' => ['$meta' => "text Score"],
+								'projection' => ['_id' => true]
+						    ]);
+		// Make the number of page 
+		$perpage = 100;
+
+		$totalResult = $numOfRows;
+
+		// Number of result 
+		$numberOfResult = $totalResult;
+
+		// Number of pages 
+		$numberOfPages = ceil($numberOfResult / $perpage);
+
+		$page = $page ?? 1;
+
+
+		// Page number 
+		$page = $page - 1;
+
+		$whichpage = $page + 1;
+
+		$skipfrom = $page * $perpage;
+
+
+
+		// Setting options 
+		$options =  [
+		'limit' => $perpage,
+		'skip' => $skipfrom,
+		'projection' => [
+		 "title"=> true,
+		"image"=> true,
+		"price"=> true,
+		"description"=> true,
+		"review"=> true,
+		"shipping"=> true,
+		"original_price"=> true,
+		"discount_price"=> true,
+		"ratings"=> true,
+		"stock"=> true,
+		"offer"=> true,
+		"website"=> true,
+		"keyword"=> true,
+		'score' => ['$meta' => 'textScore'],
+		],
+		'sort' => [
+		'score' => ['$meta' => 'textScore']
+		]
+		];
+
+
+		$search = ['$text' => [ '$search' => $searchString]];
+
+
+		$result = $collection->find( $search, $options);
+
+
+
+
+		$papgeResult = [];
+
+
+		foreach ($result as $entry) {
+
+		$papgeResult[] = $entry;
+		}
+
+
+
+		$message = [
+		    'status' => 404 , 
+		    'message' => 'Sorry, We are unable to find anything at the moment.',
+		    'search' => $searchString
+		];
+
+		$result =  $totalResult > 0 ? 
+		                    [	//'result' => $searchResult,
+		                        'result' => $papgeResult,
+		                        'search' => $searchString,
+		                        'perpage' => $perpage,
+		                        'numberOfPages' => $numberOfPages,
+		                        'numberOfResult' => $numberOfResult,
+		                        'whichpage' => $whichpage,
+		                        'page' => $whichpage,
+		                        'status' => 400,
+		                        'didyoumean' => false
+		                    ] : 
+		                    $message;
+
+
+
+
+		//echo json_encode($result);
+		return $this->output->set_output(json_encode($result));
 
 		
 	}
