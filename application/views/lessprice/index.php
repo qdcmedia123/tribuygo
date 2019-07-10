@@ -319,7 +319,7 @@ $csrf = array(
      
       <div class="view">
         
-        <a href = "http://onelink.to/yrshq9">
+        <a href = "https://tribuygo.com/contest/formpage.html">
         <img class="d-block w-100" src="<?= base_url()?>assets/images/win-i-pad.png"
           alt="Third slide" target = "_blank"/> </a>
 
