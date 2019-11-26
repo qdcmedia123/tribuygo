@@ -209,7 +209,7 @@ $("#categories-basic").easyAutocomplete(options);
     }).on("page", function (event, page) {
 
     		// Setting up
-    		 var url = '<?= base_url()?>search?search=<?= urlencode($output['search'])?>&page='+page;
+    		 var url = '<?= base_url()?>search?search=<?= urlencode($_GET['search'])?>&page='+page;
 
             console.log(url);
             //window.location.href = url;

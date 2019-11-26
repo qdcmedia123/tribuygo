@@ -6,6 +6,18 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143351885-1"></script>
 <script>
+	
+	$(function () {
+	    setInterval(function () {
+		    $('.star-1').fadeOut(150).delay(2000).fadeIn(300).fadeOut(150).delay(1254);
+	        $('.star-2').fadeOut(300).fadeIn(120).fadeOut(120).delay(1920);
+	        $('.star-3').fadeOut(150).delay(1200).fadeIn(300).fadeOut(150).delay(800);
+	        $('.star-4').fadeOut(700).fadeIn(300).fadeOut(160).delay(1350);
+	    }, 1);
+    });
+    
+</script>
+<script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -42,7 +54,15 @@ transform: translate(-50%, -50%);
     }
 
    
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
 
+@keyframes blinker {
+  50% {
+    font-size: 40px;
+  }
+}
 
 
 
@@ -201,7 +221,23 @@ $csrf = array(
 
 <!--/.Carousel Wrapper-->
 
+<div class = "row px-md-5" style = "text-align:center;">
+	
 
+	<div style = "background-color:yellow;">
+		<div>
+		<h2>Boost your Ads and Promote your Business</h2>
+		
+		</div>
+
+			<i class = "fa 	fa fa-hand-o-down fa-2x"></i>
+
+	<div style = "background-color:yellow;">
+		<div>
+		
+		<h5>support@tribuygo.com</h5>
+	</div>
+</div>
 
 <footer class="footer mt-auto py-3" style = "min-height: 250px;">
 

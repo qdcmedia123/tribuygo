@@ -56,7 +56,7 @@ public function __construct() {
 
 $client = new MongoDB\Client("mongodb://localhost:27017");
 $collection = $client->tribuygo->products;
-
+$searchString = $searchString."-cover -case -pen -watch -STANDING -COVER";
 
 		// Number of rows 
 	$numOfRows = $collection->count(
@@ -86,7 +86,7 @@ $whichpage = $page + 1;
 
 $skipfrom = $page * $perpage;
 
-
+// Cover
 
 // Setting options 
 $options =  [
@@ -112,6 +112,12 @@ $options =  [
         'score' => ['$meta' => 'textScore']
         ]
 ];
+
+/*
+'sort' => [
+        'score' => ['$meta' => 'textScore']
+        ]
+*/
 
 
 $search = ['$text' => [ '$search' => $searchString]];
@@ -155,7 +161,7 @@ $result =  $totalResult > 0 ?
 
 
 
-//echo json_encode($result);
+
 
 		
 
